@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --bg-base: #fafafa;
+    --card-surface: #ffffff;
+    --card-surface-subtle: #f4f4f5;
+    --border-color: #e4e4e7;
+    --border-subtle: #f4f4f5;
+    --text-primary: #18181b;
+    --text-muted: #71717a;
+    --text-subtle: #a1a1aa;
+    --accent: #18181b;
+  }
+
+  .dark {
+    --bg-base: #09090b;
+
+// [v26] chore: verify node runtime compatibility and package-lock files
