@@ -29,5 +29,36 @@ const MemberList = ({
 
   const handleAddMemberSubmit = async (e) => {
     e.preventDefault();
+    if (!newMemberName.trim()) {
+      toast.error('Please enter name');
+      return;
+    }
+    if (onAddMember) {
+      await onAddMember(newMemberName.trim(), newMemberUpi.trim());
+      setNewMemberName('');
+      setNewMemberUpi('');
+      setShowAddModal(false);
+    }
+  };
 
-// [v17] style(client): define backdrop-filter blur variables and gradient masks
+  return (
+    <div className="bg-white dark:bg-zinc-900 p-4 rounded-lg border border-zinc-200 dark:border-zinc-800/80 shadow-xs space-y-3">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-zinc-500">
+          <Users className="w-3.5 h-3.5" />
+          <span>Members ({members.length})</span>
+        </div>
+
+        {onAddMember && (
+          <button
+            onClick={() => setShowAddModal(true)}
+            className="inline-flex items-center gap-1 text-xs text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 bg-zinc-50 dark:bg-zinc-950 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 px-2 py-0.5 rounded-md transition-colors"
+          >
+            <UserPlus className="w-3 h-3" />
+            <span>Add Member</span>
+          </button>
+        )}
+      </div>
+
+// [v73] test(models): verify expense split calculations across members
