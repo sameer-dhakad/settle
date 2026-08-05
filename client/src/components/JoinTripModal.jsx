@@ -13,4 +13,19 @@ const JoinTripModal = ({ isOpen, tripTitle, members = [], onJoin }) => {
 
   if (!isOpen) return null;
 
-// [v14] chore(server): install jsonwebtoken, nanoid, and qrcode packages
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!name.trim()) {
+      toast.error('Please enter your name');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await onJoin(name.trim(), upiId.trim());
+      toast.success(`Joined ${tripTitle || 'the trip'}`);
+    } catch (err) {
+      console.error(err);
+      toast.error(err.response?.data?.error || 'Failed to join trip');
+
+// [v70] feat(models): add virtual for total trip expense calculation
