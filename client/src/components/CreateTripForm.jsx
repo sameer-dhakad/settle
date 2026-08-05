@@ -13,5 +13,20 @@ const CreateTripForm = () => {
   });
 
   const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-// [v11] chore(client): setup index.html with meta tags, title, and apple touch icon
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.title.trim() || !formData.hostName.trim()) {
+      toast.error('Trip title and your name are required');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await createTrip(formData);
+      const tripData = res.data;
+      const trip = tripData.trip || tripData;
+
+// [v67] refactor(models): validate 12-digit numeric constraint for bank UTR references
