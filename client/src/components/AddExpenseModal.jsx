@@ -33,5 +33,40 @@ const AddExpenseModal = ({
   if (!isOpen) return null;
 
   const numAmount = parseFloat(amount) || 0;
+  const splitCount = selectedMemberIds.length;
+  const perPersonAmount = splitCount > 0 ? (numAmount / splitCount).toFixed(2) : '0.00';
 
-// [v9] chore(client): add vercel.json rewrite rule for single page app routing
+  const toggleMember = (id) => {
+    setSelectedMemberIds((prev) => {
+      if (prev.includes(id)) {
+        if (prev.length === 1) {
+          toast.error('At least one member must be in the split');
+          return prev;
+        }
+        return prev.filter((mId) => mId !== id);
+      }
+      return [...prev, id];
+    });
+  };
+
+  const selectAll = () => {
+    setSelectedMemberIds(members.map((m) => m._id));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!description.trim()) {
+      toast.error('Please enter description');
+      return;
+    }
+    if (numAmount <= 0) {
+      toast.error('Please enter an amount greater than 0');
+      return;
+    }
+    if (!paidBy) {
+      toast.error('Please select who paid');
+      return;
+    }
+
+// [v65] feat(models): add compound index on Expense for tripId and date sorting
