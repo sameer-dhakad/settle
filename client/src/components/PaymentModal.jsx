@@ -46,5 +46,53 @@ const PaymentModal = ({
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible' && awaitingMobileReturn) {
         setShowReturnSheet(true);
+        setAwaitingMobileReturn(false);
+      }
+    };
 
-// [v18] chore(server): configure nodemon dev script in server package.json
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [awaitingMobileReturn]);
+
+  if (!isOpen || !debt) return null;
+
+  const toName = debt.toMember?.name || 'Receiver';
+  const toUpiId = debt.toMember?.upiId || '';
+  const fromMemberId = debt.fromMember?._id?.toString();
+  const toMemberId = debt.toMember?._id?.toString();
+  const amount = (parseFloat(debt.amount) || 0).toFixed(2);
+  const note = `Settle ${tripTitle}`.trim();
+
+  const upiUri = toUpiId
+    ? `upi://pay?pa=${encodeURIComponent(toUpiId)}&pn=${encodeURIComponent(toName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`
+    : '';
+
+  const copyUpiId = () => {
+    if (!toUpiId) return;
+    navigator.clipboard.writeText(toUpiId);
+    setCopiedUpi(true);
+    toast.success(`Copied UPI ID: ${toUpiId}`);
+    setTimeout(() => setCopiedUpi(false), 2000);
+  };
+
+  const handleMobileLaunch = () => {
+    if (!toUpiId) {
+      toast.error(`${toName} has not set a UPI ID yet`);
+      return;
+    }
+    setAwaitingMobileReturn(true);
+    window.location.href = upiUri;
+  };
+
+  const handleCompletePayment = async (e) => {
+    e?.preventDefault();
+    setIsSubmitting(true);
+    try {
+      if (onMarkPaid) {
+        await onMarkPaid(fromMemberId, toMemberId, amount, utrNumber.trim());
+      }
+      setShowReturnSheet(false);
+      onClose();
+    } catch (err) {
+
+// [v74] docs(models): add JSDoc documentation to Trip and Expense schemas
