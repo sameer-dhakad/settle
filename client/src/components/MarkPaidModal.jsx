@@ -15,4 +15,21 @@ const MarkPaidModal = ({
   const [utrNumber, setUtrNumber] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-// [v16] style(client): configure index.css with authentic liquid glass utility classes
+  if (!isOpen || !debt) return null;
+
+  const toName = debt.toMember?.name || 'Receiver';
+  const toUpiId = debt.toMember?.upiId || '';
+  const amount = (parseFloat(debt.amount) || 0).toFixed(2);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+    try {
+      await onSubmit(utrNumber.trim());
+      onClose();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSubmitting(false);
+
+// [v72] test(models): verify trip accessToken nanoid generation
