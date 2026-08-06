@@ -32,5 +32,39 @@ export const TripProvider = ({ children }) => {
       setError(null);
       const res = await fetchTripInfo(id, urlToken);
       const data = res.data;
+      setTrip(data);
+      setToken(urlToken);
+      setSettlements(data.settlements || []);
+      setBalances(data.balances || []);
+      setAuditLog(data.auditLog || []);
 
-// [v25] chore(client): setup client directory structure: components, pages, context, utils
+      // Check stored member ID
+      const storedMemberId = localStorage.getItem(`settle_${id}_member`);
+      if (storedMemberId) {
+        setCurrentMemberId(storedMemberId);
+      }
+
+      // Save to recent trips
+      try {
+        const recent = JSON.parse(localStorage.getItem('settle_recent_trips') || '[]');
+        const existingIndex = recent.findIndex(r => r.id === id);
+        const tripSummary = {
+          id,
+          token: urlToken,
+          name: data.name,
+          membersCount: data.members?.length || 1,
+          totalExpenses: data.totalExpenses || 0,
+          updatedAt: new Date().toISOString()
+        };
+        if (existingIndex >= 0) {
+          recent[existingIndex] = tripSummary;
+        } else {
+          recent.unshift(tripSummary);
+        }
+        localStorage.setItem('settle_recent_trips', JSON.stringify(recent.slice(0, 10)));
+      } catch (e) {
+        console.error('Failed to update recent trips', e);
+      }
+
+
+// [v81] refactor(models): prevent duplicate member names within single trip
