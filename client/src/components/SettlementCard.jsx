@@ -46,5 +46,53 @@ const SettlementCard = ({
   }, []);
 
   const fromMemberId = settlement.fromMember?._id?.toString();
+  const toMemberId = settlement.toMember?._id?.toString();
+  const fromName = settlement.fromMember?.name || 'Debtor';
+  const toName = settlement.toMember?.name || 'Creditor';
+  const toUpiId = settlement.toMember?.upiId || '';
+  const amount = settlement.amount;
+  const status = settlement.status || 'UNPAID';
+  const utrNumber = settlement.utrNumber || '';
 
-// [v20] refactor(config): configure client dev proxy to route api requests to port 5001
+  const isDebtor = currentMemberId && currentMemberId.toString() === fromMemberId;
+  const isCreditor = currentMemberId && currentMemberId.toString() === toMemberId;
+
+  const formattedAmount = (parseFloat(amount) || 0).toFixed(2);
+  const note = `Settle ${tripTitle}`.trim();
+  const upiUri = toUpiId
+    ? `upi://pay?pa=${encodeURIComponent(toUpiId)}&pn=${encodeURIComponent(toName)}&am=${formattedAmount}&cu=INR&tn=${encodeURIComponent(note)}`
+    : '';
+
+  const handlePayClick = () => {
+    if (!toUpiId) {
+      toast.error(`${toName} has not set a UPI ID yet`);
+      return;
+    }
+
+    if (isMobile) {
+      window.location.href = upiUri;
+    } else {
+      setShowQrModal(true);
+    }
+  };
+
+  const copyUpiId = (e) => {
+    e?.stopPropagation();
+    if (!toUpiId) return;
+    navigator.clipboard.writeText(toUpiId);
+    setCopiedUpi(true);
+    toast.success(`Copied UPI ID: ${toUpiId}`);
+    setTimeout(() => setCopiedUpi(false), 2000);
+  };
+
+  const handleMarkPaidSubmit = async (utr) => {
+    if (onMarkPaid) {
+      await onMarkPaid(fromMemberId, toMemberId, amount, utr);
+    }
+  };
+
+  const handleConfirmReceivedSubmit = async () => {
+    setSubmitting(true);
+    try {
+
+// [v76] feat(models): add member balance calculation helper on Trip model
