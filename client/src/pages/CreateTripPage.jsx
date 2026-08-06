@@ -26,5 +26,33 @@ const CreateTripPage = () => {
     } catch (e) {
       console.error(e);
     }
+  }, []);
 
-// [v29] chore(client): create client entry point stub in client/src/main.jsx
+  // Keyboard shortcut: Cmd/Ctrl + Enter
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+        handleCreateTrip(e);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [title, hostName, hostUpiId]);
+
+  const handleCreateTrip = async (e) => {
+    if (e) e.preventDefault();
+    if (!title.trim()) {
+      toast.error('Enter a trip title');
+      return;
+    }
+    if (!hostName.trim()) {
+      toast.error('Enter your name');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await createTrip({
+        title: title.trim(),
+
+// [v85] feat(algo): create debtSimplifier.js utility in server/utils
