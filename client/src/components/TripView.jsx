@@ -96,5 +96,104 @@ const TripView = () => {
   const handleJoin = async (name, upiId) => {
     const res = await joinTrip(accessToken, { name, upiId });
     const data = res.data;
+    setTripData(data);
+    const assignedId = data.joinedMemberId;
+    if (assignedId && data.trip?._id) {
+      localStorage.setItem(`settle_${data.trip._id}_member`, assignedId);
+      setCurrentMemberId(assignedId);
+    }
+    setIsJoinModalOpen(false);
+  };
 
-// [v22] docs: document client environment variables in client/.env.example
+  const handleAddExpense = async (expensePayload) => {
+    const res = await addExpense(accessToken, expensePayload);
+    setTripData(res.data);
+    toast.success('Expense recorded');
+  };
+
+  const handleDeleteExpense = async (expenseId) => {
+    if (window.confirm('Delete this expense?')) {
+      const res = await deleteExpense(accessToken, expenseId);
+      setTripData(res.data);
+      toast.success('Expense removed');
+    }
+  };
+
+  const handleMarkPaid = async (fromMemberId, toMemberId, amount, utrNumber) => {
+    const res = await markSettlementPaid(accessToken, { fromMemberId, toMemberId, amount, utrNumber });
+    setTripData(res.data);
+    toast.success('Payment recorded');
+  };
+
+  const handleConfirmReceived = async (fromMemberId, toMemberId, amount) => {
+    setProcessingAction(true);
+    try {
+      const res = await confirmSettlement(accessToken, { fromMemberId, toMemberId, amount });
+      setTripData(res.data);
+      toast.success('Payment confirmed');
+    } catch (err) {
+      console.error(err);
+      toast.error('Failed to confirm payment');
+    } finally {
+      setProcessingAction(false);
+    }
+  };
+
+  const handleRejectSettlement = async (fromMemberId, toMemberId) => {
+    if (window.confirm('Reject payment claim?')) {
+      setProcessingAction(true);
+      try {
+        const res = await rejectSettlement(accessToken, { fromMemberId, toMemberId });
+        setTripData(res.data);
+        toast.info('Payment claim rejected');
+      } catch (err) {
+        console.error(err);
+        toast.error('Failed to reject payment claim');
+      } finally {
+        setProcessingAction(false);
+      }
+    }
+  };
+
+  const handleSwitchMember = (member) => {
+    if (tripData?.trip?._id) {
+      localStorage.setItem(`settle_${tripData.trip._id}_member`, member._id);
+      setCurrentMemberId(member._id);
+      toast.success(`Active user: ${member.name}`);
+    }
+  };
+
+  const handleWhatsAppShare = () => {
+    if (!tripData) return;
+    const { trip, settlements = [], totalSpent = 0 } = tripData;
+    const tripUrl = window.location.href;
+
+    let message = `*${trip.title}*\nTotal: ₹${totalSpent.toFixed(2)}\n\n`;
+    if (settlements.length === 0) {
+      message += `All settled up.\n\n`;
+    } else {
+      settlements.forEach((s) => {
+        const upiPart = s.toMember?.upiId ? ` (${s.toMember.upiId})` : '';
+        message += `• ${s.fromMember?.name} pays ${s.toMember?.name} ₹${s.amount.toFixed(2)}${upiPart}\n`;
+      });
+      message += `\n`;
+    }
+    message += `${tripUrl}`;
+
+    const encoded = encodeURIComponent(message);
+    window.open(`https://wa.me/?text=${encoded}`, '_blank');
+    navigator.clipboard.writeText(message);
+    toast.success('Summary copied');
+  };
+
+  const copyShareLink = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setCopiedLink(true);
+    toast.success('Link copied');
+    setTimeout(() => setCopiedLink(false), 2000);
+  };
+
+  if (loading && !tripData) {
+    return (
+
+// [v78] feat(models): add default currency symbol INR (₹) fallback
