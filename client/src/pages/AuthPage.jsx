@@ -32,5 +32,40 @@ const AuthPage = () => {
   const [feedbackNotice, setFeedbackNotice] = useState(null);
 
   useEffect(() => {
+    if (isAuthenticated) {
+      navigate(redirectTo);
+    }
+  }, [isAuthenticated, navigate, redirectTo]);
 
-// [v28] chore(server): create server entry point stub in server/server.js
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setFeedbackNotice(null);
+
+    const cleanEmail = email.trim();
+
+    try {
+      if (mode === 'login') {
+        await login(cleanEmail, password);
+        navigate(redirectTo);
+      } else {
+        if (!name.trim()) {
+          toast.error('Name is required');
+          setLoading(false);
+          return;
+        }
+        await register({
+          name: name.trim(),
+          email: cleanEmail,
+          password,
+          defaultUpiId: defaultUpiId.trim()
+        });
+        navigate(redirectTo);
+      }
+    } catch (err) {
+      console.error(err);
+      const errMsg = err.response?.data?.error || 'Authentication failed';
+
+      if (errMsg.toLowerCase().includes('not found') || errMsg.toLowerCase().includes('no account')) {
+
+// [v84] refactor(models): export all mongoose models cleanly
