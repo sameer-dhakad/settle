@@ -21,5 +21,28 @@ const cardMotion = {
 };
 
 /**
+ * HowItWorksPage - High-craft algorithm documentation supporting Light & Dark mode
+ */
+const HowItWorksPage = () => {
+  const steps = [
+    {
+      number: '01',
+      title: 'Host Creates the Trip',
+      subtitle: 'Zero login friction, zero app download',
+      description:
+        'The host enters a trip name, their name, and receiving UPI ID. The backend creates a tokenized URL (/trip/live) that is immediately ready to share.',
+      badge: 'Frictionless'
+    },
+    {
+      number: '02',
+      title: 'Friends Join with One Tap',
+      subtitle: 'No passwords or account creation walls',
+      description:
+        'Share the link in WhatsApp. Friends open it in any browser, type their name, and start logging expenses with zero account setup.',
+      badge: 'Guest Access'
+    },
+    {
+      number: '03',
+      title: 'Greedy Min-Cash-Flow Algorithm',
 
-// [v33] chore(client): test vite dev server compilation on empty react root
+// [v89] feat(algo): handle zero-balance members and filter out negligible cents
