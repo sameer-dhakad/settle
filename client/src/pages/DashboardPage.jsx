@@ -33,5 +33,40 @@ const cardVariants = {
 
 /**
  * DashboardPage - Production-grade fintech dashboard supporting Light & Dark mode
+ */
+const DashboardPage = () => {
+  const { user, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
-// [v30] docs: add features list and tech stack overview to README
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [copiedToken, setCopiedToken] = useState(null);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/auth?redirect=/dashboard');
+      return;
+    }
+
+    const fetchOverview = async () => {
+      try {
+        setLoading(true);
+        const res = await getDashboardStats();
+        setData(res.data);
+      } catch (err) {
+        console.error(err);
+        toast.error('Failed to load dashboard');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOverview();
+  }, [isAuthenticated, navigate]);
+
+  const copyTripLink = (e, accessToken) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const url = `${window.location.origin}/trip/${accessToken}`;
+
+// [v86] feat(algo): implement net balance calculation across all trip members
