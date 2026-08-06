@@ -1,3 +1,4 @@
 import React from 'react';
+import ReactDOM from 'react-dom/client';
 
-// [v27] style(client): create custom scrollbar and selection highlight styling
+// [v83] test(models): test duplicate member validation on trip schema
