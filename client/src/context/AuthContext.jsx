@@ -11,4 +11,17 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('settle_jwt_token') || null);
   const [loading, setLoading] = useState(true);
 
-// [v23] chore: configure root start script for unified production deployment
+  const fetchCurrentUser = async () => {
+    try {
+      const res = await getMe();
+      setUser(res.data.user);
+    } catch (err) {
+      console.error('Auth verification failed:', err);
+      logout();
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+// [v79] refactor(models): add strict query mode on mongoose connection
