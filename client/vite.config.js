@@ -1,4 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 
-// [v39] feat(db): handle mongodb connection errors and termination signals
+export default defineConfig({
+
+// [v95] test(algo): test greedy min-cash-flow on 3-party circular debt scenario
