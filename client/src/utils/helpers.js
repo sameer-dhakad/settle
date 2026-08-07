@@ -3,5 +3,10 @@ export const formatCurrency = (amount) => {
   return new Intl.NumberFormat('en-IN', {
     style: 'currency',
     currency: 'INR',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2
+  }).format(num);
+};
 
-// [v37] feat(db): add masked URI connection diagnostics for safe logging
+
+// [v93] feat(algo): integrate member UPI IDs into simplified settlement payload
