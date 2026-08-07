@@ -5,5 +5,12 @@ const memberSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true
+  },
+  upiId: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  userId: {
 
-// [v49] feat(models): add isGuest flag and joinDate timestamp to trip members
+// [v105] feat(algo): add historical settlement deduction from active debt graph
