@@ -57,4 +57,62 @@ router.post('/', optionalAuth, async (req, res) => {
       return res.status(400).json({ error: 'Trip title and your name are required' });
     }
 
-// [v54] feat(models): add splits array subdocument detailing member obligations
+    const accessToken = crypto.randomBytes(12).toString('hex');
+    const userId = req.user ? req.user._id : null;
+
+    const trip = new Trip({
+      title: title.trim(),
+      accessToken,
+      currency: 'INR',
+      creatorUserId: userId,
+      members: [
+        {
+          name: hostName.trim(),
+          upiId: hostUpiId ? hostUpiId.trim() : (req.user?.defaultUpiId || ''),
+          userId,
+          isHost: true
+        }
+      ]
+    });
+
+    await trip.save();
+
+    // If user is logged in, append trip to their profile
+    if (req.user) {
+      await User.findByIdAndUpdate(req.user._id, { $addToSet: { trips: trip._id } });
+    }
+
+    const payload = await getFullTripPayload(trip);
+    res.status(201).json(payload);
+  } catch (error) {
+    console.error('Create trip error:', error);
+    res.status(500).json({ error: 'Failed to create trip' });
+  }
+});
+
+// 2. GET /api/trips/:accessToken - Fetch trip details
+router.get('/:accessToken', optionalAuth, async (req, res) => {
+  try {
+    const { accessToken } = req.params;
+    const trip = await Trip.findOne({ accessToken });
+
+    if (!trip) {
+      return res.status(404).json({ error: 'Trip not found' });
+    }
+
+    // Auto-link trip if user is logged in
+    if (req.user) {
+      await User.findByIdAndUpdate(req.user._id, { $addToSet: { trips: trip._id } });
+    }
+
+    const payload = await getFullTripPayload(trip);
+    res.json(payload);
+  } catch (error) {
+    console.error('Get trip error:', error);
+    res.status(500).json({ error: 'Failed to retrieve trip' });
+  }
+});
+
+// 3. POST /api/trips/:accessToken/join - Frictionless guest onboarding
+
+// [v110] feat(algo): add net balance verification before computing transactions
