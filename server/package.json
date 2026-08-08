@@ -1,4 +1,7 @@
 {
   "name": "settle-server",
   "version": "1.0.0",
+  "description": "Settle Backend Server",
+  "main": "server.js",
+  "scripts": {
 
