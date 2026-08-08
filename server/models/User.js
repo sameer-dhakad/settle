@@ -5,5 +5,12 @@ const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    trim: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    lowercase: true,
 
-// [v50] feat(models): add trip status enum (active, settled, archived)
+// [v106] refactor(algo): ensure idempotent output on identical expense inputs
