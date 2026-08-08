@@ -21,4 +21,16 @@ A minimalist, high-contrast fintech web application built for instant group expe
 
 - **Frontend**: React 18, Vite, Tailwind CSS v4, Lucide Icons, Sonner, QRCode.react, Canvas Confetti
 - **Backend**: Node.js, Express, MongoDB Atlas, Mongoose, JSON Web Tokens (JWT), bcryptjs
+- **Architecture**: REST API with JWT authentication & tokenized trip session routing
+
+---
+
+## 🚀 Getting Started
+
+### 1. Prerequisites
+- Node.js (v18 or higher)
+- MongoDB Atlas cluster or local MongoDB instance
+
+### 2. Clone the Repository
+```bash
 
