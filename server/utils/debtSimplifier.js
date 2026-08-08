@@ -21,4 +21,26 @@ function calculateNetBalances(members = [], expenses = [], settlements = []) {
     };
   });
 
-// [v56] feat(models): add receiptUrl and notes fields to Expense schema
+  // 1. Process Expenses
+  expenses.forEach((expense) => {
+    const payerId = expense.paidBy?.toString();
+    if (payerId && balances[payerId]) {
+      balances[payerId].netBalance += expense.amount;
+      balances[payerId].totalPaid += expense.amount;
+    }
+
+    (expense.splits || []).forEach((split) => {
+      const memberId = split.memberId?.toString();
+      if (memberId && balances[memberId]) {
+        balances[memberId].netBalance -= split.owedAmount;
+        balances[memberId].totalOwed += split.owedAmount;
+      }
+    });
+  });
+
+  // 2. Process Confirmed Settlements (Adjusts net balance)
+  settlements.forEach((s) => {
+    if (s.status === 'CONFIRMED') {
+      const fromId = s.fromMemberId?.toString();
+
+// [v112] refactor(algo): streamline creditor/debtor queue sorting
