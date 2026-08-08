@@ -10,5 +10,11 @@ import TripView from './components/TripView';
 import AuthPage from './pages/AuthPage';
 import DashboardPage from './pages/DashboardPage';
 import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
 
-// [v63] refactor(models): add toJSON transform to strip sensitive fields
+function ThemedToaster() {
+  const { theme } = useTheme();
+  return <Toaster position="top-center" richColors theme={theme} />;
+}
+
+// [v119] refactor(algo): optimize memory allocations in graph reduction algorithm
