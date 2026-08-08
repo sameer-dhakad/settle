@@ -2,5 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
+const tripRoutes = require('./routes/trips');
+const authRoutes = require('./routes/auth');
 
-// [v55] feat(models): add category enum (food, travel, stay, entertainment, other)
+const app = express();
+
+// [v111] docs(algo): add visual ASCII diagram of debt simplification in comments
