@@ -68,5 +68,40 @@ const AddExpenseModal = ({
       toast.error('Please select who paid');
       return;
     }
+    if (selectedMemberIds.length === 0) {
+      toast.error('Please select at least one member to split with');
+      return;
+    }
 
-// [v65] feat(models): add compound index on Expense for tripId and date sorting
+    setLoading(true);
+    try {
+      await onSubmit({
+        description: description.trim(),
+        amount: numAmount,
+        paidBy,
+        splitType: 'EQUAL',
+        splitMemberIds: selectedMemberIds
+      });
+      onClose();
+    } catch (err) {
+      console.error(err);
+      toast.error(err.response?.data?.error || 'Failed to add expense');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 dark:bg-black/70 backdrop-blur-xs p-4">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.96, y: 8 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.96 }}
+        transition={{ duration: 0.18 }}
+        className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-5 sm:p-6 max-w-md w-full shadow-xl space-y-4 my-8"
+      >
+        <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800">
+          <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 tracking-tight">Add Expense</h2>
+          <button
+
+// [v121] test(algo): verify zero debt generation when all balances are settled
