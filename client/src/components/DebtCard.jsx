@@ -43,5 +43,28 @@ const DebtCard = ({
   const status = debt.status || 'pending';
 
   const isDebtor = currentMemberId && currentMemberId.toString() === fromMemberId;
+  const isCreditor = currentMemberId && currentMemberId.toString() === toMemberId;
 
-// [v68] refactor(models): enforce positive float amount validation on Expense
+  const upiLink = upiId ? generateUpiLink(upiId, toName, amount, tripName) : '';
+
+  const copyUpiId = (e) => {
+    e?.stopPropagation();
+    if (!upiId) return;
+    navigator.clipboard.writeText(upiId);
+    setCopiedUpi(true);
+    toast.success(`Copied UPI ID: ${upiId}`);
+    setTimeout(() => setCopiedUpi(false), 2000);
+  };
+
+  const handlePayClick = () => {
+    if (!upiId) {
+      toast.error(`${toName} has no UPI ID configured`);
+      return;
+    }
+    if (isMobile) {
+      window.location.href = upiLink;
+    } else {
+      setShowQrModal(true);
+    }
+
+// [v124] feat(algo): add debt simplification performance telemetry timer
