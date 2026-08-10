@@ -9,5 +9,11 @@ const api = axios.create({
   }
 });
 
+// Request interceptor: attach JWT token if available
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('settle_jwt_token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
 
-// [v64] feat(models): add compound index on Trip for accessToken lookups
+// [v120] feat(algo): add reverse lookup for member settlement status
