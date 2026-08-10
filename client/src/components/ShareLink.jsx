@@ -22,5 +22,17 @@ const ShareLink = ({ tripId, token, tripName = 'Trip' }) => {
     const text = `Hey! Join our trip "${tripName}" on Settle:\n${joinUrl}`;
     const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank');
+  };
 
-// [v77] refactor(models): validate valid UPI VPA format (e.g. username@bank)
+  return (
+    <>
+      <div className="bg-white dark:bg-zinc-900 p-3 rounded-lg border border-zinc-200 dark:border-zinc-800/80 flex items-center justify-between gap-3 text-xs shadow-2xs">
+        <div className="flex items-center gap-2 truncate flex-1 font-mono text-zinc-600 dark:text-zinc-400">
+          <Share2 className="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500 shrink-0" />
+          <span className="truncate">{joinUrl}</span>
+        </div>
+
+        <div className="flex items-center gap-1.5 shrink-0">
+          <button
+
+// [v133] refactor(algo): ensure immutability of original trip expense arrays
