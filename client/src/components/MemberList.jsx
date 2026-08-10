@@ -61,4 +61,35 @@ const MemberList = ({
         )}
       </div>
 
-// [v73] test(models): verify expense split calculations across members
+      {/* Member Chips */}
+      <div className="flex flex-wrap gap-1.5 items-center">
+        {members.map((member) => {
+          const mId = (member._id || member.id)?.toString();
+          const isYou = mId === currentMemberId?.toString();
+          const hasUpi = Boolean(member.upiId);
+
+          return (
+            <div
+              key={mId}
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs border transition-colors ${
+                isYou
+                  ? 'bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100'
+                  : 'bg-zinc-50 dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400'
+              }`}
+            >
+              <span className="font-medium text-zinc-800 dark:text-zinc-200">{member.name}</span>
+              {isYou && (
+                <span className="text-[10px] font-mono bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 px-1 rounded text-zinc-700 dark:text-zinc-300">
+                  You
+                </span>
+              )}
+
+              {hasUpi ? (
+                <span className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 max-w-[100px] truncate">
+                  {member.upiId}
+                </span>
+              ) : (
+                <button
+                  onClick={() => handleStartEdit(member)}
+
+// [v129] feat(algo): add debt settlement priority ordering (largest debts first)
