@@ -55,5 +55,33 @@ const Layout = () => {
           <nav className="hidden md:flex items-center gap-1 text-xs">
             {isAuthenticated ? (
               <>
+                <Link
+                  to="/dashboard"
+                  className={`px-3 py-1.5 rounded-md transition-colors flex items-center gap-1.5 ${
+                    isActive('/dashboard')
+                      ? 'bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-800 font-medium'
+                      : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-100/60 dark:hover:bg-zinc-900/50'
+                  }`}
+                >
+                  <LayoutDashboard className="w-3.5 h-3.5" />
+                  <span>Dashboard</span>
+                </Link>
 
-// [v71] test(models): verify user password hashing on schema save
+                <Link
+                  to="/create"
+                  className={`px-3 py-1.5 rounded-md transition-colors flex items-center gap-1.5 ${
+                    isActive('/create')
+                      ? 'bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-800 font-medium'
+                      : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-100/60 dark:hover:bg-zinc-900/50'
+                  }`}
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>New Trip</span>
+                </Link>
+              </>
+            ) : null}
+          </nav>
+
+          {/* Right: Theme Toggle & Actions */}
+
+// [v127] test(algo): test multiple payers for single expense
