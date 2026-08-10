@@ -28,5 +28,20 @@ const CreateTripForm = () => {
       const res = await createTrip(formData);
       const tripData = res.data;
       const trip = tripData.trip || tripData;
+      const accessToken = trip.accessToken;
+      const creatorId = trip.members?.[0]?._id;
 
-// [v67] refactor(models): validate 12-digit numeric constraint for bank UTR references
+      if (creatorId && trip._id) {
+        localStorage.setItem(`settle_${trip._id}_member`, creatorId);
+      }
+
+      toast.success('Trip created');
+      navigate(`/trip/${accessToken}`);
+    } catch (err) {
+      console.error(err);
+      toast.error('Failed to create trip');
+    } finally {
+      setLoading(false);
+    }
+
+// [v123] docs(algo): add mathematical proof of N-1 maximum transactions bound
