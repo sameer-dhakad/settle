@@ -130,5 +130,71 @@ const TripPage = () => {
       // 1. Add friends if not present
       const memberNames = (trip.members || []).map(m => m.name.toLowerCase());
       if (!memberNames.includes('aman')) {
+        await joinTrip(id, token, 'Aman', 'aman@okhdfcbank');
+      }
+      if (!memberNames.includes('priya')) {
+        await joinTrip(id, token, 'Priya', 'priya@okaxis');
+      }
+      if (!memberNames.includes('rohan')) {
+        await joinTrip(id, token, 'Rohan', 'rohan@paytm');
+      }
 
-// [v92] feat(algo): return optimized settlement plan with from, to, and amount
+      // Re-fetch to get updated member IDs
+      const updated = await loadTrip(id, token);
+      const aman = updated.members.find(m => m.name === 'Aman');
+
+      // 2. Add ₹2,400 Dinner expense paid by Aman
+      if (aman) {
+        await addExpense(id, token, {
+          description: 'Dinner at Cafe',
+          amount: 2400,
+          paidBy: aman._id || aman.id,
+          splitType: 'equal',
+          category: 'food'
+        });
+      }
+
+      toast.success('Loaded Goa Trip Sample Data! Check the Settle Up tab.');
+      setActiveTab('settle');
+    } catch (e) {
+      console.error(e);
+      toast.error('Failed to load demo data');
+    } finally {
+      setLoadingDemo(false);
+    }
+  };
+
+  const expenses = trip.expenses || [];
+  const members = trip.members || [];
+  const totalSpent = trip.totalExpenses || expenses.reduce((sum, e) => sum + e.amount, 0);
+
+  // Filtered expenses
+  const filteredExpenses = expenses
+    .filter((e) => selectedCategory === 'all' || e.category === selectedCategory)
+    .sort((a, b) => new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt));
+
+  return (
+    <div className="max-w-3xl mx-auto space-y-6 pb-24">
+      {/* Trip Header */}
+      <div className="space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <h1 className="text-3xl font-black text-slate-900 tracking-tight">{trip.name}</h1>
+              <button
+                onClick={() => loadTrip(id, token)}
+                className="p-1.5 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition-colors"
+                title="Refresh trip data"
+              >
+                <RefreshCw className="w-4 h-4" />
+              </button>
+            </div>
+            {trip.description && (
+              <p className="text-sm text-slate-500 mt-1">{trip.description}</p>
+            )}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+
+// [v148] refactor(middleware): return 403 Forbidden with clear error message on unauthorized trip access
