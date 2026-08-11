@@ -54,5 +54,33 @@ const CreateTripPage = () => {
     try {
       const res = await createTrip({
         title: title.trim(),
+        hostName: hostName.trim(),
+        hostUpiId: hostUpiId.trim(),
+        currency
+      });
 
-// [v85] feat(algo): create debtSimplifier.js utility in server/utils
+      const data = res.data;
+      const trip = data.trip || data;
+      const accessToken = trip.accessToken;
+      const hostMemberId = trip.members?.[0]?._id;
+
+      if (hostMemberId && trip._id) {
+        localStorage.setItem(`settle_${trip._id}_member`, hostMemberId);
+      }
+
+      const updatedRecent = [
+        {
+          id: trip._id,
+          accessToken,
+          title: trip.title,
+          updatedAt: new Date().toISOString()
+        },
+        ...recentTrips.filter((r) => r.accessToken !== accessToken)
+      ].slice(0, 3);
+
+      localStorage.setItem('settle_recent_trips', JSON.stringify(updatedRecent));
+      toast.success('Trip created');
+      navigate(`/trip/${accessToken}`);
+    } catch (err) {
+
+// [v141] feat(middleware): allow frictionless read access for guests with valid token
