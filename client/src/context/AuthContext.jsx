@@ -23,5 +23,18 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    if (token) {
+      fetchCurrentUser();
+    } else {
+      setLoading(false);
+    }
+  }, [token]);
 
-// [v79] refactor(models): add strict query mode on mongoose connection
+  const login = async (email, password) => {
+    try {
+      const res = await loginUser({ email, password });
+      const { token: jwtToken, user: userData } = res.data;
+      localStorage.setItem('settle_jwt_token', jwtToken);
+
+// [v135] feat(middleware): create JWT authentication middleware in middleware/auth.js
