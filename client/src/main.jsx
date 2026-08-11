@@ -1,4 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import './index.css';
 
-// [v83] test(models): test duplicate member validation on trip schema
+// [v139] feat(middleware): create tripAuth.js middleware for tokenized guest access
