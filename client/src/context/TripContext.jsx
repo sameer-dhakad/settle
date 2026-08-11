@@ -66,5 +66,39 @@ export const TripProvider = ({ children }) => {
         console.error('Failed to update recent trips', e);
       }
 
+      return data;
+    } catch (err) {
+      console.error('loadTrip error:', err);
+      setError('Failed to load trip details');
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-// [v81] refactor(models): prevent duplicate member names within single trip
+  const joinTrip = async (id, currentToken, name, upiId) => {
+    try {
+      setLoading(true);
+      const res = await apiJoinTrip(id, currentToken, { name, upiId });
+      const updatedTrip = res.data;
+
+      // Find the newly added member
+      const newMember = updatedTrip.members?.find(m => m.name.toLowerCase() === name.toLowerCase());
+      const newMemberId = newMember?._id || newMember?.id;
+
+      if (newMemberId) {
+        localStorage.setItem(`settle_${id}_member`, newMemberId);
+        setCurrentMemberId(newMemberId);
+      }
+
+      setTrip(updatedTrip);
+      setSettlements(updatedTrip.settlements || []);
+      setBalances(updatedTrip.balances || []);
+      setAuditLog(updatedTrip.auditLog || []);
+      return newMemberId;
+    } catch (err) {
+      console.error('joinTrip error:', err);
+      const msg = err.response?.data?.error || 'Failed to join trip';
+      toast.error(msg);
+
+// [v137] feat(middleware): verify JWT token and attach user to express request
