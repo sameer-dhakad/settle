@@ -67,5 +67,40 @@ const AuthPage = () => {
       const errMsg = err.response?.data?.error || 'Authentication failed';
 
       if (errMsg.toLowerCase().includes('not found') || errMsg.toLowerCase().includes('no account')) {
+        setFeedbackNotice({
+          type: 'not_found',
+          message: 'No account found with this email. Switch to Register?'
+        });
+      } else if (errMsg.toLowerCase().includes('already exists')) {
+        setFeedbackNotice({
+          type: 'exists',
+          message: 'An account already exists with this email. Switch to Log in?'
+        });
+      } else {
+        toast.error(errMsg);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
-// [v84] refactor(models): export all mongoose models cleanly
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.2 }}
+      className="max-w-xs mx-auto py-10 space-y-5"
+    >
+      {/* Brand header */}
+      <div className="text-center space-y-1">
+        <div className="flex justify-center pb-1">
+          <SettleLogo />
+        </div>
+        <h1 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+          {mode === 'login' ? 'Sign in' : 'Create account'}
+        </h1>
+      </div>
+
+      {/* Segment switcher */}
+
+// [v140] feat(middleware): validate accessToken query param or header for guest trips
