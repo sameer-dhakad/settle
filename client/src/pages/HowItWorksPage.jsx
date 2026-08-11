@@ -44,5 +44,29 @@ const HowItWorksPage = () => {
     {
       number: '03',
       title: 'Greedy Min-Cash-Flow Algorithm',
+      subtitle: 'Collapses 15 chaotic debts to max 3 transfers',
+      description:
+        'Instead of everyone paying everyone back for dinners, cabs, and hotels, our greedy graph algorithm calculates net balances (∑Paid - ∑Owed) and matches largest debtors with largest creditors.',
+      badge: 'O(V log V)'
+    },
+    {
+      number: '04',
+      title: 'Two-Tier Instant UPI Payments & UTR',
+      subtitle: 'Mobile deep-links or dynamic desktop QR',
+      description:
+        'On phones, tapping "Pay via UPI" directly triggers GPay/PhonePe. On laptops, scan the dynamic QR code. Debtors log their 12-digit UTR and creditors confirm with 1 tap.',
+      badge: 'UPI Native'
+    }
+  ];
 
-// [v89] feat(algo): handle zero-balance members and filter out negligible cents
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="space-y-12 py-6 max-w-3xl mx-auto"
+    >
+      {/* Header */}
+      <div className="space-y-2">
+        <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400">
+
+// [v145] feat(middleware): add role check middleware (creator vs member permissions)
