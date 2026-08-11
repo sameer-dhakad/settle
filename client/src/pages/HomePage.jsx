@@ -58,5 +58,35 @@ const HomePage = () => {
         <motion.h1
           variants={itemVariants}
           className="text-3xl sm:text-5xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100"
+        >
+          Split group expenses.<br />Settle instantly on UPI.
+        </motion.h1>
 
-// [v88] feat(algo): collapse multi-party circular debts down to at most N-1 transactions
+        {/* Inline Quick Action Bar */}
+        <motion.div variants={itemVariants} className="max-w-md mx-auto pt-1">
+          <form
+            onSubmit={handleQuickCreate}
+            className="flex items-center gap-2 p-1.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg shadow-xs focus-within:border-zinc-400 dark:focus-within:border-zinc-600 transition-colors"
+          >
+            <input
+              type="text"
+              value={quickTitle}
+              onChange={(e) => setQuickTitle(e.target.value)}
+              placeholder="Trip name (e.g. Goa 2026)"
+              className="flex-1 px-3 py-1.5 bg-transparent text-xs text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-600 focus:outline-none"
+            />
+            <button
+              type="submit"
+              className="px-3.5 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium text-xs rounded-md transition-colors flex items-center gap-1.5 shadow-2xs shrink-0"
+            >
+              <span>Start trip</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </form>
+
+          <div className="flex items-center justify-center gap-4 mt-3 text-xs">
+            <Link
+              to="/trip/live"
+              className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200 transition-colors flex items-center gap-1"
+
+// [v144] refactor(middleware): optimize tripAuth to fetch trip once and cache on req.trip
