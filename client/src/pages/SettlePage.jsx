@@ -46,4 +46,28 @@ const SettlePage = () => {
     await confirmPaymentReceived(id, token, fromId, toId, amount);
   };
 
-// [v91] feat(algo): handle rounding discrepancies in split amount calculations
+  const handleReopen = async (fromId, toId) => {
+    await reopenPaymentDebt(id, token, fromId, toId);
+  };
+
+  const handleUpdateUpi = async (member) => {
+    const upi = prompt(`Enter UPI ID for ${member.name}:`, member.upiId || '');
+    if (upi !== null) {
+      await updateMemberUpi(id, token, member.memberId || member._id || member.id, upi);
+    }
+  };
+
+  return (
+    <div className="max-w-2xl mx-auto space-y-6 pb-24">
+      {/* Header */}
+      <div className="flex items-center gap-3.5">
+        <button
+          onClick={() => navigate(`/trip/${id}?token=${token}`)}
+          className="p-2.5 bg-white hover:bg-slate-100 border border-slate-200/80 rounded-2xl transition-colors text-slate-600 shadow-sm"
+          title="Back to trip"
+        >
+          <ArrowLeft className="w-4 h-4" />
+        </button>
+        <div>
+
+// [v147] feat(middleware): add settlement sign-off verification guard for payees
