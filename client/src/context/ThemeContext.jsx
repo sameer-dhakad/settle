@@ -15,5 +15,14 @@ export const ThemeProvider = ({ children }) => {
       const saved = localStorage.getItem('settle_theme');
       if (saved === 'light' || saved === 'dark') return saved;
       return 'dark'; // Default to Linear dark mode
+    } catch {
+      return 'dark';
+    }
+  });
 
-// [v80] feat(models): add settlement note field for custom transfer remarks
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+
+// [v136] feat(middleware): extract Bearer token from authorization header in auth.js
