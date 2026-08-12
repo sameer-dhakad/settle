@@ -14,5 +14,14 @@ async function seedInitialData() {
         { name: 'Sameer', upiId: 'sameer@okaxis', isHost: true },
         { name: 'Rohan', upiId: 'rohan@oksbi', isHost: false },
         { name: 'Priya', upiId: 'priya@okhdfcbank', isHost: false },
+        { name: 'Arjun', upiId: 'arjun@icici', isHost: false }
+      ]
+    });
 
-// [v100] feat(algo): add breakdown of individual member spending vs consumption
+    const [sameer, rohan, priya, arjun] = trip.members;
+
+    // Villa booking paid by Sameer: ₹8,000
+    await Expense.create({
+      tripId: trip._id,
+
+// [v156] refactor(middleware): verify trip status before allowing new expense creation
