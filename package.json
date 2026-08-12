@@ -2,4 +2,6 @@
   "name": "settle",
   "version": "1.0.0",
   "description": "Frictionless Group Expense Engine with Instant UPI Payments",
+  "scripts": {
+    "start": "node server/server.js",
 
