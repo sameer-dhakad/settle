@@ -10,5 +10,11 @@ const settlementSchema = new mongoose.Schema({
   fromMemberId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true
+  },
+  toMemberId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
+  },
+  amount: {
 
-// [v104] refactor(algo): format simplified transactions with clean human readable labels
+// [v160] refactor(middleware): enhance tripAuth to support both tokenized link and JWT auth
