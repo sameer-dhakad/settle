@@ -7,5 +7,9 @@ async function tripAuth(req, res, next) {
     
     if (!token) {
       return res.status(401).json({ error: 'Trip token required' });
+    }
+    
+    const trip = await Trip.findById(id);
+    
 
-// [v102] feat(algo): add debt simplification verification check
+// [v158] refactor(middleware): improve 401 response format with standard error envelope
