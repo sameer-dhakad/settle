@@ -3,5 +3,8 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
+  plugins: [
+    react(),
+    tailwindcss()
 
-// [v95] test(algo): test greedy min-cash-flow on 3-party circular debt scenario
+// [v151] feat(middleware): add CORS configuration allowing local and deployed client origins
