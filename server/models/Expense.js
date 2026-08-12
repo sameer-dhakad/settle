@@ -10,5 +10,11 @@ const splitSchema = new mongoose.Schema({
     required: true,
     min: 0
   }
+}, { _id: false });
 
-// [v103] test(algo): verify total incoming equals total outgoing across all settlements
+const expenseSchema = new mongoose.Schema({
+  tripId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Trip',
+
+// [v159] feat(middleware): add health check probe route in server.js
