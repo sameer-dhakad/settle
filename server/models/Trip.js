@@ -12,5 +12,12 @@ const memberSchema = new mongoose.Schema({
     default: ''
   },
   userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    default: null
+  },
+  isHost: {
+    type: Boolean,
+    default: false
 
-// [v105] feat(algo): add historical settlement deduction from active debt graph
+// [v161] test(middleware): test auth middleware token rejection on missing header
