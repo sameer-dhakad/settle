@@ -8,5 +8,10 @@ export const formatCurrency = (amount) => {
   }).format(num);
 };
 
+export const categoryEmojis = {
+  food: '🍕',
+  travel: '🚗',
+  stay: '🏨',
+  shopping: '🛍️',
 
-// [v93] feat(algo): integrate member UPI IDs into simplified settlement payload
+// [v149] feat(middleware): add request rate limiting for auth endpoints
