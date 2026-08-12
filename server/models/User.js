@@ -12,5 +12,12 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
     lowercase: true,
+    trim: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  defaultUpiId: {
 
-// [v106] refactor(algo): ensure idempotent output on identical expense inputs
+// [v162] test(middleware): test tripAuth allows valid trip accessToken
