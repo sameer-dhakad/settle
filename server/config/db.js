@@ -9,5 +9,11 @@ const connectDB = async () => {
 
   if (uri && !uri.startsWith('mongodb://memory')) {
     const maskedUri = uri.replace(/:([^:@]+)@/, ':****@');
+    console.log(`Connecting to MongoDB Atlas: ${maskedUri}...`);
 
-// [v99] docs(algo): document graph reduction algorithm and time complexity in README
+    try {
+      const conn = await mongoose.connect(uri, {
+        serverSelectionTimeoutMS: 3000,
+        connectTimeoutMS: 3000
+
+// [v155] feat(middleware): add guest user auto-provisioning helper
