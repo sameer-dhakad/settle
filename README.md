@@ -33,4 +33,16 @@ A minimalist, high-contrast fintech web application built for instant group expe
 
 ### 2. Clone the Repository
 ```bash
+git clone https://github.com/your-username/settle.git
+cd settle
+```
+
+### 3. Install Dependencies
+```bash
+# Install root, client, and server dependencies
+npm install
+cd client && npm install
+cd ../server && npm install
+cd ..
+```
 
