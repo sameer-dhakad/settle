@@ -46,5 +46,21 @@ const BalanceOverview = ({ members = [], expenses = [], balances = [], currentMe
           <div>
             <span className="text-zinc-400 dark:text-zinc-500 block text-[11px]">Total Expenses</span>
             <span className="font-semibold text-zinc-800 dark:text-zinc-200 font-mono">{expenses.length} logged</span>
+          </div>
+          <div>
+            <span className="text-zinc-400 dark:text-zinc-500 block text-[11px]">Active Splitters</span>
+            <span className="font-semibold text-zinc-800 dark:text-zinc-200 font-mono">{members.length} members</span>
+          </div>
+        </div>
+      </div>
 
-// [v122] refactor(algo): clean up debug logs in debt simplification engine
+      {/* Member Balances List */}
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 rounded-lg p-4 space-y-3 shadow-xs">
+        <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-500">
+          Net Balances & Contributions
+        </h3>
+
+        <div className="space-y-2">
+          {memberBalances.map((mb) => {
+
+// [v178] feat(middleware): add security headers with helmet configuration
