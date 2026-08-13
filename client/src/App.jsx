@@ -17,4 +17,10 @@ function ThemedToaster() {
   return <Toaster position="top-center" richColors theme={theme} />;
 }
 
-// [v119] refactor(algo): optimize memory allocations in graph reduction algorithm
+function App() {
+  return (
+    <ThemeProvider>
+      <BrowserRouter>
+        <ThemedToaster />
+
+// [v175] refactor(middleware): sanitize guest member names to prevent XSS
