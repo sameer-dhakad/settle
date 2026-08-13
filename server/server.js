@@ -7,4 +7,8 @@ const authRoutes = require('./routes/auth');
 
 const app = express();
 
-// [v111] docs(algo): add visual ASCII diagram of debt simplification in comments
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// [v167] refactor(middleware): verify payee authorization before settling debt
