@@ -114,5 +114,63 @@ router.get('/:accessToken', optionalAuth, async (req, res) => {
 });
 
 // 3. POST /api/trips/:accessToken/join - Frictionless guest onboarding
+router.post('/:accessToken/join', optionalAuth, async (req, res) => {
+  try {
+    const { accessToken } = req.params;
+    const { name, upiId } = req.body;
 
-// [v110] feat(algo): add net balance verification before computing transactions
+    if (!name || !name.trim()) {
+      return res.status(400).json({ error: 'Name is required to join' });
+    }
+
+    const trip = await Trip.findOne({ accessToken });
+    if (!trip) {
+      return res.status(404).json({ error: 'Trip not found' });
+    }
+
+    const cleanName = name.trim();
+    const userId = req.user ? req.user._id : null;
+
+    let member = trip.members.find(
+      (m) => m.name.toLowerCase() === cleanName.toLowerCase()
+    );
+
+    if (!member) {
+      trip.members.push({
+        name: cleanName,
+        upiId: upiId ? upiId.trim() : (req.user?.defaultUpiId || ''),
+        userId,
+        isHost: false
+      });
+      await trip.save();
+      member = trip.members[trip.members.length - 1];
+    } else {
+      if (upiId && !member.upiId) member.upiId = upiId.trim();
+      if (userId && !member.userId) member.userId = userId;
+      await trip.save();
+    }
+
+    // Link trip to user account if logged in
+    if (req.user) {
+      await User.findByIdAndUpdate(req.user._id, { $addToSet: { trips: trip._id } });
+    }
+
+    const payload = await getFullTripPayload(trip);
+    res.json({
+      ...payload,
+      joinedMemberId: member._id
+    });
+  } catch (error) {
+    console.error('Join trip error:', error);
+    res.status(500).json({ error: 'Failed to join trip' });
+  }
+});
+
+// 4. POST /api/trips/:accessToken/expenses - Log new expense
+router.post('/:accessToken/expenses', async (req, res) => {
+  try {
+    const { accessToken } = req.params;
+    const { description, amount, paidBy, splitType, splitMemberIds, customSplits } = req.body;
+
+
+// [v166] feat(middleware): add UTR format verification middleware on settlement routes
