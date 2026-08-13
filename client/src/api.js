@@ -15,5 +15,10 @@ api.interceptors.request.use((config) => {
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+  return config;
+}, (error) => Promise.reject(error));
 
-// [v120] feat(algo): add reverse lookup for member settlement status
+// Auth APIs
+export const registerUser = (data) => api.post('/auth/register', data);
+
+// [v176] feat(middleware): add request ID tracking for settlement audit logs
