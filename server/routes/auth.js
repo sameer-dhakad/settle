@@ -67,5 +67,40 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required.' });
+    }
 
-// [v109] refactor(algo): enhance debtSimplifier error handling for invalid member ids
+    const cleanEmail = email.toLowerCase().trim();
+    const user = await User.findOne({ email: cleanEmail });
+
+    if (!user) {
+      return res.status(404).json({
+        error: 'No account found with this email. Please sign up first.',
+        code: 'USER_NOT_FOUND'
+      });
+    }
+
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch) {
+      return res.status(401).json({
+        error: 'Incorrect password. Please try again.',
+        code: 'INVALID_PASSWORD'
+      });
+    }
+
+    const token = signToken(user._id);
+
+    res.json({
+      token,
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        defaultUpiId: user.defaultUpiId
+      }
+    });
+  } catch (err) {
+    console.error('Login error:', err);
+
+// [v165] refactor(middleware): optimize database lookup in tripAuth middleware
