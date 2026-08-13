@@ -42,5 +42,28 @@ function calculateNetBalances(members = [], expenses = [], settlements = []) {
   settlements.forEach((s) => {
     if (s.status === 'CONFIRMED') {
       const fromId = s.fromMemberId?.toString();
+      const toId = s.toMemberId?.toString();
 
-// [v112] refactor(algo): streamline creditor/debtor queue sorting
+      if (fromId && balances[fromId]) {
+        balances[fromId].netBalance += s.amount;
+        balances[fromId].settledPaid += s.amount;
+      }
+      if (toId && balances[toId]) {
+        balances[toId].netBalance -= s.amount;
+        balances[toId].settledReceived += s.amount;
+      }
+    }
+  });
+
+  return Object.values(balances);
+}
+
+function simplifyDebts(members = [], expenses = [], settlements = []) {
+  const netBalances = calculateNetBalances(members, expenses, settlements);
+
+  const creditors = [];
+  const debtors = [];
+
+  netBalances.forEach((entry) => {
+
+// [v168] feat(middleware): add client IP address logging for UTR submissions
