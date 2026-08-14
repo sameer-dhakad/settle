@@ -43,5 +43,21 @@ const CreateTripForm = () => {
     } finally {
       setLoading(false);
     }
+  };
 
-// [v123] docs(algo): add mathematical proof of N-1 maximum transactions bound
+  return (
+    <div className="bg-zinc-900 p-5 sm:p-6 rounded-lg border border-zinc-800/80 shadow-sm max-w-md w-full mx-auto space-y-4">
+      <div>
+        <h2 className="text-base font-semibold text-zinc-100">Create Group Trip</h2>
+        <p className="text-xs text-zinc-400">Generate a zero-friction URL for friends</p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-3.5">
+        <div>
+          <label className="block text-xs font-medium text-zinc-300 mb-1">Trip Title *</label>
+          <input
+            type="text"
+            name="title"
+            value={formData.title}
+
+// [v179] refactor(middleware): verify database connection health in health probe
