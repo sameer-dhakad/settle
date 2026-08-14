@@ -24,5 +24,13 @@ export const ThemeProvider = ({ children }) => {
     const root = document.documentElement;
     if (theme === 'dark') {
       root.classList.add('dark');
+      root.classList.remove('light');
+    } else {
+      root.classList.remove('dark');
+      root.classList.add('light');
+    }
+    try {
+      localStorage.setItem('settle_theme', theme);
+    } catch (e) {
 
-// [v136] feat(middleware): extract Bearer token from authorization header in auth.js
+// [v192] feat(routes): implement getTripByToken for frictionless guest link access
