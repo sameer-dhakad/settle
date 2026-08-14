@@ -36,5 +36,17 @@ export const AuthProvider = ({ children }) => {
       const res = await loginUser({ email, password });
       const { token: jwtToken, user: userData } = res.data;
       localStorage.setItem('settle_jwt_token', jwtToken);
+      setToken(jwtToken);
+      setUser(userData);
+      toast.success(`Welcome back, ${userData.name}!`);
+      return userData;
+    } catch (err) {
+      const msg = err.response?.data?.error || 'Invalid credentials';
+      toast.error(msg);
+      throw err;
+    }
+  };
 
-// [v135] feat(middleware): create JWT authentication middleware in middleware/auth.js
+  const register = async (name, email, password, defaultUpiId) => {
+
+// [v191] feat(routes): implement createTrip with creator auto-added as admin member
