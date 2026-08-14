@@ -142,5 +142,54 @@ const PaymentModal = ({
           <form onSubmit={handleCompletePayment} className="space-y-3">
             <div>
               <label className="block text-[11px] font-medium text-zinc-600 dark:text-zinc-400 mb-1">
+                12-digit UPI Reference / UTR <span className="text-zinc-400 dark:text-zinc-500 font-normal">(optional)</span>
+              </label>
+              <input
+                type="text"
+                value={utrNumber}
+                onChange={(e) => setUtrNumber(e.target.value)}
+                placeholder="e.g. 412345678901"
+                className="w-full px-3 py-1.5 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md text-zinc-900 dark:text-zinc-100 text-xs font-mono focus:border-zinc-500 focus:outline-none transition-colors"
+                autoFocus
+              />
+            </div>
 
-// [v130] refactor(algo): sanitize input amounts before running graph solver
+            <div className="space-y-1.5 pt-1">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-2 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium text-xs rounded-md transition-colors flex items-center justify-center gap-1.5 disabled:opacity-50"
+              >
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                <span>{isSubmitting ? 'Updating...' : 'Yes, Mark as Paid'}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setShowReturnSheet(false)}
+                className="w-full py-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 border border-zinc-200 dark:border-zinc-800 font-medium text-xs rounded-md transition-colors"
+              >
+                Cancel / Try Again
+              </button>
+            </div>
+          </form>
+        </motion.div>
+      ) : isMobile ? (
+        /* 2. MOBILE LAUNCH SHEET */
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.18 }}
+          className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-5 w-full max-w-sm shadow-xl space-y-4"
+        >
+          <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800">
+            <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
+              Pay via UPI
+            </span>
+            <button
+              onClick={onClose}
+              className="p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 rounded"
+            >
+
+// [v186] feat(routes): implement user registration with password hashing in routes/auth.js
