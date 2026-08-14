@@ -91,5 +91,36 @@ const MemberList = ({
               ) : (
                 <button
                   onClick={() => handleStartEdit(member)}
+                  className="text-[10px] text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300 underline"
+                >
+                  +UPI
+                </button>
+              )}
 
-// [v129] feat(algo): add debt settlement priority ordering (largest debts first)
+              {onSwitchMember && !isYou && (
+                <button
+                  onClick={() => onSwitchMember(member)}
+                  className="text-[10px] text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 ml-0.5"
+                  title="Switch to this member"
+                >
+                  Switch
+                </button>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Edit UPI Modal */}
+      {editingMember && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 dark:bg-black/70 p-4">
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-5 max-w-xs w-full shadow-xl space-y-3">
+            <div className="flex items-center justify-between pb-2 border-b border-zinc-100 dark:border-zinc-800">
+              <span className="text-xs font-medium text-zinc-900 dark:text-zinc-200">
+                Set UPI for {editingMember.name}
+              </span>
+              <button
+                onClick={() => setEditingMember(null)}
+                className="p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
+
+// [v185] feat(routes): scaffold auth.js routes with register, login, and profile
