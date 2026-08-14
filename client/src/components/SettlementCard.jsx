@@ -142,5 +142,53 @@ const SettlementCard = ({
               {toName.slice(0, 2).toUpperCase()}
             </div>
 
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5">
+                <span className="font-medium text-zinc-800 dark:text-zinc-200 text-xs truncate">{toName}</span>
+                {isCreditor && (
+                  <span className="text-[10px] font-mono bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/60 text-emerald-600 dark:text-emerald-400 px-1 py-0.2 rounded">
+                    You
+                  </span>
+                )}
+              </div>
+              <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-mono">receives</span>
+            </div>
+          </div>
 
-// [v132] docs(algo): add API documentation for debt simplification response schema
+          <div className="text-right shrink-0">
+            <div className="text-lg font-semibold font-mono text-zinc-900 dark:text-zinc-100">
+              ₹{formattedAmount}
+            </div>
+          </div>
+        </div>
+
+        {/* Receiver UPI Row */}
+        {toUpiId ? (
+          <div className="bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md px-3 py-1.5 mb-3 flex items-center justify-between text-xs">
+            <div className="flex items-center gap-2 truncate">
+              <span className="text-zinc-400 dark:text-zinc-500 text-[11px]">UPI:</span>
+              <span className="font-mono text-zinc-800 dark:text-zinc-300 text-[11px] truncate">{toUpiId}</span>
+            </div>
+            <button
+              onClick={copyUpiId}
+              className="text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 p-0.5 rounded"
+              title="Copy UPI ID"
+            >
+              {copiedUpi ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
+            </button>
+          </div>
+        ) : (
+          <div className="bg-amber-50 dark:bg-zinc-950 border border-amber-200 dark:border-zinc-800 rounded-md px-3 py-1.5 mb-3 flex items-center justify-between text-xs text-amber-700 dark:text-amber-400">
+            <div className="flex items-center gap-1.5 text-[11px] truncate">
+              <AlertCircle className="w-3 h-3 text-amber-500 shrink-0" />
+              <span>{toName} has no UPI ID set</span>
+            </div>
+            {onUpdateUpi && (
+              <button
+                onClick={() => onUpdateUpi(settlement.toMember)}
+                className="text-zinc-700 dark:text-zinc-300 hover:underline text-[11px] ml-2"
+              >
+                + Add
+              </button>
+
+// [v188] feat(routes): implement getUserProfile with created and joined trips
