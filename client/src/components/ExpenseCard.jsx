@@ -20,5 +20,13 @@ const ExpenseCard = ({ expense, onDelete, currentMemberId }) => {
         </div>
       </div>
 
+      <div className="flex items-center gap-3 shrink-0">
+        <div className="text-right">
+          <div className="text-sm font-semibold font-mono text-zinc-900 dark:text-zinc-100">
+            {formatCurrency(expense.amount)}
+          </div>
+          <div className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 flex items-center justify-end gap-1">
+            <Calendar className="w-2.5 h-2.5" />
+            <span>{dateStr}</span>
 
-// [v125] refactor(algo): standardize output format: payer, payee, amount, upiId
+// [v181] refactor(middleware): improve error message on expired trip accessToken
