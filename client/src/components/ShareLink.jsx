@@ -34,5 +34,17 @@ const ShareLink = ({ tripId, token, tripName = 'Trip' }) => {
 
         <div className="flex items-center gap-1.5 shrink-0">
           <button
+            onClick={shareToWhatsApp}
+            className="px-2.5 py-1 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-950 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 rounded-md transition-colors flex items-center gap-1 text-[11px]"
+            title="Share via WhatsApp"
+          >
+            <MessageCircle className="w-3 h-3 text-emerald-500" />
+            <span className="hidden sm:inline">WhatsApp</span>
+          </button>
 
-// [v133] refactor(algo): ensure immutability of original trip expense arrays
+          <button
+            onClick={() => setShowQr(true)}
+            className="px-2.5 py-1 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-950 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 rounded-md transition-colors flex items-center gap-1 text-[11px]"
+            title="Show QR Code"
+
+// [v189] feat(routes): implement updateProfile with UPI ID and avatar settings
