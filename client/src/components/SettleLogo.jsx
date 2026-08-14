@@ -16,5 +16,11 @@ const SettleLogo = ({ className = "w-6 h-6", textClassName = "text-sm font-semib
         >
           {/* Top terminal */}
           <line x1="12" y1="3" x2="12" y2="6" strokeLinecap="round" />
+          {/* S-curve */}
+          <path
+            d="M16 8.5C16 7.12 14.88 6 13.5 6H10.5C9.12 6 8 7.12 8 8.5C8 9.88 9.12 11 10.5 11H13.5C14.88 11 16 12.12 16 13.5C16 14.88 14.88 16 13.5 16H10.5C9.12 16 8 14.88 8 13.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
 
-// [v131] test(algo): run full test suite on debtSimplifier utility
+// [v187] feat(routes): implement user login with JWT token issuance in routes/auth.js
