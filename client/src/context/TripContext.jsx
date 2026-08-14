@@ -100,5 +100,40 @@ export const TripProvider = ({ children }) => {
       console.error('joinTrip error:', err);
       const msg = err.response?.data?.error || 'Failed to join trip';
       toast.error(msg);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
 
-// [v137] feat(middleware): verify JWT token and attach user to express request
+  const addExpense = async (id, currentToken, data) => {
+    try {
+      const res = await apiAddExpense(id, currentToken, data);
+      const updatedTrip = res.data;
+      setTrip(updatedTrip);
+      setSettlements(updatedTrip.settlements || []);
+      setBalances(updatedTrip.balances || []);
+      setAuditLog(updatedTrip.auditLog || []);
+      toast.success('Expense logged!');
+      return updatedTrip;
+    } catch (err) {
+      console.error('addExpense error:', err);
+      const msg = err.response?.data?.error || 'Failed to add expense';
+      toast.error(msg);
+      throw err;
+    }
+  };
+
+  const deleteExpense = async (id, currentToken, expenseId) => {
+    try {
+      const res = await apiDeleteExpense(id, currentToken, expenseId);
+      const updatedTrip = res.data;
+      setTrip(updatedTrip);
+      setSettlements(updatedTrip.settlements || []);
+      setBalances(updatedTrip.balances || []);
+      setAuditLog(updatedTrip.auditLog || []);
+      toast.success('Expense removed');
+      return updatedTrip;
+    } catch (err) {
+
+// [v193] feat(routes): implement getTripById with populated members and expenses
