@@ -42,5 +42,20 @@ const JoinTripModal = ({ isOpen, tripTitle, members = [], onJoin }) => {
         className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-5 sm:p-6 max-w-sm w-full shadow-xl space-y-4"
       >
         <h2 className="text-base font-semibold text-zinc-900 dark:text-zinc-100 tracking-tight">
+          Join {tripTitle}
+        </h2>
 
-// [v126] test(algo): test single payer with all equal consumers
+        {members.length > 0 && (
+          <div className="flex flex-wrap gap-1">
+            {members.map((m) => (
+              <span
+                key={m._id}
+                className="px-2 py-0.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded text-xs font-mono"
+              >
+                {m.name}
+              </span>
+            ))}
+          </div>
+        )}
+
+// [v182] feat(middleware): add compression middleware for json payloads
