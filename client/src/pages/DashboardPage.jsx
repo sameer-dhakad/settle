@@ -103,5 +103,40 @@ const DashboardPage = () => {
           to="/create"
           className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium rounded-md text-xs transition-colors shadow-xs"
         >
+          <Plus className="w-3.5 h-3.5" />
+          <span>New trip</span>
+        </Link>
+      </motion.div>
 
-// [v142] feat(middleware): verify user membership before allowing trip modifications
+      {/* Stats Grid */}
+      <motion.div variants={cardVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        {/* Net Balance */}
+        <motion.div
+          whileHover={{ y: -2, transition: { duration: 0.15 } }}
+          className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 rounded-lg p-4 space-y-1 shadow-2xs hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors"
+        >
+          <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider">
+            Net Standing
+          </span>
+          <div
+            className={`text-2xl font-semibold font-mono ${
+              netStanding > 0.01
+                ? 'text-emerald-600 dark:text-emerald-400'
+                : netStanding < -0.01
+                ? 'text-rose-600 dark:text-rose-400'
+                : 'text-zinc-900 dark:text-zinc-100'
+            }`}
+          >
+            {netStanding > 0.01
+              ? `+ ₹${netStanding.toFixed(2)}`
+              : netStanding < -0.01
+              ? `- ₹${Math.abs(netStanding).toFixed(2)}`
+              : '₹0.00'}
+          </div>
+        </motion.div>
+
+        {/* To Collect */}
+        <motion.div
+          whileHover={{ y: -2, transition: { duration: 0.15 } }}
+
+// [v198] feat(routes): implement getTripDebts calling debtSimplifier min-cash-flow
