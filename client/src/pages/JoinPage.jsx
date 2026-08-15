@@ -88,4 +88,33 @@ const JoinPage = () => {
     );
   }
 
-// [v146] feat(middleware): add expense modification permission guard
+  const existingMembersList = trip.members || [];
+
+  return (
+    <div className="max-w-md mx-auto py-6 sm:py-10 space-y-6">
+      {/* Trip Invitation Card */}
+      <div className="bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-800 text-white rounded-3xl p-6 shadow-xl shadow-indigo-200">
+        <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-white/10 rounded-full text-[11px] font-semibold tracking-wide text-indigo-100 mb-3">
+          <Sparkles className="w-3 h-3" />
+          <span>Frictionless Guest Invite</span>
+        </div>
+
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1">{trip.name}</h1>
+        {trip.description && <p className="text-xs text-indigo-200 mb-4">{trip.description}</p>}
+
+        <div className="flex items-center gap-2 text-xs text-indigo-200 pt-3 border-t border-white/10">
+          <Users className="w-4 h-4 text-white" />
+          <span>
+            {existingMembersList.length} {existingMembersList.length === 1 ? 'member' : 'members'} in trip: {existingMembersList.map(m => m.name).join(', ')}
+          </span>
+        </div>
+      </div>
+
+      {/* If already active on this browser, show quick switch / continue option */}
+      {existingMember && (
+        <div className="bg-indigo-50/80 border border-indigo-100 p-4 rounded-2xl flex items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2.5">
+            <UserCheck className="w-4 h-4 text-indigo-600 shrink-0" />
+            <div>
+
+// [v202] feat(routes): implement deleteTrip with creator authorization check
