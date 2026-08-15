@@ -60,5 +60,26 @@ const FeaturesPage = () => {
     {
       title: 'Zero Login Friction Onboarding',
       description: 'Friends do not need to download an app from the App Store or sign up with a password. They click your link and start splitting bills in 2 seconds.',
+      icon: <Users className="w-4 h-4 text-zinc-700 dark:text-zinc-300" />
+    },
+    {
+      title: 'Permanent Settlement Audit Trail',
+      description: 'Every confirmed transfer is permanently logged with timestamps, participant names, and reference IDs, providing a transparent financial record for the group.',
+      icon: <CheckCircle2 className="w-4 h-4 text-zinc-700 dark:text-zinc-300" />
+    }
+  ];
 
-// [v143] feat(middleware): add guest identity cookie support for persistent sessions
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="space-y-12 py-6 max-w-4xl mx-auto"
+    >
+      {/* Header */}
+      <div className="space-y-2">
+        <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400">
+          <span>Fintech Capabilities</span>
+        </div>
+        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+
+// [v199] feat(routes): implement recordSettlement for logging UPI payments with UTR
