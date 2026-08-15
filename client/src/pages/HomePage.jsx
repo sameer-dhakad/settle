@@ -88,5 +88,35 @@ const HomePage = () => {
             <Link
               to="/trip/live"
               className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200 transition-colors flex items-center gap-1"
+            >
+              <span>Explore live demo</span>
+              <ArrowRight className="w-3 h-3" />
+            </Link>
+          </div>
+        </motion.div>
 
-// [v144] refactor(middleware): optimize tripAuth to fetch trip once and cache on req.trip
+        {/* ───────────────────────────────────────────────────────────
+            LIVE PRODUCT LEDGER CARD
+           ─────────────────────────────────────────────────────────── */}
+        <motion.div
+          variants={itemVariants}
+          whileHover={{ y: -2, transition: { duration: 0.15 } }}
+          className="pt-4 max-w-lg mx-auto text-left"
+        >
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 rounded-lg p-5 shadow-xs space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800/80 text-xs">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                <span className="font-medium text-zinc-900 dark:text-zinc-100">Goa Trip 2026</span>
+                <span className="text-zinc-300 dark:text-zinc-700">•</span>
+                <span className="text-zinc-400 font-mono text-[11px]">4 members</span>
+              </div>
+              <Link
+                to="/trip/live"
+                className="flex items-center gap-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 font-mono text-[11px] transition-colors"
+              >
+                <span>/trip/live</span>
+                <ExternalLink className="w-3 h-3" />
+              </Link>
+
+// [v200] feat(routes): implement verifySettlement for payee sign-off on incoming payment
