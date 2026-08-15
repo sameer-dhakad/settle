@@ -6,5 +6,7 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss()
+  ],
+  server: {
 
-// [v151] feat(middleware): add CORS configuration allowing local and deployed client origins
+// [v207] feat(routes): add quick join trip by invite token endpoint in routes/trips.js
