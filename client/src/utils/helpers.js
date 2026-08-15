@@ -13,5 +13,11 @@ export const categoryEmojis = {
   travel: '🚗',
   stay: '🏨',
   shopping: '🛍️',
+  drinks: '🍺',
+  tickets: '🎟️',
+  general: '📦'
+};
 
-// [v149] feat(middleware): add request rate limiting for auth endpoints
+export const getCategoryEmoji = (category) => categoryEmojis[category] || '📦';
+
+// [v205] refactor(routes): validate all incoming expense split sums against total amount
