@@ -196,5 +196,72 @@ const TripPage = () => {
 
           <div className="flex items-center gap-2">
             <button
+              onClick={() => setIsModalOpen(true)}
+              className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-semibold text-sm py-2.5 px-5 rounded-2xl shadow-sm shadow-indigo-200 transition-all shrink-0"
+            >
+              <Plus className="w-4 h-4" />
+              <span>Add Expense</span>
+            </button>
+          </div>
+        </div>
 
-// [v148] refactor(middleware): return 403 Forbidden with clear error message on unauthorized trip access
+        {/* Share Link Banner */}
+        <ShareLink tripId={id} token={token} tripName={trip.name} />
+
+        {/* Member Chips & Management */}
+        <MemberList
+          members={members}
+          currentMemberId={currentMemberId}
+          onUpdateUpi={handleUpdateUpi}
+          onAddMember={handleAddMember}
+          onSwitchMember={handleSwitchMember}
+        />
+      </div>
+
+      {/* Quick Demo Data Alert if 0 expenses exist */}
+      {expenses.length === 0 && (
+        <div className="bg-gradient-to-r from-amber-500/10 via-indigo-500/10 to-purple-500/10 border border-indigo-100 rounded-3xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="flex items-start gap-3">
+            <div className="p-2 bg-indigo-600 text-white rounded-2xl shrink-0 mt-0.5">
+              <Zap className="w-4 h-4" />
+            </div>
+            <div>
+              <strong className="text-sm font-bold text-slate-900 block">
+                Want to test the full flow right away?
+              </strong>
+              <p className="text-xs text-slate-600 mt-0.5">
+                Load sample friends (Aman, Priya, Rohan) and a ₹2,400 dinner bill to test the 2-tier UPI payment buttons & QR codes instantly.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={handleLoadDemoData}
+            disabled={loadingDemo}
+            className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white text-xs font-bold rounded-xl shrink-0 shadow-sm shadow-indigo-200 transition-all disabled:opacity-60"
+          >
+            {loadingDemo ? 'Loading...' : '⚡ Load Sample Goa Trip'}
+          </button>
+        </div>
+      )}
+
+      {/* Segmented Tabs */}
+      <div className="flex bg-slate-200/60 p-1.5 rounded-2xl">
+        <button
+          onClick={() => setActiveTab('expenses')}
+          className={`flex-1 py-2.5 text-xs sm:text-sm font-semibold rounded-xl transition-all flex items-center justify-center gap-1.5 ${
+            activeTab === 'expenses'
+              ? 'bg-white text-slate-900 shadow-sm'
+              : 'text-slate-500 hover:text-slate-700'
+          }`}
+        >
+          <Receipt className="w-4 h-4" />
+          <span>Expenses ({expenses.length})</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('balances')}
+          className={`flex-1 py-2.5 text-xs sm:text-sm font-semibold rounded-xl transition-all flex items-center justify-center gap-1.5 ${
+            activeTab === 'balances'
+              ? 'bg-white text-slate-900 shadow-sm'
+
+// [v204] feat(routes): implement generateTripWhatsAppSummary endpoint
