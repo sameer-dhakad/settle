@@ -68,5 +68,28 @@ const HowItWorksPage = () => {
       {/* Header */}
       <div className="space-y-2">
         <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400">
+          <span>Algorithm & Protocol</span>
+        </div>
+        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+          How Settle Works
+        </h1>
+        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-xl">
+          A high-velocity settlement engine designed to eliminate social awkwardness and mathematical chaos in group trips.
+        </p>
+      </div>
 
-// [v145] feat(middleware): add role check middleware (creator vs member permissions)
+      {/* Step Cards */}
+      <div className="space-y-3">
+        {steps.map((step) => (
+          <motion.div
+            key={step.number}
+            variants={cardMotion}
+            initial="hidden"
+            animate="visible"
+            whileHover={{ y: -2, transition: { duration: 0.15 } }}
+            className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 rounded-lg p-5 space-y-3 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors shadow-2xs"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+
+// [v201] feat(routes): implement getTripSettlements with payment status audit trail
