@@ -69,5 +69,29 @@ const SettlePage = () => {
           <ArrowLeft className="w-4 h-4" />
         </button>
         <div>
+          <h1 className="text-2xl font-black text-slate-900 tracking-tight">Settle Up</h1>
+          <p className="text-xs text-slate-500 mt-0.5">
+            {trip.name} • {settlements.length} {settlements.length === 1 ? 'transfer' : 'transfers'} required
+          </p>
+        </div>
+      </div>
 
-// [v147] feat(middleware): add settlement sign-off verification guard for payees
+      {/* Algorithm Banner */}
+      <div className="bg-gradient-to-r from-indigo-50 via-purple-50 to-indigo-50 border border-indigo-100 rounded-3xl p-5 text-xs text-indigo-950 flex items-start gap-3.5">
+        <div className="p-2 bg-indigo-600 text-white rounded-2xl shrink-0 mt-0.5">
+          <Sparkles className="w-4 h-4" />
+        </div>
+        <div>
+          <strong className="font-bold block text-sm text-indigo-900 mb-0.5">
+            Greedy Min-Cash-Flow Simplification Active
+          </strong>
+          <span className="text-slate-600 leading-relaxed">
+            All group expenses have been collapsed into the fewest direct transfers. Pay directly via mobile UPI deep-link or desktop QR code.
+          </span>
+        </div>
+      </div>
+
+      {/* Active Settlements */}
+      <div className="space-y-3">
+
+// [v203] feat(routes): implement getUserTrips returning all active and settled groups
