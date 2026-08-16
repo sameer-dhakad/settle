@@ -15,5 +15,10 @@ const connectDB = async () => {
       const conn = await mongoose.connect(uri, {
         serverSelectionTimeoutMS: 3000,
         connectTimeoutMS: 3000
+      });
+      console.log(`✓ MongoDB connected successfully: ${conn.connection.host}`);
+      await seedInitialData();
+      return;
+    } catch (error) {
 
-// [v155] feat(middleware): add guest user auto-provisioning helper
+// [v211] feat(config): create seed.js with realistic trip scenarios and members
