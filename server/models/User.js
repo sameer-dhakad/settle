@@ -19,5 +19,12 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   defaultUpiId: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  trips: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Trip'
 
-// [v162] test(middleware): test tripAuth allows valid trip accessToken
+// [v218] refactor(server): configure dynamic PORT binding with fallback to 5001
