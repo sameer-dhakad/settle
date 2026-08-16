@@ -19,4 +19,10 @@ const requireAuth = async (req, res, next) => {
       return res.status(401).json({ error: 'User account not found.' });
     }
 
-// [v157] feat(middleware): prevent expense additions to archived or settled trips
+    req.user = user;
+    next();
+  } catch (err) {
+    return res.status(401).json({ error: 'Invalid or expired session token.' });
+  }
+
+// [v213] feat(config): add realistic expenses and settlement records to seed script
