@@ -16,5 +16,12 @@ const expenseSchema = new mongoose.Schema({
   tripId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Trip',
+    required: true,
+    index: true
+  },
+  description: {
+    type: String,
+    required: true,
+    trim: true
 
-// [v159] feat(middleware): add health check probe route in server.js
+// [v215] feat(server): assemble express app mounting auth and trips routes
