@@ -4,4 +4,7 @@
   "description": "Frictionless Group Expense Engine with Instant UPI Payments",
   "scripts": {
     "start": "node server/server.js",
+    "build": "npm --prefix server install",
+    "server": "cd server && node server.js",
+    "client": "cd client && npm run dev",
 
