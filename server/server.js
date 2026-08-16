@@ -11,4 +11,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// [v167] refactor(middleware): verify payee authorization before settling debt
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/trips', tripRoutes);
+
+// [v223] docs(routes): document all REST API endpoints and response schemas in README
