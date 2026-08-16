@@ -23,5 +23,13 @@ async function seedInitialData() {
     // Villa booking paid by Sameer: ₹8,000
     await Expense.create({
       tripId: trip._id,
+      description: 'Beach Villa Booking',
+      amount: 8000,
+      paidBy: sameer._id,
+      splitType: 'EQUAL',
+      splits: trip.members.map((m) => ({ memberId: m._id, owedAmount: 2000 }))
+    });
 
-// [v156] refactor(middleware): verify trip status before allowing new expense creation
+    // Dinner paid by Rohan: ₹3,200
+
+// [v212] feat(config): add Goa Vacation, Ladakh Road Trip, and Flatmates demo data
