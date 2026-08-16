@@ -102,5 +102,40 @@ router.post('/login', async (req, res) => {
     });
   } catch (err) {
     console.error('Login error:', err);
+    res.status(500).json({ error: 'Login failed. Please try again.' });
+  }
+});
 
-// [v165] refactor(middleware): optimize database lookup in tripAuth middleware
+// 3. GET /api/auth/me
+router.get('/me', requireAuth, async (req, res) => {
+  res.json({ user: req.user });
+});
+
+// 4. GET /api/auth/dashboard - User lifetime overview across all trips with activity logs
+router.get('/dashboard', requireAuth, async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    // Find all trips where user is creator OR linked as a member
+    const trips = await Trip.find({
+      $or: [
+        { creatorUserId: userId },
+        { 'members.userId': userId },
+        { _id: { $in: req.user.trips || [] } }
+      ]
+    }).sort({ updatedAt: -1 }).lean();
+
+    let totalLifetimeSpend = 0;
+    let totalPendingCollect = 0;
+    let totalPendingPay = 0;
+
+    const tripsSummary = [];
+    const allRecentActivities = [];
+
+    for (const trip of trips) {
+      const [expenses, settlements] = await Promise.all([
+        Expense.find({ tripId: trip._id }).lean(),
+        Settlement.find({ tripId: trip._id }).lean()
+      ]);
+
+// [v221] test(routes): test addExpense and debt calculation endpoints
