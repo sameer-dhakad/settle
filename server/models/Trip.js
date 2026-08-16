@@ -19,5 +19,12 @@ const memberSchema = new mongoose.Schema({
   isHost: {
     type: Boolean,
     default: false
+  }
+}, { timestamps: true });
 
-// [v161] test(middleware): test auth middleware token rejection on missing header
+const tripSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+
+// [v217] feat(server): add graceful shutdown handlers for mongodb connection
