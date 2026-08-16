@@ -16,5 +16,12 @@ const settlementSchema = new mongoose.Schema({
     required: true
   },
   amount: {
+    type: Number,
+    required: true,
+    min: 0.01
+  },
+  status: {
+    type: String,
+    enum: ['PENDING', 'CONFIRMED'],
 
-// [v160] refactor(middleware): enhance tripAuth to support both tokenized link and JWT auth
+// [v216] feat(server): add root /api status ping endpoint in server.js
