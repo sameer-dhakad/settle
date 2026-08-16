@@ -11,5 +11,10 @@ async function tripAuth(req, res, next) {
     
     const trip = await Trip.findById(id);
     
+    if (!trip) {
+      return res.status(404).json({ error: 'Trip not found' });
+    }
+    
+    if (trip.token !== token) {
 
-// [v158] refactor(middleware): improve 401 response format with standard error envelope
+// [v214] feat(config): add npm run seed command in server package.json
