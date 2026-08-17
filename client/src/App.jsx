@@ -22,5 +22,11 @@ function App() {
     <ThemeProvider>
       <BrowserRouter>
         <ThemedToaster />
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<HomePage />} />
+              <Route path="create" element={<CreateTripPage />} />
+              <Route path="how-it-works" element={<HowItWorksPage />} />
 
-// [v175] refactor(middleware): sanitize guest member names to prevent XSS
+// [v231] test(routes): verify seed script creates accessible demo trips with valid tokens
