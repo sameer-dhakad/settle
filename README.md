@@ -46,3 +46,15 @@ cd ../server && npm install
 cd ..
 ```
 
+### 4. Configure Environment Variables
+Copy the example environment configuration:
+```bash
+# In the server directory:
+cp server/.env.example server/.env
+```
+
+Update `server/.env` with your MongoDB connection string and JWT secret:
+```env
+MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/settle?retryWrites=true&w=majority
+PORT=5001
+
