@@ -88,5 +88,28 @@ const DebtCard = ({
             )}
           </div>
 
+          <div className="text-sm font-semibold font-mono text-zinc-900 dark:text-zinc-100">
+            {formatCurrency(amount)}
+          </div>
+        </div>
 
-// [v180] test(middleware): verify rate limiting rejects brute force login attempts
+        {upiId && (
+          <div className="bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md px-2.5 py-1 flex items-center justify-between text-[11px]">
+            <span className="font-mono text-zinc-600 dark:text-zinc-400 truncate">{upiId}</span>
+            <button
+              onClick={copyUpiId}
+              className="text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 p-0.5"
+            >
+              {copiedUpi ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
+            </button>
+          </div>
+        )}
+
+        <div className="pt-1 flex gap-2">
+          {upiId ? (
+            <button
+              onClick={handlePayClick}
+              className="flex-1 py-1.5 px-3 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium text-xs rounded-md transition-colors flex items-center justify-center gap-1.5 shadow-2xs"
+            >
+
+// [v236] feat(client): create AuthContext.jsx with user authentication state
