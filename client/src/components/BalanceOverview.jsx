@@ -62,5 +62,21 @@ const BalanceOverview = ({ members = [], expenses = [], balances = [], currentMe
 
         <div className="space-y-2">
           {memberBalances.map((mb) => {
+            const isPositive = mb.balance > 0.01;
+            const isNegative = mb.balance < -0.01;
 
-// [v178] feat(middleware): add security headers with helmet configuration
+            return (
+              <div
+                key={mb.id}
+                className="p-3 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800/80 rounded-md flex items-center justify-between text-xs"
+              >
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-medium text-zinc-800 dark:text-zinc-200">{mb.name}</span>
+                    {mb.isYou && (
+                      <span className="text-[10px] font-mono bg-zinc-200 dark:bg-zinc-800 px-1 py-0.2 rounded text-zinc-700 dark:text-zinc-300">
+                        You
+                      </span>
+                    )}
+
+// [v234] chore(client): initialize src directory and setup main.jsx entry point
