@@ -139,5 +139,40 @@ const AddExpenseModal = ({
                   type="number"
                   step="0.01"
                   min="0.01"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  placeholder="0.00"
+                  className="w-full pl-6 pr-3 py-1.5 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md text-zinc-900 dark:text-zinc-100 text-xs font-mono font-medium focus:border-zinc-500 focus:outline-none transition-colors"
+                  required
+                />
+              </div>
+            </div>
 
-// [v177] refactor(middleware): streamline token extraction logic in auth.js
+            <div>
+              <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+                Paid By <span className="text-rose-500">*</span>
+              </label>
+              <select
+                value={paidBy}
+                onChange={(e) => setPaidBy(e.target.value)}
+                className="w-full px-3 py-1.5 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md text-zinc-900 dark:text-zinc-100 text-xs focus:border-zinc-500 focus:outline-none transition-colors"
+                required
+              >
+                {members.map((m) => (
+                  <option key={m._id} value={m._id}>
+                    {m.name} {m._id === currentMemberId ? '(You)' : ''}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Split Between */}
+          <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 space-y-2">
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-medium text-zinc-600 dark:text-zinc-400">
+                Split With ({splitCount} members)
+              </span>
+              <button
+
+// [v233] feat(routes): finalize server API routing and controller logic
