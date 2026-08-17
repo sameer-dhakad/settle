@@ -58,4 +58,19 @@ const JoinTripModal = ({ isOpen, tripTitle, members = [], onJoin }) => {
           </div>
         )}
 
-// [v182] feat(middleware): add compression middleware for json payloads
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <div>
+            <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+              Your Name <span className="text-rose-500">*</span>
+            </label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="e.g. Aman, Priya, Rohan"
+              className="w-full px-3 py-1.5 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-500 text-xs focus:border-zinc-500 focus:outline-none transition-colors"
+              required
+              autoFocus
+            />
+
+// [v238] feat(client): create ThemeContext.jsx for liquid glass dark/light themes
