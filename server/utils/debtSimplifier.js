@@ -65,5 +65,27 @@ function simplifyDebts(members = [], expenses = [], settlements = []) {
   const debtors = [];
 
   netBalances.forEach((entry) => {
+    const rounded = Math.round(entry.netBalance * 100) / 100;
+    if (rounded > 0.01) {
+      creditors.push({ ...entry, amount: rounded });
+    } else if (rounded < -0.01) {
+      debtors.push({ ...entry, amount: Math.abs(rounded) });
+    }
+  });
 
-// [v168] feat(middleware): add client IP address logging for UTR submissions
+  // Sort descending by magnitude
+  creditors.sort((a, b) => b.amount - a.amount);
+  debtors.sort((a, b) => b.amount - a.amount);
+
+  const simplified = [];
+
+  while (creditors.length > 0 && debtors.length > 0) {
+    const creditor = creditors[0];
+    const debtor = debtors[0];
+
+    const transferAmount = Math.min(creditor.amount, debtor.amount);
+    const roundedTransfer = Math.round(transferAmount * 100) / 100;
+
+    if (roundedTransfer > 0) {
+
+// [v224] refactor(routes): standardize API response format: success, data, message
