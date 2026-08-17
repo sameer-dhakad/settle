@@ -59,5 +59,20 @@ const CreateTripForm = () => {
             type="text"
             name="title"
             value={formData.title}
+            onChange={handleChange}
+            placeholder="e.g. Goa Trip 2026"
+            className="w-full px-3 py-1.5 bg-zinc-950 border border-zinc-800 rounded-md text-zinc-100 placeholder-zinc-500 text-xs focus:border-zinc-500 focus:outline-none"
+            required
+            autoFocus
+          />
+        </div>
 
-// [v179] refactor(middleware): verify database connection health in health probe
+        <div>
+          <label className="block text-xs font-medium text-zinc-300 mb-1">Your Name *</label>
+          <input
+            type="text"
+            name="hostName"
+            value={formData.hostName}
+            onChange={handleChange}
+
+// [v235] feat(client): configure React Router with BrowserRouter in App.jsx
