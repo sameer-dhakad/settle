@@ -28,5 +28,12 @@ const ExpenseCard = ({ expense, onDelete, currentMemberId }) => {
           <div className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 flex items-center justify-end gap-1">
             <Calendar className="w-2.5 h-2.5" />
             <span>{dateStr}</span>
+          </div>
+        </div>
 
-// [v181] refactor(middleware): improve error message on expired trip accessToken
+        {onDelete && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+
+// [v237] feat(client): add token storage in localStorage with auto-login check
