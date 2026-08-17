@@ -20,5 +20,11 @@ api.interceptors.request.use((config) => {
 
 // Auth APIs
 export const registerUser = (data) => api.post('/auth/register', data);
+export const loginUser = (data) => api.post('/auth/login', data);
+export const getMe = () => api.get('/auth/me');
+export const getDashboardStats = () => api.get('/auth/dashboard');
+export const getDashboardOverview = () => api.get('/auth/dashboard');
+export const claimTrip = (accessToken, data) => api.post(`/auth/claim-trip/${accessToken}`, data);
 
-// [v176] feat(middleware): add request ID tracking for settlement audit logs
+
+// [v232] refactor(routes): wrap all route handlers in async error catcher
