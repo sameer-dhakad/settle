@@ -137,5 +137,40 @@ const AuthPage = () => {
         <div className="p-2.5 rounded-md bg-amber-50 dark:bg-zinc-900 border border-amber-200 dark:border-zinc-800 text-xs flex items-center justify-between gap-2">
           <div className="flex items-center gap-1.5 text-zinc-800 dark:text-zinc-300 text-[11px]">
             <AlertCircle className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+            <span>{feedbackNotice.message}</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              setMode(feedbackNotice.type === 'not_found' ? 'register' : 'login');
+              setFeedbackNotice(null);
+            }}
+            className="text-[11px] font-medium text-zinc-900 dark:text-zinc-100 underline shrink-0"
+          >
+            Switch
+          </button>
+        </div>
+      )}
 
-// [v196] feat(routes): implement updateExpense for correcting amounts or categories
+      {/* Form Card */}
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 rounded-lg p-5 shadow-xs space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3">
+          {mode === 'register' && (
+            <div>
+              <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300 mb-1">Full Name</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Sameer"
+                className="w-full px-2.5 py-1.5 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md text-zinc-900 dark:text-zinc-100 text-xs focus:border-zinc-500 focus:outline-none"
+                required
+              />
+            </div>
+          )}
+
+          <div>
+            <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300 mb-1">Email</label>
+            <input
+
+// [v252] style(client): configure index.css with authentic Apple-style glassmorphism styles
