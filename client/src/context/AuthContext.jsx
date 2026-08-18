@@ -48,5 +48,18 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (name, email, password, defaultUpiId) => {
+    try {
+      const res = await registerUser({ name, email, password, defaultUpiId });
+      const { token: jwtToken, user: userData } = res.data;
+      localStorage.setItem('settle_jwt_token', jwtToken);
+      setToken(jwtToken);
+      setUser(userData);
+      toast.success(`Account created! Welcome, ${userData.name}.`);
+      return userData;
+    } catch (err) {
+      const msg = err.response?.data?.error || 'Registration failed';
+      toast.error(msg);
+      throw err;
+    }
 
-// [v191] feat(routes): implement createTrip with creator auto-added as admin member
+// [v247] feat(client): create upi helpers in utils/helpers.js for NPCI URI generation
