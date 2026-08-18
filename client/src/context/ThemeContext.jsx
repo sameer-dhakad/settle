@@ -32,5 +32,14 @@ export const ThemeProvider = ({ children }) => {
     try {
       localStorage.setItem('settle_theme', theme);
     } catch (e) {
+      console.error(e);
+    }
+  }, [theme]);
 
-// [v192] feat(routes): implement getTripByToken for frictionless guest link access
+  const toggleTheme = () => {
+    setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
+  const setTheme = (newTheme) => {
+
+// [v248] feat(client): implement generateUpiUri helper with pa, pn, am, and tn parameters
