@@ -191,5 +191,53 @@ const PaymentModal = ({
               onClick={onClose}
               className="p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 rounded"
             >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
 
-// [v186] feat(routes): implement user registration with password hashing in routes/auth.js
+          <div className="space-y-1">
+            <span className="text-xs text-zinc-500 dark:text-zinc-400 block">Paying To {toName}</span>
+            <div className="text-2xl font-semibold font-mono text-zinc-900 dark:text-zinc-100">
+              ₹{amount}
+            </div>
+          </div>
+
+          <div className="bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800/80 rounded-md p-3 text-xs space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="text-zinc-500">Receiving UPI:</span>
+              <span className="font-mono text-zinc-800 dark:text-zinc-300 truncate max-w-[180px]">{toUpiId || 'Not Set'}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-zinc-500">Note:</span>
+              <span className="text-zinc-700 dark:text-zinc-400">{note}</span>
+            </div>
+          </div>
+
+          <div className="space-y-2 pt-1">
+            <button
+              onClick={handleMobileLaunch}
+              className="w-full py-2 px-3 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium text-xs rounded-md transition-colors flex items-center justify-center gap-1.5 shadow-xs"
+            >
+              <Smartphone className="w-3.5 h-3.5" />
+              <span>Launch UPI App (GPay / PhonePe)</span>
+            </button>
+
+            <button
+              onClick={copyUpiId}
+              className="w-full py-1.5 px-3 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 font-medium text-xs rounded-md transition-colors flex items-center justify-center gap-1.5"
+            >
+              {copiedUpi ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+              <span>{copiedUpi ? 'UPI ID Copied' : 'Copy UPI ID & Pay Manually'}</span>
+            </button>
+
+            <button
+              onClick={() => setShowReturnSheet(true)}
+              className="w-full text-center text-[11px] text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-300 pt-1 font-mono transition-colors"
+            >
+              Already paid? Enter UTR & Mark Done →
+            </button>
+          </div>
+        </motion.div>
+      ) : (
+
+// [v242] feat(client): add fetchTrip, addExpense, and recordPayment actions in TripContext
