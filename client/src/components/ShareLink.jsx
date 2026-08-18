@@ -46,5 +46,17 @@ const ShareLink = ({ tripId, token, tripName = 'Trip' }) => {
             onClick={() => setShowQr(true)}
             className="px-2.5 py-1 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-950 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 rounded-md transition-colors flex items-center gap-1 text-[11px]"
             title="Show QR Code"
+          >
+            <QrCode className="w-3 h-3 text-zinc-500" />
+            <span className="hidden sm:inline">QR</span>
+          </button>
 
-// [v189] feat(routes): implement updateProfile with UPI ID and avatar settings
+          <button
+            onClick={handleCopy}
+            className="px-2.5 py-1 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium rounded-md transition-colors flex items-center gap-1 text-[11px] shadow-xs"
+          >
+            {copied ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
+            <span>{copied ? 'Copied' : 'Copy'}</span>
+          </button>
+
+// [v245] feat(client): configure api request interceptor injecting auth token
