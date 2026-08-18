@@ -110,5 +110,33 @@ const CreateTripPage = () => {
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 rounded-lg p-5 sm:p-6 shadow-xs space-y-5 transition-colors">
         <h1 className="text-base font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
           New trip
+        </h1>
 
-// [v197] feat(routes): implement deleteExpense with recalculation of balances
+        <form onSubmit={handleCreateTrip} className="space-y-4">
+          <div className="space-y-1">
+            <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400">
+              Trip name
+            </label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="e.g. Goa 2026"
+              className="w-full px-3 py-2 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-600 text-sm focus:border-zinc-400 dark:focus:border-zinc-600 focus:outline-none transition-colors"
+              required
+              autoFocus
+            />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="space-y-1">
+              <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400">
+                Your name
+              </label>
+              <input
+                type="text"
+                value={hostName}
+                onChange={(e) => setHostName(e.target.value)}
+                placeholder="Sameer"
+
+// [v253] style(client): define background grid patterns and delicate top blush washes
