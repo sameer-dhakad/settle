@@ -392,5 +392,104 @@ const TripView = () => {
                       >
                         <Smartphone className="w-3.5 h-3.5" />
                         <span>Pay via UPI</span>
+                      </button>
+                    )}
+                  </motion.div>
+                );
+              })}
+            </div>
+          )}
 
-// [v190] feat(routes): scaffold trips.js routes with full group expense operations
+          {/* Segmented Ledger Tabs */}
+          <div className="flex items-center gap-1 p-0.5 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs">
+            <button
+              onClick={() => setActiveTab('expenses')}
+              className={`flex-1 py-1.5 rounded font-medium transition-colors ${
+                activeTab === 'expenses'
+                  ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-2xs'
+                  : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200'
+              }`}
+            >
+              Expenses ({expenses.length})
+            </button>
+            <button
+              onClick={() => setActiveTab('settlements')}
+              className={`flex-1 py-1.5 rounded font-medium transition-colors ${
+                activeTab === 'settlements'
+                  ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-2xs'
+                  : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200'
+              }`}
+            >
+              Settlements ({settlements.length})
+            </button>
+            {auditLog.length > 0 && (
+              <button
+                onClick={() => setActiveTab('history')}
+                className={`flex-1 py-1.5 rounded font-medium transition-colors ${
+                  activeTab === 'history'
+                    ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-2xs'
+                    : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200'
+                }`}
+              >
+                History ({auditLog.length})
+              </button>
+            )}
+          </div>
+
+          {/* TAB 1: EXPENSES */}
+          {activeTab === 'expenses' && (
+            <div className="space-y-1.5">
+              {expenses.length === 0 ? (
+                <div className="p-8 text-center bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg text-xs font-mono text-zinc-400">
+                  No expenses recorded
+                </div>
+              ) : (
+                expenses.map((expense) => {
+                  const splitCount = expense.splits?.length || 0;
+                  const dateStr = expense.createdAt
+                    ? new Date(expense.createdAt).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' })
+                    : '';
+
+                  return (
+                    <motion.div
+                      key={expense._id}
+                      initial={{ opacity: 0, y: 3 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="group p-3 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors flex items-center justify-between gap-3 text-xs"
+                    >
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-2">
+                          <span className="font-medium text-zinc-900 dark:text-zinc-100 truncate">
+                            {expense.description}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-[11px] text-zinc-400 dark:text-zinc-500 mt-0.5">
+                          <span>Paid by {expense.paidByName}</span>
+                          <span>•</span>
+                          <span>{splitCount} split</span>
+                          {dateStr && (
+                            <>
+                              <span>•</span>
+                              <span>{dateStr}</span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3 shrink-0">
+                        <span className="font-mono font-semibold text-zinc-900 dark:text-zinc-100 text-sm">
+                          ₹{expense.amount.toFixed(2)}
+                        </span>
+                        <button
+                          onClick={() => handleDeleteExpense(expense._id)}
+                          className="opacity-0 group-hover:opacity-100 text-zinc-400 hover:text-rose-500 p-1 rounded transition-opacity"
+                          title="Delete"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </motion.div>
+                  );
+                })
+
+// [v246] feat(client): configure api response interceptor with error toast triggers
