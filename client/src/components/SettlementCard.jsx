@@ -190,5 +190,53 @@ const SettlementCard = ({
               >
                 + Add
               </button>
+            )}
+          </div>
+        )}
 
-// [v188] feat(routes): implement getUserProfile with created and joined trips
+        {/* State Indicators & Action Buttons */}
+        {status === 'PENDING' ? (
+          <div className="bg-amber-50/50 dark:bg-zinc-950 border border-amber-200 dark:border-amber-900/50 rounded-md p-3 space-y-2 text-xs">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2 text-amber-800 dark:text-amber-300 text-[11px]">
+                <Clock className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400 shrink-0" />
+                <span>
+                  <strong>{fromName}</strong> marked as paid. Waiting for confirmation.
+                </span>
+              </div>
+
+              <button
+                onClick={handleConfirmReceivedSubmit}
+                disabled={submitting}
+                className="py-1 px-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-md text-xs transition-colors flex items-center gap-1 shrink-0 shadow-2xs"
+              >
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>Confirm</span>
+              </button>
+            </div>
+
+            {utrNumber && (
+              <div className="pt-1.5 border-t border-amber-200 dark:border-zinc-800 flex items-center justify-between text-[10px] text-zinc-500 dark:text-zinc-400 font-mono">
+                <div className="flex items-center gap-1">
+                  <Hash className="w-3 h-3 text-emerald-500" />
+                  <span>UTR Reference: <strong className="text-zinc-800 dark:text-zinc-200">{utrNumber}</strong></span>
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="flex items-center gap-2 pt-2 border-t border-zinc-100 dark:border-zinc-800">
+            {toUpiId ? (
+              <button
+                onClick={handlePayClick}
+                className="flex-1 py-1.5 px-3 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium text-xs rounded-md transition-colors flex items-center justify-center gap-1.5 shadow-2xs"
+              >
+                {isMobile ? <Smartphone className="w-3.5 h-3.5" /> : <QrCode className="w-3.5 h-3.5" />}
+                <span>Pay ₹{formattedAmount} via UPI</span>
+              </button>
+            ) : (
+              <button
+                onClick={copyUpiId}
+                className="flex-1 py-1.5 px-3 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium text-xs rounded-md transition-colors"
+
+// [v244] feat(client): create api.js service client with axios/fetch base configuration
