@@ -122,5 +122,36 @@ const MemberList = ({
               <button
                 onClick={() => setEditingMember(null)}
                 className="p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
+            <form onSubmit={handleSaveUpi} className="space-y-3">
+              <input
+                type="text"
+                value={upiInput}
+                onChange={(e) => setUpiInput(e.target.value)}
+                placeholder="name@okaxis"
+                className="w-full px-2.5 py-1.5 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md text-zinc-900 dark:text-zinc-100 text-xs font-mono focus:border-zinc-500 focus:outline-none"
+                autoFocus
+              />
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setEditingMember(null)}
+                  className="flex-1 py-1.5 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-md text-xs"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium rounded-md text-xs shadow-xs"
+                >
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
 
-// [v185] feat(routes): scaffold auth.js routes with register, login, and profile
+// [v241] feat(client): create TripContext.jsx for managing active trip state
