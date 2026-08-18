@@ -135,5 +135,39 @@ export const TripProvider = ({ children }) => {
       toast.success('Expense removed');
       return updatedTrip;
     } catch (err) {
+      console.error('deleteExpense error:', err);
+      const msg = err.response?.data?.error || 'Failed to delete expense';
+      toast.error(msg);
+      throw err;
+    }
+  };
 
-// [v193] feat(routes): implement getTripById with populated members and expenses
+  const markPaymentAsPaid = async (id, currentToken, fromMemberId, toMemberId, amount) => {
+    try {
+      const res = await apiMarkPaymentPaid(id, currentToken, { fromMemberId, toMemberId, amount });
+      const updatedTrip = res.data;
+      setTrip(updatedTrip);
+      setSettlements(updatedTrip.settlements || []);
+      setBalances(updatedTrip.balances || []);
+      setAuditLog(updatedTrip.auditLog || []);
+      toast.success('Marked as paid! Awaiting confirmation from receiver.');
+      return updatedTrip;
+    } catch (err) {
+      console.error('markPaymentAsPaid error:', err);
+      toast.error('Failed to mark payment');
+      throw err;
+    }
+  };
+
+  const confirmPaymentReceived = async (id, currentToken, fromMemberId, toMemberId, amount) => {
+    try {
+      const res = await apiConfirmPayment(id, currentToken, { fromMemberId, toMemberId, amount });
+      const updatedTrip = res.data;
+      setTrip(updatedTrip);
+      setSettlements(updatedTrip.settlements || []);
+      setBalances(updatedTrip.balances || []);
+      setAuditLog(updatedTrip.auditLog || []);
+      toast.success('Settlement confirmed and locked! 🎉');
+      return updatedTrip;
+
+// [v249] feat(client): implement generateWhatsAppSummary helper for 1-click sharing
