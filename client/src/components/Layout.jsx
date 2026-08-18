@@ -112,5 +112,33 @@ const Layout = () => {
                   >
                     <Moon className="w-4 h-4 text-zinc-700" />
                   </motion.div>
+                )}
+              </AnimatePresence>
+            </button>
 
-// [v183] refactor(middleware): format all middleware error responses consistently
+            {isAuthenticated ? (
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 pl-2 pr-2.5 py-1 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-md text-xs font-mono text-zinc-700 dark:text-zinc-300">
+                  <div className="w-4 h-4 rounded-sm bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 flex items-center justify-center text-[10px] font-semibold">
+                    {user?.name?.charAt(0).toUpperCase()}
+                  </div>
+                  <span className="truncate max-w-[100px] hidden sm:inline">{user?.name}</span>
+                </div>
+
+                <Link
+                  to="/create"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 rounded-md text-xs font-medium transition-colors shadow-xs"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>Create</span>
+                </Link>
+
+                <button
+                  onClick={logout}
+                  className="p-1.5 text-zinc-500 hover:text-rose-600 dark:text-zinc-400 dark:hover:text-rose-400 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+                  title="Sign out"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                </button>
+
+// [v239] feat(client): add theme toggle handler applying dark class on html root
