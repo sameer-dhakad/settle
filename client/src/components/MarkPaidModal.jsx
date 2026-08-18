@@ -64,5 +64,21 @@ const MarkPaidModal = ({
             <span className="text-zinc-500">Paying To:</span>
             <span className="font-medium text-zinc-800 dark:text-zinc-200">{toName}</span>
           </div>
+          {toUpiId && (
+            <div className="flex justify-between">
+              <span className="text-zinc-500">UPI ID:</span>
+              <span className="font-mono text-zinc-800 dark:text-zinc-300 text-[11px]">{toUpiId}</span>
+            </div>
+          )}
+          <div className="flex justify-between pt-1 border-t border-zinc-200/60 dark:border-zinc-850">
+            <span className="text-zinc-500 dark:text-zinc-400">Amount Sent:</span>
+            <span className="font-mono font-semibold text-zinc-900 dark:text-zinc-100">₹{amount}</span>
+          </div>
+        </div>
 
-// [v184] feat(middleware): finalize auth and trip security pipeline
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <div>
+            <label className="block text-[11px] font-medium text-zinc-600 dark:text-zinc-400 mb-1">
+              12-digit UTR Reference <span className="text-zinc-400 dark:text-zinc-500 font-normal">(optional)</span>
+
+// [v240] feat(client): persist active theme selection in localStorage in ThemeContext
