@@ -22,5 +22,11 @@ const SettleLogo = ({ className = "w-6 h-6", textClassName = "text-sm font-semib
             strokeLinecap="round"
             strokeLinejoin="round"
           />
+          {/* Bottom terminal */}
+          <line x1="12" y1="16" x2="12" y2="21" strokeLinecap="round" />
+        </svg>
+      </div>
 
-// [v187] feat(routes): implement user login with JWT token issuance in routes/auth.js
+      <div className="flex items-center gap-2">
+
+// [v243] feat(client): add live balance recalculation on trip state updates
