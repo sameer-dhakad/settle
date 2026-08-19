@@ -93,5 +93,29 @@ const SettlePage = () => {
 
       {/* Active Settlements */}
       <div className="space-y-3">
+        {settlements.length === 0 ? (
+          <div className="text-center py-16 bg-white rounded-3xl border border-slate-200/80 p-8 space-y-3">
+            <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto">
+              <CheckCircle2 className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-bold text-slate-900">All Settled Up! 🎉</h3>
+            <p className="text-xs text-slate-500 max-w-xs mx-auto">
+              No pending debts in this trip. Every member's balance is clean!
+            </p>
+            <button
+              onClick={() => navigate(`/trip/${id}?token=${token}`)}
+              className="mt-2 inline-flex items-center gap-1.5 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition-colors"
+            >
+              Back to Expenses
+            </button>
+          </div>
+        ) : (
+          settlements.map((debt, index) => (
+            <DebtCard
+              key={index}
+              debt={debt}
+              tripName={trip.name}
+              currentMemberId={currentMemberId}
+              onMarkPaid={handleMarkPaid}
 
-// [v203] feat(routes): implement getUserTrips returning all active and settled groups
+// [v259] feat(client): add protected route guard for authenticated user pages
