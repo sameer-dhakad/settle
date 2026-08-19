@@ -20,4 +20,9 @@ export const categoryEmojis = {
 
 export const getCategoryEmoji = (category) => categoryEmojis[category] || '📦';
 
-// [v205] refactor(routes): validate all incoming expense split sums against total amount
+export const generateUpiLink = (upiId, name, amount, tripName = 'Trip') => {
+  const cleanUpi = upiId ? upiId.trim() : '';
+  const cleanName = name ? name.trim() : 'Receiver';
+  const cleanAmount = (parseFloat(amount) || 0).toFixed(2);
+
+// [v261] feat(client): add useAuth, useTheme, and useTrip custom hooks
