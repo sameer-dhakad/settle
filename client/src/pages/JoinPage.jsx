@@ -116,5 +116,35 @@ const JoinPage = () => {
           <div className="flex items-center gap-2.5">
             <UserCheck className="w-4 h-4 text-indigo-600 shrink-0" />
             <div>
+              <span className="text-slate-500">Currently active as:</span>
+              <span className="font-bold text-slate-900 ml-1">{existingMember.name}</span>
+            </div>
+          </div>
+          <button
+            onClick={() => navigate(`/trip/${id}?token=${token}`)}
+            className="px-3 py-1.5 bg-indigo-600 text-white font-semibold rounded-xl text-xs hover:bg-indigo-700 transition-colors"
+          >
+            Go to Trip →
+          </button>
+        </div>
+      )}
 
-// [v202] feat(routes): implement deleteTrip with creator authorization check
+      {/* Join Form */}
+      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-5">
+        <div>
+          <h2 className="text-lg font-bold text-slate-900">
+            {existingMember ? 'Join as Another Friend' : "Enter your name to join"}
+          </h2>
+          <p className="text-xs text-slate-500 mt-0.5">
+            No signup or app download required. Friends can split expenses immediately.
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-xs font-semibold text-slate-700 mb-1">
+              Your Name *
+            </label>
+            <input
+
+// [v258] feat(client): add loading spinner and skeleton card components
