@@ -20,5 +20,11 @@ const connectDB = async () => {
       await seedInitialData();
       return;
     } catch (error) {
+      console.warn(`⚠️ Cloud MongoDB connection failed (${error.message}).`);
+      console.log('⚡ Starting local embedded MongoMemoryServer for reliable offline development...');
+    }
+  }
 
-// [v211] feat(config): create seed.js with realistic trip scenarios and members
+  try {
+
+// [v267] style(client): add smooth opacity transitions across route changes
