@@ -138,5 +138,40 @@ const DashboardPage = () => {
         {/* To Collect */}
         <motion.div
           whileHover={{ y: -2, transition: { duration: 0.15 } }}
+          className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 rounded-lg p-4 space-y-1 shadow-2xs hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors"
+        >
+          <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider">
+            To Collect
+          </span>
+          <div className="text-2xl font-semibold font-mono text-emerald-600 dark:text-emerald-400">
+            ₹{(stats.totalToCollect || 0).toFixed(2)}
+          </div>
+        </motion.div>
 
-// [v198] feat(routes): implement getTripDebts calling debtSimplifier min-cash-flow
+        {/* To Pay */}
+        <motion.div
+          whileHover={{ y: -2, transition: { duration: 0.15 } }}
+          className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 rounded-lg p-4 space-y-1 shadow-2xs hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors"
+        >
+          <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider">
+            To Pay
+          </span>
+          <div className="text-2xl font-semibold font-mono text-rose-600 dark:text-rose-400">
+            ₹{(stats.totalToPay || 0).toFixed(2)}
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Active Trips Section */}
+      <motion.div variants={cardVariants} className="space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            <h2 className="text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+              Active Trips ({trips.length})
+            </h2>
+          </div>
+        </div>
+
+
+// [v254] style(client): create custom button gradients and glowing border utilities
