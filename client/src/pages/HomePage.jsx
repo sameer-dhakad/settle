@@ -118,5 +118,35 @@ const HomePage = () => {
                 <span>/trip/live</span>
                 <ExternalLink className="w-3 h-3" />
               </Link>
+            </div>
 
-// [v200] feat(routes): implement verifySettlement for payee sign-off on incoming payment
+            <div className="bg-zinc-50 dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800/90 rounded-md p-3.5 flex items-center justify-between">
+              <div>
+                <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block">
+                  Viewing as Sameer
+                </span>
+                <div className="text-xl font-semibold font-mono text-emerald-600 dark:text-emerald-400 mt-0.5">
+                  + ₹4,600.00
+                </div>
+              </div>
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-400">
+                Owed to you
+              </span>
+            </div>
+
+            <div className="bg-zinc-50/60 dark:bg-zinc-950/60 border border-zinc-200/80 dark:border-zinc-800/80 rounded-md p-3 flex items-center justify-between text-xs">
+              <div className="flex items-center gap-2.5">
+                <div className="w-6 h-6 rounded bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 flex items-center justify-center font-mono text-[10px] font-semibold">
+                  R
+                </div>
+                <div>
+                  <span className="text-zinc-800 dark:text-zinc-200 font-medium">Rohan pays You</span>
+                  <span className="text-zinc-400 font-mono text-[11px] block">sameer@okaxis</span>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-sm font-semibold font-mono text-zinc-900 dark:text-zinc-100">₹2,200.00</span>
+                <Link
+                  to="/trip/live"
+
+// [v256] feat(client): create Layout.jsx wrapper with responsive container and background
