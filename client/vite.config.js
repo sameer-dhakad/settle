@@ -8,5 +8,8 @@ export default defineConfig({
     tailwindcss()
   ],
   server: {
+    port: 3000,
+    proxy: {
+      '/api': {
 
-// [v207] feat(routes): add quick join trip by invite token endpoint in routes/trips.js
+// [v263] refactor(client): cleanup default react boilerplates and unused css rules
