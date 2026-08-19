@@ -91,5 +91,29 @@ const HowItWorksPage = () => {
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
+                <span className="font-mono text-xs px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300">
+                  {step.number}
+                </span>
+                <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-200">
+                  {step.title}
+                </h3>
+              </div>
+              <span className="text-[11px] font-mono text-zinc-500 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-850 px-2 py-0.5 rounded">
+                {step.badge}
+              </span>
+            </div>
 
-// [v201] feat(routes): implement getTripSettlements with payment status audit trail
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed pl-8">
+              {step.description}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Algorithm Deep Dive Box */}
+      <motion.div
+        variants={cardMotion}
+        initial="hidden"
+        animate="visible"
+
+// [v257] feat(client): add notification toast system using custom styled alerts
