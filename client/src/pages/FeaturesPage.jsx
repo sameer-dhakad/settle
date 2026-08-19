@@ -81,5 +81,26 @@ const FeaturesPage = () => {
           <span>Fintech Capabilities</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+          Features
+        </h1>
+        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-xl">
+          Engineered for speed, privacy, and frictionless group settlement without proprietary wallet locks.
+        </p>
+      </div>
 
-// [v199] feat(routes): implement recordSettlement for logging UPI payments with UTR
+      {/* Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+        {featureList.map((f, idx) => (
+          <motion.div
+            key={idx}
+            variants={cardMotion}
+            initial="hidden"
+            animate="visible"
+            whileHover={{ y: -2, transition: { duration: 0.15 } }}
+            className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 rounded-lg p-4 space-y-2.5 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors shadow-2xs"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 rounded-md bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 flex items-center justify-center">
+                {f.icon}
+
+// [v255] style(client): configure floating animation keyframes and glow effects
