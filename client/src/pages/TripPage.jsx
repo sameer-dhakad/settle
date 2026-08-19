@@ -263,5 +263,71 @@ const TripPage = () => {
           className={`flex-1 py-2.5 text-xs sm:text-sm font-semibold rounded-xl transition-all flex items-center justify-center gap-1.5 ${
             activeTab === 'balances'
               ? 'bg-white text-slate-900 shadow-sm'
+              : 'text-slate-500 hover:text-slate-700'
+          }`}
+        >
+          <Wallet className="w-4 h-4" />
+          <span>Balances</span>
+        </button>
 
-// [v204] feat(routes): implement generateTripWhatsAppSummary endpoint
+        <button
+          onClick={() => setActiveTab('settle')}
+          className={`flex-1 py-2.5 text-xs sm:text-sm font-semibold rounded-xl transition-all flex items-center justify-center gap-1.5 ${
+            activeTab === 'settle'
+              ? 'bg-white text-slate-900 shadow-sm'
+              : 'text-slate-500 hover:text-slate-700'
+          }`}
+        >
+          <Sparkles className="w-4 h-4 text-indigo-600" />
+          <span>Settle Up ({settlements.length})</span>
+        </button>
+      </div>
+
+      {/* TAB 1: Expenses */}
+      {activeTab === 'expenses' && (
+        <div className="space-y-4">
+          {/* Category Filter Chips */}
+          {expenses.length > 0 && (
+            <div className="flex gap-1.5 overflow-x-auto pb-1 no-scrollbar text-xs">
+              {['all', 'food', 'travel', 'stay', 'drinks', 'tickets', 'shopping', 'general'].map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-3 py-1.5 rounded-xl font-medium shrink-0 capitalize transition-colors ${
+                    selectedCategory === cat
+                      ? 'bg-slate-900 text-white'
+                      : 'bg-white border border-slate-200/80 text-slate-600 hover:bg-slate-50'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Expenses List */}
+          {filteredExpenses.length === 0 ? (
+            <div className="text-center py-16 bg-white rounded-3xl border border-dashed border-slate-200 p-8 space-y-3">
+              <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto text-slate-400">
+                <Receipt className="w-6 h-6" />
+              </div>
+              <h3 className="text-base font-bold text-slate-800">
+                {selectedCategory === 'all' ? 'No expenses yet' : `No ${selectedCategory} expenses`}
+              </h3>
+              <p className="text-xs text-slate-500 max-w-xs mx-auto">
+                Tap the "+ Add Expense" button to record food, travel, tickets, or stays.
+              </p>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="mt-2 inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold shadow-sm transition-all"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Add First Expense</span>
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {filteredExpenses.map((exp) => (
+                <ExpenseCard
+
+// [v260] refactor(client): handle network disconnection gracefully with offline banner
