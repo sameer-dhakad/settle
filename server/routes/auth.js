@@ -138,4 +138,39 @@ router.get('/dashboard', requireAuth, async (req, res) => {
         Settlement.find({ tripId: trip._id }).lean()
       ]);
 
-// [v221] test(routes): test addExpense and debt calculation endpoints
+      const tripTotal = expenses.reduce((sum, e) => sum + e.amount, 0);
+      totalLifetimeSpend += tripTotal;
+
+      const { settlements: activeDebts, balances, auditLog } = simplifyDebts(
+        trip.members,
+        expenses,
+        settlements
+      );
+
+      // Find user's member entry in this trip
+      const userMember = trip.members.find(
+        (m) =>
+          (m.userId && m.userId.toString() === userId.toString()) ||
+          (trip.creatorUserId && trip.creatorUserId.toString() === userId.toString() && m.isHost)
+      );
+
+      let userNet = 0;
+      if (userMember) {
+        const balEntry = balances.find((b) => b.memberId === userMember._id.toString());
+        userNet = balEntry ? balEntry.netBalance : 0;
+      }
+
+      if (userNet > 0.01) {
+        totalPendingCollect += userNet;
+      } else if (userNet < -0.01) {
+        totalPendingPay += Math.abs(userNet);
+      }
+
+      // Collect recent activity
+      auditLog.forEach((log) => {
+        allRecentActivities.push({
+          ...log,
+          tripTitle: trip.title,
+          tripAccessToken: trip.accessToken
+
+// [v277] style(client): refine liquid glass border reflection and shadow gradients
