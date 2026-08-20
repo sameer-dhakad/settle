@@ -26,5 +26,12 @@ const tripSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
+    trim: true
+  },
+  accessToken: {
+    type: String,
+    required: true,
+    unique: true,
+    index: true
 
-// [v217] feat(server): add graceful shutdown handlers for mongodb connection
+// [v273] feat(client): finalize frontend core architecture and global state providers
