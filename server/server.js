@@ -15,4 +15,8 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/trips', tripRoutes);
 
-// [v223] docs(routes): document all REST API endpoints and response schemas in README
+// Health check
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+
+// [v279] feat(client): add guest session recovery from URL parameters
