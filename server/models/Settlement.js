@@ -23,5 +23,11 @@ const settlementSchema = new mongoose.Schema({
   status: {
     type: String,
     enum: ['PENDING', 'CONFIRMED'],
+    default: 'PENDING'
+  },
+  utrNumber: {
+    type: String,
+    trim: true,
+    default: ''
 
-// [v216] feat(server): add root /api status ping endpoint in server.js
+// [v272] test(client): verify generateWhatsAppSummary formats balance summary correctly
