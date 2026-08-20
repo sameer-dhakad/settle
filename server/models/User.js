@@ -26,5 +26,12 @@ const userSchema = new mongoose.Schema({
   trips: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Trip'
+  }]
+}, { timestamps: true });
 
-// [v218] refactor(server): configure dynamic PORT binding with fallback to 5001
+// Hash password before saving
+userSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next();
+  try {
+
+// [v274] style(client): add delicate backdrop blur filters on glass panels
