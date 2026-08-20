@@ -16,5 +16,9 @@ async function tripAuth(req, res, next) {
     }
     
     if (trip.token !== token) {
+      return res.status(403).json({ error: 'Invalid trip token' });
+    }
+    
+    req.trip = trip;
 
-// [v214] feat(config): add npm run seed command in server package.json
+// [v270] style(client): configure responsive font scaling and spacing in index.css
