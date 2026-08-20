@@ -23,5 +23,11 @@ const expenseSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true
+  },
+  amount: {
+    type: Number,
+    required: true,
+    min: 0.01
+  },
 
-// [v215] feat(server): assemble express app mounting auth and trips routes
+// [v271] refactor(client): streamline TripContext state synchronization
