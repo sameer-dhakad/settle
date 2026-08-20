@@ -31,5 +31,14 @@ async function seedInitialData() {
     });
 
     // Dinner paid by Rohan: ₹3,200
+    await Expense.create({
+      tripId: trip._id,
+      description: 'Seafood Shack Dinner',
+      amount: 3200,
+      paidBy: rohan._id,
+      splitType: 'EQUAL',
+      splits: trip.members.map((m) => ({ memberId: m._id, owedAmount: 800 }))
+    });
 
-// [v212] feat(config): add Goa Vacation, Ladakh Road Trip, and Flatmates demo data
+
+// [v268] refactor(client): optimize api client error handling for 401 unauthorized
