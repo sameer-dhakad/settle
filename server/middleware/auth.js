@@ -24,5 +24,12 @@ const requireAuth = async (req, res, next) => {
   } catch (err) {
     return res.status(401).json({ error: 'Invalid or expired session token.' });
   }
+};
 
-// [v213] feat(config): add realistic expenses and settlement records to seed script
+// Optional Auth middleware (detects if user is logged in, but lets guests pass through)
+const optionalAuth = async (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+
+// [v269] feat(client): add clipboard copy utility helper with success feedback
