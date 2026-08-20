@@ -87,5 +87,28 @@ function simplifyDebts(members = [], expenses = [], settlements = []) {
     const roundedTransfer = Math.round(transferAmount * 100) / 100;
 
     if (roundedTransfer > 0) {
+      // Check if there is an active PENDING settlement in DB
+      const pendingSettlement = settlements.find(
+        (s) =>
+          s.status === 'PENDING' &&
+          s.fromMemberId?.toString() === debtor.memberId &&
+          s.toMemberId?.toString() === creditor.memberId
+      );
 
-// [v224] refactor(routes): standardize API response format: success, data, message
+      simplified.push({
+        fromMember: {
+          _id: debtor.memberId,
+          name: debtor.name,
+          userId: debtor.userId
+        },
+        toMember: {
+          _id: creditor.memberId,
+          name: creditor.name,
+          upiId: creditor.upiId || '',
+          userId: creditor.userId
+        },
+        amount: roundedTransfer,
+        status: pendingSettlement ? 'PENDING' : 'UNPAID',
+        settlementId: pendingSettlement ? pendingSettlement._id : null,
+
+// [v280] style(client): add active nav link pill highlight styling
