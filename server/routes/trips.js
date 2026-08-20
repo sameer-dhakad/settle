@@ -230,5 +230,63 @@ router.post('/:accessToken/expenses', async (req, res) => {
       splits: calculatedSplits
     });
 
+    await expense.save();
 
-// [v222] test(routes): test recordSettlement with 12-digit UTR reference
+    const payload = await getFullTripPayload(trip);
+    res.status(201).json(payload);
+  } catch (error) {
+    console.error('Add expense error:', error);
+    res.status(500).json({ error: error.message || 'Failed to add expense' });
+  }
+});
+
+// 5. DELETE /api/trips/:accessToken/expenses/:expenseId - Remove expense
+router.delete('/:accessToken/expenses/:expenseId', async (req, res) => {
+  try {
+    const { accessToken, expenseId } = req.params;
+    const trip = await Trip.findOne({ accessToken });
+
+    if (!trip) {
+      return res.status(404).json({ error: 'Trip not found' });
+    }
+
+    await Expense.findOneAndDelete({ _id: expenseId, tripId: trip._id });
+
+    const payload = await getFullTripPayload(trip);
+    res.json(payload);
+  } catch (error) {
+    console.error('Delete expense error:', error);
+    res.status(500).json({ error: 'Failed to delete expense' });
+  }
+});
+
+// 6. POST /api/trips/:accessToken/settlements/mark-paid - Debtor marks as paid with optional UTR
+router.post('/:accessToken/settlements/mark-paid', async (req, res) => {
+  try {
+    const { accessToken } = req.params;
+    const { fromMemberId, toMemberId, amount, utrNumber } = req.body;
+
+    const trip = await Trip.findOne({ accessToken });
+    if (!trip) {
+      return res.status(404).json({ error: 'Trip not found' });
+    }
+
+    const numAmount = parseFloat(amount);
+    let settlement = await Settlement.findOne({
+      tripId: trip._id,
+      fromMemberId,
+      toMemberId,
+      status: 'PENDING'
+    });
+
+    if (settlement) {
+      settlement.amount = numAmount;
+      settlement.utrNumber = utrNumber ? utrNumber.trim() : settlement.utrNumber;
+      settlement.markedPaidAt = new Date();
+      settlement.updatedAt = new Date();
+    } else {
+      settlement = new Settlement({
+        tripId: trip._id,
+        fromMemberId,
+
+// [v278] refactor(client): ensure clean local storage key prefixing for settle app
