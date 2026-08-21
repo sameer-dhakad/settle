@@ -28,5 +28,11 @@ function App() {
               <Route index element={<HomePage />} />
               <Route path="create" element={<CreateTripPage />} />
               <Route path="how-it-works" element={<HowItWorksPage />} />
+              <Route path="features" element={<FeaturesPage />} />
+              <Route path="trip/:accessToken" element={<TripView />} />
+              <Route path="auth" element={<AuthPage />} />
+              <Route path="dashboard" element={<DashboardPage />} />
+            </Route>
+          </Routes>
 
-// [v231] test(routes): verify seed script creates accessible demo trips with valid tokens
+// [v287] feat(components): add user profile badge and quick logout trigger in Layout.jsx
