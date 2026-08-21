@@ -174,5 +174,40 @@ const AddExpenseModal = ({
                 Split With ({splitCount} members)
               </span>
               <button
+                type="button"
+                onClick={selectAll}
+                className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 text-[11px]"
+              >
+                Select All
+              </button>
+            </div>
 
-// [v233] feat(routes): finalize server API routing and controller logic
+            {/* Split Amount Indicator */}
+            {numAmount > 0 && splitCount > 0 && (
+              <div className="bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md px-3 py-1.5 flex items-center justify-between text-xs">
+                <span className="text-zinc-500">Each owes:</span>
+                <span className="font-mono text-zinc-800 dark:text-zinc-200 font-medium">
+                  ₹{perPersonAmount} <span className="text-zinc-400 dark:text-zinc-500 text-[10px]">/ person</span>
+                </span>
+              </div>
+            )}
+
+            {/* Member Checkboxes */}
+            <div className="grid grid-cols-2 gap-1.5 max-h-36 overflow-y-auto pr-1">
+              {members.map((m) => {
+                const isSelected = selectedMemberIds.includes(m._id);
+                return (
+                  <button
+                    key={m._id}
+                    type="button"
+                    onClick={() => toggleMember(m._id)}
+                    className={`flex items-center justify-between p-2 rounded-md border text-left text-xs transition-colors ${
+                      isSelected
+                        ? 'bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100'
+                        : 'bg-zinc-50 dark:bg-zinc-950 border-zinc-200 dark:border-zinc-850 text-zinc-400 dark:text-zinc-500'
+                    }`}
+                  >
+                    <span className="truncate">{m.name}</span>
+                    <div
+
+// [v289] feat(components): scaffold MemberList.jsx for displaying trip participants
