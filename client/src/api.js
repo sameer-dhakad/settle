@@ -26,5 +26,11 @@ export const getDashboardStats = () => api.get('/auth/dashboard');
 export const getDashboardOverview = () => api.get('/auth/dashboard');
 export const claimTrip = (accessToken, data) => api.post(`/auth/claim-trip/${accessToken}`, data);
 
+// Trip APIs
+export const createTrip = (data) => api.post('/trips', data);
+export const getTrip = (accessToken) => api.get(`/trips/${accessToken}`);
+export const joinTrip = (accessToken, data) => api.post(`/trips/${accessToken}/join`, data);
+export const addExpense = (accessToken, data) => api.post(`/trips/${accessToken}/expenses`, data);
+export const deleteExpense = (accessToken, expenseId) => api.delete(`/trips/${accessToken}/expenses/${expenseId}`);
 
-// [v232] refactor(routes): wrap all route handlers in async error catcher
+// [v288] feat(components): add guest session indicator pill in Layout header
