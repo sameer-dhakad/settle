@@ -57,4 +57,16 @@ Update `server/.env` with your MongoDB connection string and JWT secret:
 ```env
 MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/settle?retryWrites=true&w=majority
 PORT=5001
+JWT_SECRET=your_super_secure_jwt_secret_key
+CLIENT_URL=http://localhost:3000
+```
+
+### 5. Run Locally in Development
+```bash
+# From the root directory:
+npm run dev
+```
+- **Client**: `http://localhost:3000`
+- **Server**: `http://localhost:5001`
+
 
