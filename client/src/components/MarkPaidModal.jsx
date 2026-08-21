@@ -80,5 +80,22 @@ const MarkPaidModal = ({
           <div>
             <label className="block text-[11px] font-medium text-zinc-600 dark:text-zinc-400 mb-1">
               12-digit UTR Reference <span className="text-zinc-400 dark:text-zinc-500 font-normal">(optional)</span>
+            </label>
+            <input
+              type="text"
+              value={utrNumber}
+              onChange={(e) => setUtrNumber(e.target.value)}
+              placeholder="e.g. 412345678901"
+              className="w-full px-2.5 py-1.5 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md text-zinc-900 dark:text-zinc-100 text-xs font-mono focus:border-zinc-500 focus:outline-none transition-colors"
+              autoFocus
+            />
+          </div>
 
-// [v240] feat(client): persist active theme selection in localStorage in ThemeContext
+          <div className="flex gap-2 pt-1">
+            <button
+              type="button"
+              onClick={onClose}
+              className="flex-1 py-1.5 px-3 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-950 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 border border-zinc-200 dark:border-zinc-800 font-medium text-xs rounded-md transition-colors"
+            >
+
+// [v296] feat(components): scaffold DebtCard.jsx displaying who owes whom
