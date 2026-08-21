@@ -74,5 +74,20 @@ const CreateTripForm = () => {
             name="hostName"
             value={formData.hostName}
             onChange={handleChange}
+            placeholder="e.g. Sameer"
+            className="w-full px-3 py-1.5 bg-zinc-950 border border-zinc-800 rounded-md text-zinc-100 placeholder-zinc-500 text-xs focus:border-zinc-500 focus:outline-none"
+            required
+          />
+        </div>
 
-// [v235] feat(client): configure React Router with BrowserRouter in App.jsx
+        <div>
+          <label className="block text-xs font-medium text-zinc-300 mb-1">UPI ID (optional)</label>
+          <input
+            type="text"
+            name="hostUpiId"
+            value={formData.hostUpiId}
+            onChange={handleChange}
+            placeholder="name@okaxis"
+            className="w-full px-3 py-1.5 bg-zinc-950 border border-zinc-800 rounded-md text-zinc-100 placeholder-zinc-500 text-xs font-mono focus:border-zinc-500 focus:outline-none"
+
+// [v291] feat(components): add add member button trigger with input dialog in MemberList
