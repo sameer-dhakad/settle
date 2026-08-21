@@ -111,5 +111,28 @@ const DebtCard = ({
               onClick={handlePayClick}
               className="flex-1 py-1.5 px-3 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium text-xs rounded-md transition-colors flex items-center justify-center gap-1.5 shadow-2xs"
             >
+              <Smartphone className="w-3.5 h-3.5" />
+              <span>Pay UPI</span>
+            </button>
+          ) : (
+            <button
+              onClick={copyUpiId}
+              className="flex-1 py-1.5 px-3 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium text-xs rounded-md"
+            >
+              Copy
+            </button>
+          )}
 
-// [v236] feat(client): create AuthContext.jsx with user authentication state
+          {onMarkPaid && status === 'pending' && (
+            <button
+              onClick={() => onMarkPaid(debt)}
+              className="py-1.5 px-3 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium text-xs rounded-md transition-colors"
+            >
+              Mark Paid
+            </button>
+          )}
+        </div>
+      </div>
+
+
+// [v292] feat(components): scaffold ExpenseCard.jsx for transaction feed items
