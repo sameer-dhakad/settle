@@ -35,5 +35,13 @@ const ExpenseCard = ({ expense, onDelete, currentMemberId }) => {
           <button
             onClick={(e) => {
               e.stopPropagation();
+              if (window.confirm(`Delete "${expense.description}"?`)) {
+                onDelete(expense._id || expense.id);
+              }
+            }}
+            className="p-1 text-zinc-400 hover:text-rose-600 dark:text-zinc-500 dark:hover:text-rose-400 rounded transition-colors"
+            title="Delete expense"
+          >
+            <Trash2 className="w-3.5 h-3.5" />
 
-// [v237] feat(client): add token storage in localStorage with auto-login check
+// [v293] feat(components): add category icon badge and split type pill on ExpenseCard
