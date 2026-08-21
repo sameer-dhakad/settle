@@ -140,5 +140,34 @@ const Layout = () => {
                 >
                   <LogOut className="w-3.5 h-3.5" />
                 </button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <Link
+                  to="/auth"
+                  className="text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 px-2.5 py-1.5 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+                >
+                  Log In
+                </Link>
 
-// [v239] feat(client): add theme toggle handler applying dark class on html root
+                <Link
+                  to="/create"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 rounded-md text-xs font-medium transition-colors shadow-xs"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>New Trip</span>
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content Area */}
+      <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-8 relative">
+        <Outlet />
+      </main>
+
+      {/* Minimalist Staff-Grade Footer */}
+
+// [v295] feat(components): add expandable split breakdown accordion on ExpenseCard
