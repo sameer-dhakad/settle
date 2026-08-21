@@ -78,5 +78,21 @@ const BalanceOverview = ({ members = [], expenses = [], balances = [], currentMe
                         You
                       </span>
                     )}
+                  </div>
+                  <span className="text-[11px] font-mono text-zinc-500 block">
+                    Paid ₹{mb.paidTotal.toFixed(2)}
+                  </span>
+                </div>
 
-// [v234] chore(client): initialize src directory and setup main.jsx entry point
+                <div className="text-right">
+                  <div
+                    className={`font-semibold font-mono text-sm ${
+                      isPositive
+                        ? 'text-emerald-600 dark:text-emerald-400'
+                        : isNegative
+                        ? 'text-rose-600 dark:text-rose-400'
+                        : 'text-zinc-500 dark:text-zinc-400'
+                    }`}
+                  >
+
+// [v290] feat(components): add member avatar chips with initials and UPI ID in MemberList
