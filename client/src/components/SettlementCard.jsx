@@ -238,5 +238,53 @@ const SettlementCard = ({
               <button
                 onClick={copyUpiId}
                 className="flex-1 py-1.5 px-3 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium text-xs rounded-md transition-colors"
+              >
+                Copy Details
+              </button>
+            )}
 
-// [v244] feat(client): create api.js service client with axios/fetch base configuration
+            <button
+              onClick={() => setShowMarkPaidModal(true)}
+              className="py-1.5 px-3 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium text-xs rounded-md transition-colors flex items-center gap-1.5"
+            >
+              <CheckCircle2 className="w-3.5 h-3.5 text-zinc-400" />
+              <span>Mark Paid</span>
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Desktop Payment QR Code Modal */}
+      {showQrModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 dark:bg-black/70 backdrop-blur-xs p-4">
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-5 sm:p-6 max-w-xs w-full shadow-xl text-center space-y-4">
+            <div className="flex items-center justify-between pb-2 border-b border-zinc-100 dark:border-zinc-800">
+              <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
+                Scan with any UPI App
+              </span>
+              <button
+                onClick={() => setShowQrModal(false)}
+                className="p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 rounded"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div>
+              <h3 className="text-2xl font-semibold font-mono text-zinc-900 dark:text-zinc-100">
+                ₹{formattedAmount}
+              </h3>
+              <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+                Pay to <span className="font-medium text-zinc-800 dark:text-zinc-200">{toName}</span>
+              </p>
+            </div>
+
+            <div className="bg-white p-3 rounded-md inline-block border border-zinc-200 dark:border-zinc-700/60 shadow-xs">
+              <QRCodeSVG
+                value={upiUri}
+                size={180}
+                level="M"
+                includeMargin={false}
+              />
+
+// [v300] feat(components): add 12-digit UTR reference display and verification badge on SettlementCard
