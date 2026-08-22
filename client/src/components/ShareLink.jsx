@@ -58,5 +58,17 @@ const ShareLink = ({ tripId, token, tripName = 'Trip' }) => {
             {copied ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
             <span>{copied ? 'Copied' : 'Copy'}</span>
           </button>
+        </div>
+      </div>
 
-// [v245] feat(client): configure api request interceptor injecting auth token
+      {showQr && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 dark:bg-black/70 backdrop-blur-xs p-4">
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-5 max-w-xs w-full shadow-xl text-center space-y-3">
+            <div className="flex justify-between items-center pb-2 border-b border-zinc-100 dark:border-zinc-800">
+              <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase">Trip QR Invite</span>
+              <button onClick={() => setShowQr(false)} className="text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200">
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
+// [v301] feat(components): add sign-off button for payee verification on SettlementCard
