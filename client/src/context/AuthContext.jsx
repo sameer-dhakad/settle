@@ -61,5 +61,18 @@ export const AuthProvider = ({ children }) => {
       toast.error(msg);
       throw err;
     }
+  };
 
-// [v247] feat(client): create upi helpers in utils/helpers.js for NPCI URI generation
+  const logout = () => {
+    localStorage.removeItem('settle_jwt_token');
+    setToken(null);
+    setUser(null);
+    toast.info('Logged out');
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+
+// [v303] feat(components): add total group spend, your spend, and net balance cards in BalanceOverview
