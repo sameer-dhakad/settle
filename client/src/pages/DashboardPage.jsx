@@ -173,5 +173,40 @@ const DashboardPage = () => {
           </div>
         </div>
 
+        {trips.length === 0 ? (
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-8 text-center space-y-3 shadow-2xs">
+            <div className="w-8 h-8 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 flex items-center justify-center mx-auto">
+              <Layers className="w-4 h-4" />
+            </div>
+            <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-200">No active trips</h3>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 max-w-sm mx-auto">
+              Create your first trip or join an existing one using an invite link.
+            </p>
+            <Link
+              to="/create"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium rounded-md text-xs transition-colors shadow-xs"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              <span>Create Trip</span>
+            </Link>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {trips.map((trip) => {
+              const isCopied = copiedToken === trip.accessToken;
+              return (
+                <motion.div
+                  key={trip._id}
+                  whileHover={{ y: -2, transition: { duration: 0.15 } }}
+                >
+                  <Link
+                    to={`/trip/${trip.accessToken}`}
+                    className="bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-850 border border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-300 dark:hover:border-zinc-700 rounded-lg p-4 transition-colors flex flex-col justify-between space-y-3 group shadow-2xs block"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <h3 className="text-sm font-medium text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors">
+                          {trip.title}
+                        </h3>
 
-// [v254] style(client): create custom button gradients and glowing border utilities
+// [v310] feat(components): implement mobile browser 1-tap upi://pay deep link in PaymentModal
