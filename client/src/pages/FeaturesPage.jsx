@@ -102,5 +102,26 @@ const FeaturesPage = () => {
             <div className="flex items-center gap-2.5">
               <div className="w-7 h-7 rounded-md bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 flex items-center justify-center">
                 {f.icon}
+              </div>
+              <h3 className="text-xs font-semibold text-zinc-900 dark:text-zinc-200">
+                {f.title}
+              </h3>
+            </div>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              {f.description}
+            </p>
+          </motion.div>
+        ))}
+      </div>
 
-// [v255] style(client): configure floating animation keyframes and glow effects
+      {/* Bottom CTA */}
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs">
+        <div>
+          <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+            Start using Settle today
+          </h3>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">
+            Create your first trip or test with sample data in under 10 seconds.
+          </p>
+
+// [v311] feat(components): implement desktop browser dynamic high-contrast QR code modal in PaymentModal
