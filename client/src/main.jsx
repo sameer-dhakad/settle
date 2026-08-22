@@ -5,5 +5,6 @@ import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <App />
 
-// [v251] feat(client): implement date formatters for transaction timeline feeds
+// [v307] feat(components): add split type toggle (equal, exact, percentage) in AddExpenseModal
