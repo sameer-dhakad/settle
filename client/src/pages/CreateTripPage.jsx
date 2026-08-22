@@ -138,5 +138,33 @@ const CreateTripPage = () => {
                 value={hostName}
                 onChange={(e) => setHostName(e.target.value)}
                 placeholder="Sameer"
+                className="w-full px-3 py-2 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-600 text-sm focus:border-zinc-400 dark:focus:border-zinc-600 focus:outline-none transition-colors"
+                required
+              />
+            </div>
 
-// [v253] style(client): define background grid patterns and delicate top blush washes
+            <div className="space-y-1">
+              <div className="flex items-center justify-between">
+                <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400">
+                  UPI ID
+                </label>
+                <span className="text-[10px] font-mono text-zinc-400">optional</span>
+              </div>
+              <input
+                type="text"
+                value={hostUpiId}
+                onChange={(e) => setHostUpiId(e.target.value)}
+                placeholder="name@upi"
+                className="w-full px-3 py-2 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-600 text-sm font-mono focus:border-zinc-400 dark:focus:border-zinc-600 focus:outline-none transition-colors"
+              />
+            </div>
+          </div>
+
+          <div className="pt-2">
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-2 px-4 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium text-xs rounded-md transition-colors flex items-center justify-center gap-2 shadow-xs disabled:opacity-50"
+            >
+
+// [v309] feat(components): scaffold PaymentModal.jsx with two-tier UPI settlement pathways
