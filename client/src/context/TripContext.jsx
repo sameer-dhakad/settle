@@ -169,5 +169,39 @@ export const TripProvider = ({ children }) => {
       setAuditLog(updatedTrip.auditLog || []);
       toast.success('Settlement confirmed and locked! 🎉');
       return updatedTrip;
+    } catch (err) {
+      console.error('confirmPaymentReceived error:', err);
+      toast.error('Failed to confirm payment');
+      throw err;
+    }
+  };
 
-// [v249] feat(client): implement generateWhatsAppSummary helper for 1-click sharing
+  const reopenPaymentDebt = async (id, currentToken, fromMemberId, toMemberId) => {
+    try {
+      const res = await apiReopenPayment(id, currentToken, { fromMemberId, toMemberId });
+      const updatedTrip = res.data;
+      setTrip(updatedTrip);
+      setSettlements(updatedTrip.settlements || []);
+      setBalances(updatedTrip.balances || []);
+      setAuditLog(updatedTrip.auditLog || []);
+      toast.info('Payment status reset to pending');
+      return updatedTrip;
+    } catch (err) {
+      console.error('reopenPaymentDebt error:', err);
+      toast.error('Failed to reset payment status');
+      throw err;
+    }
+  };
+
+  const updateMemberUpi = async (id, currentToken, memberId, upiId) => {
+    try {
+      const res = await apiUpdateMemberUpi(id, currentToken, memberId, { upiId });
+      const updatedTrip = res.data;
+      setTrip(updatedTrip);
+      setSettlements(updatedTrip.settlements || []);
+      setBalances(updatedTrip.balances || []);
+      setAuditLog(updatedTrip.auditLog || []);
+      toast.success('UPI ID updated!');
+      return updatedTrip;
+
+// [v305] feat(components): scaffold AddExpenseModal.jsx with amount and description inputs
