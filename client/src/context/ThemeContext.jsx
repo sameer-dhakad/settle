@@ -41,5 +41,14 @@ export const ThemeProvider = ({ children }) => {
   };
 
   const setTheme = (newTheme) => {
+    if (newTheme === 'dark' || newTheme === 'light') {
+      setThemeState(newTheme);
+    }
+  };
 
-// [v248] feat(client): implement generateUpiUri helper with pa, pn, am, and tn parameters
+  return (
+    <ThemeContext.Provider
+      value={{
+        theme,
+
+// [v304] feat(components): add color-coded net balance pill (You are owed vs You owe) in BalanceOverview
