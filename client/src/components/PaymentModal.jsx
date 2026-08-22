@@ -239,5 +239,53 @@ const PaymentModal = ({
           </div>
         </motion.div>
       ) : (
+        /* 3. DESKTOP QR CODE MODAL */
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.18 }}
+          className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-5 sm:p-6 max-w-xs w-full shadow-xl text-center space-y-4"
+        >
+          <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800">
+            <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
+              <QrCode className="w-3.5 h-3.5 text-zinc-700 dark:text-zinc-300" />
+              <span>Scan UPI QR</span>
+            </div>
+            <button
+              onClick={onClose}
+              className="p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 rounded"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
 
-// [v242] feat(client): add fetchTrip, addExpense, and recordPayment actions in TripContext
+          <div>
+            <div className="text-2xl font-semibold font-mono text-zinc-900 dark:text-zinc-100">
+              ₹{amount}
+            </div>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+              Paying <span className="font-medium text-zinc-800 dark:text-zinc-200">{toName}</span>
+            </p>
+          </div>
+
+          {/* High Contrast QR Container */}
+          <div className="bg-white p-3 rounded-md inline-block border border-zinc-200 dark:border-zinc-700/60 shadow-xs">
+            <QRCodeSVG
+              value={upiUri}
+              size={160}
+              level="M"
+              includeMargin={false}
+            />
+          </div>
+
+          {/* Payee Info & Copy */}
+          <div className="bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md p-2.5 text-left text-xs space-y-1">
+            <div className="flex justify-between">
+              <span className="text-zinc-500">Payee:</span>
+              <span className="font-medium text-zinc-800 dark:text-zinc-200">{toName}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-zinc-500">UPI ID:</span>
+
+// [v298] feat(components): add member avatars and payment direction arrow on DebtCard
