@@ -153,5 +153,36 @@ const MemberList = ({
             </form>
           </div>
         </div>
+      )}
 
-// [v241] feat(client): create TripContext.jsx for managing active trip state
+      {/* Add Member Modal */}
+      {showAddModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 dark:bg-black/70 p-4">
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-5 max-w-xs w-full shadow-xl space-y-3">
+            <div className="flex items-center justify-between pb-2 border-b border-zinc-100 dark:border-zinc-800">
+              <span className="text-xs font-medium text-zinc-900 dark:text-zinc-200">Add Friend to Trip</span>
+              <button
+                onClick={() => setShowAddModal(false)}
+                className="p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
+            <form onSubmit={handleAddMemberSubmit} className="space-y-3">
+              <div>
+                <label className="block text-[11px] text-zinc-600 dark:text-zinc-400 mb-1">Name *</label>
+                <input
+                  type="text"
+                  value={newMemberName}
+                  onChange={(e) => setNewMemberName(e.target.value)}
+                  placeholder="e.g. Rahul"
+                  className="w-full px-2.5 py-1.5 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md text-zinc-900 dark:text-zinc-100 text-xs focus:border-zinc-500 focus:outline-none"
+                  required
+                  autoFocus
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] text-zinc-600 dark:text-zinc-400 mb-1">UPI ID (optional)</label>
+                <input
+
+// [v297] feat(components): add instant Pay via UPI button on DebtCard.jsx
