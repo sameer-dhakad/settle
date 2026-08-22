@@ -28,5 +28,11 @@ const SettleLogo = ({ className = "w-6 h-6", textClassName = "text-sm font-semib
       </div>
 
       <div className="flex items-center gap-2">
+        <span className={textClassName}>
+          Settle
+        </span>
+        <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-sm bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">
+          v1.0
+        </span>
 
-// [v243] feat(client): add live balance recalculation on trip state updates
+// [v299] feat(components): scaffold SettlementCard.jsx for verified and pending payments
