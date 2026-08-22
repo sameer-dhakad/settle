@@ -491,5 +491,104 @@ const TripView = () => {
                     </motion.div>
                   );
                 })
+              )}
+            </div>
+          )}
 
-// [v246] feat(client): configure api response interceptor with error toast triggers
+          {/* TAB 2: SETTLEMENTS */}
+          {activeTab === 'settlements' && (
+            <div className="space-y-1.5">
+              {settlements.length === 0 ? (
+                <div className="p-8 text-center bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg text-xs font-mono text-zinc-400">
+                  All debts settled
+                </div>
+              ) : (
+                settlements.map((debt, idx) => {
+                  const fromName = debt.fromMember?.name || 'Debtor';
+                  const toName = debt.toMember?.name || 'Creditor';
+                  const isYouPaying = debt.fromMember?._id?.toString() === currentMemberId?.toString();
+                  const isYouReceiving = debt.toMember?._id?.toString() === currentMemberId?.toString();
+                  const formattedAmt = (parseFloat(debt.amount) || 0).toFixed(2);
+
+                  return (
+                    <motion.div
+                      key={`s-${idx}`}
+                      initial={{ opacity: 0, y: 3 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-3 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 flex items-center justify-between gap-3 text-xs"
+                    >
+                      <div className="flex items-center gap-2 min-w-0">
+                        <span className="font-medium text-zinc-800 dark:text-zinc-200 truncate">
+                          {fromName}
+                        </span>
+                        {isYouPaying && (
+                          <span className="text-[10px] font-mono px-1 py-0.2 rounded bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40">
+                            you
+                          </span>
+                        )}
+                        <span className="text-zinc-400">→</span>
+                        <span className="font-medium text-zinc-800 dark:text-zinc-200 truncate">
+                          {toName}
+                        </span>
+                        {isYouReceiving && (
+                          <span className="text-[10px] font-mono px-1 py-0.2 rounded bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/40">
+                            you
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="flex items-center gap-2 shrink-0">
+                        <span className="font-mono font-semibold text-zinc-900 dark:text-zinc-100">
+                          ₹{formattedAmt}
+                        </span>
+                        {isYouPaying && debt.status !== 'PENDING' && (
+                          <button
+                            onClick={() => setActivePaymentDebt(debt)}
+                            className="px-2 py-0.5 rounded text-[11px] font-medium bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-950 transition-colors"
+                          >
+                            Pay
+                          </button>
+                        )}
+                      </div>
+                    </motion.div>
+                  );
+                })
+              )}
+            </div>
+          )}
+
+          {/* TAB 3: AUDIT HISTORY */}
+          {activeTab === 'history' && (
+            <div className="space-y-1.5">
+              {auditLog.map((log) => (
+                <div
+                  key={log._id}
+                  className="p-3 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 flex items-center justify-between text-xs"
+                >
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                    <span className="text-zinc-700 dark:text-zinc-300">
+                      {log.fromMember?.name} paid {log.toMember?.name}
+                    </span>
+                    {log.utrNumber && (
+                      <span className="font-mono text-[10px] text-zinc-400">({log.utrNumber})</span>
+                    )}
+                  </div>
+                  <span className="font-mono font-medium text-zinc-900 dark:text-zinc-100">
+                    ₹{log.amount.toFixed(2)}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* RIGHT / SIDEBAR COLUMN (lg:col-span-4) */}
+        <div className="lg:col-span-4 space-y-4">
+          {/* Your Position Card */}
+          <div className="p-4 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 shadow-2xs space-y-2">
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-medium text-zinc-600 dark:text-zinc-400">
+                {activeMember ? activeMember.name : 'Guest'}
+
+// [v302] feat(components): scaffold BalanceOverview.jsx for trip financial summary
