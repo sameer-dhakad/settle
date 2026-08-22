@@ -172,5 +172,40 @@ const AuthPage = () => {
           <div>
             <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300 mb-1">Email</label>
             <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@domain.com"
+              className="w-full px-2.5 py-1.5 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md text-zinc-900 dark:text-zinc-100 text-xs focus:border-zinc-500 focus:outline-none"
+              required
+              autoFocus
+            />
+          </div>
 
-// [v252] style(client): configure index.css with authentic Apple-style glassmorphism styles
+          <div>
+            <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300 mb-1">Password</label>
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                className="w-full px-2.5 py-1.5 pr-8 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md text-zinc-900 dark:text-zinc-100 text-xs focus:border-zinc-500 focus:outline-none"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-2 top-1.5 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
+              >
+                {showPassword ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+              </button>
+            </div>
+          </div>
+
+          {mode === 'register' && (
+            <div>
+              <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+                Default UPI ID <span className="text-zinc-400 dark:text-zinc-500 font-normal">(optional)</span>
+
+// [v308] feat(components): add participant inclusion checkboxes with auto-split in AddExpenseModal
