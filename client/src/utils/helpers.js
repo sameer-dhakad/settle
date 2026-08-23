@@ -24,5 +24,10 @@ export const generateUpiLink = (upiId, name, amount, tripName = 'Trip') => {
   const cleanUpi = upiId ? upiId.trim() : '';
   const cleanName = name ? name.trim() : 'Receiver';
   const cleanAmount = (parseFloat(amount) || 0).toFixed(2);
+  const note = `Settle-${tripName.replace(/[^a-zA-Z0-9]/g, '')}`;
 
-// [v261] feat(client): add useAuth, useTheme, and useTrip custom hooks
+  return `upi://pay?pa=${encodeURIComponent(cleanUpi)}&pn=${encodeURIComponent(cleanName)}&am=${cleanAmount}&cu=INR&tn=${encodeURIComponent(note)}`;
+};
+
+
+// [v317] feat(components): scaffold JoinTripModal.jsx for guest onboarding via invite link
