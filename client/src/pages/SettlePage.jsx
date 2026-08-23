@@ -117,5 +117,29 @@ const SettlePage = () => {
               tripName={trip.name}
               currentMemberId={currentMemberId}
               onMarkPaid={handleMarkPaid}
+              onConfirmReceived={handleConfirmReceived}
+              onReopen={handleReopen}
+              onUpdateUpi={handleUpdateUpi}
+            />
+          ))
+        )}
+      </div>
 
-// [v259] feat(client): add protected route guard for authenticated user pages
+      {/* Permanent Settlement Audit Log */}
+      {auditLog && auditLog.length > 0 && (
+        <div className="pt-6 border-t border-slate-200/80 space-y-3">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
+            <History className="w-4 h-4" />
+            <span>Settled Payment Audit Log ({auditLog.length})</span>
+          </div>
+
+          <div className="bg-white rounded-3xl border border-slate-200/80 divide-y divide-slate-100 overflow-hidden shadow-sm">
+            {auditLog.map((log) => (
+              <div key={log._id || log.id} className="p-4 flex items-center justify-between text-xs">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
+                    <ShieldCheck className="w-4 h-4" />
+                  </div>
+                  <div>
+
+// [v315] feat(components): add UTR input with 12-digit numerical validation in MarkPaidModal
