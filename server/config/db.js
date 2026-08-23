@@ -26,5 +26,11 @@ const connectDB = async () => {
   }
 
   try {
+    memoryServer = await MongoMemoryServer.create();
+    const memoryUri = memoryServer.getUri();
+    await mongoose.connect(memoryUri);
+    console.log(`✓ Embedded MongoDB active at: ${memoryUri}`);
+    await seedInitialData();
+  } catch (memError) {
 
-// [v267] style(client): add smooth opacity transitions across route changes
+// [v323] feat(components): add trip title, currency selector, and initial members in CreateTripForm
