@@ -329,5 +329,71 @@ const TripPage = () => {
             <div className="space-y-3">
               {filteredExpenses.map((exp) => (
                 <ExpenseCard
+                  key={exp._id || exp.id}
+                  expense={exp}
+                  onDelete={handleDeleteExpense}
+                  currentMemberId={currentMemberId}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
-// [v260] refactor(client): handle network disconnection gracefully with offline banner
+      {/* TAB 2: Balances */}
+      {activeTab === 'balances' && (
+        <div className="space-y-6">
+          <BalanceOverview
+            members={members}
+            expenses={expenses}
+            balances={balances}
+            currentMemberId={currentMemberId}
+          />
+
+          <div className="flex justify-center pt-2">
+            <button
+              onClick={() => setActiveTab('settle')}
+              className="bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white px-6 py-3 rounded-2xl font-semibold text-sm shadow-md shadow-indigo-200 transition-all flex items-center gap-2"
+            >
+              <span>View Simplified Settlements</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* TAB 3: Settle Up (2-Tier Cross Platform Payments & Audit Log) */}
+      {activeTab === 'settle' && (
+        <div className="space-y-6">
+          <div className="bg-gradient-to-r from-indigo-50 via-purple-50 to-indigo-50 border border-indigo-100 p-4 sm:p-5 rounded-3xl text-xs text-indigo-950 flex items-start gap-3">
+            <div className="p-2 bg-indigo-600 text-white rounded-2xl shrink-0 mt-0.5">
+              <Sparkles className="w-4 h-4" />
+            </div>
+            <div>
+              <span className="font-bold block text-sm text-indigo-900 mb-0.5">
+                Greedy Min-Cash-Flow Simplification Active
+              </span>
+              <span className="text-slate-600 leading-relaxed">
+                Reduced group debt to <strong>{settlements.length} direct transfers</strong>. Pay with 1-tap mobile UPI deep-links or scan the desktop QR code.
+              </span>
+            </div>
+          </div>
+
+          {settlements.length === 0 ? (
+            <div className="text-center py-16 bg-white rounded-3xl border border-slate-200/80 p-8 space-y-3">
+              <div className="text-4xl mb-1">🎉</div>
+              <h3 className="text-lg font-bold text-slate-800">All Settled Up!</h3>
+              <p className="text-xs text-slate-500 max-w-xs mx-auto">
+                Nobody in this trip owes anything right now. Add a new expense to split!
+              </p>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="mt-2 inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold shadow-sm transition-all"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Add Expense</span>
+              </button>
+            </div>
+          ) : (
+
+// [v316] feat(components): add proof payment receipt attachment option in MarkPaidModal
