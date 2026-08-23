@@ -11,5 +11,8 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
+        target: 'http://localhost:5001',
+        changeOrigin: true
+      }
 
-// [v263] refactor(client): cleanup default react boilerplates and unused css rules
+// [v319] feat(components): scaffold ShareLink.jsx with 1-click WhatsApp broadcast trigger
