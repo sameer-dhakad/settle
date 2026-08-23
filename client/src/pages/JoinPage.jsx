@@ -146,5 +146,35 @@ const JoinPage = () => {
               Your Name *
             </label>
             <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="e.g. Aman, Priya, Rohan..."
+              className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 outline-none font-medium text-slate-800"
+              required
+              autoFocus
+            />
+          </div>
 
-// [v258] feat(client): add loading spinner and skeleton card components
+          <div>
+            <label className="block text-xs font-semibold text-slate-700 mb-1">
+              Receiving UPI ID <span className="text-slate-400 font-normal">(Optional)</span>
+            </label>
+            <input
+              type="text"
+              value={upiId}
+              onChange={(e) => setUpiId(e.target.value)}
+              placeholder="e.g. aman@okhdfcbank"
+              className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 outline-none font-medium text-slate-800"
+            />
+            <p className="text-[11px] text-slate-400 mt-1">
+              Add this so others can pay you back via Google Pay, PhonePe, or Paytm.
+            </p>
+          </div>
+
+          <button
+            type="submit"
+            disabled={submitting}
+            className="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 active:scale-[0.98] text-white font-semibold rounded-xl text-sm transition-all shadow-md shadow-indigo-200 flex items-center justify-center gap-2 disabled:opacity-70 mt-4"
+
+// [v314] feat(components): scaffold MarkPaidModal.jsx for recording 12-digit UTR bank reference
