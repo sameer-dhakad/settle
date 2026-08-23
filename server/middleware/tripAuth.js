@@ -20,5 +20,10 @@ async function tripAuth(req, res, next) {
     }
     
     req.trip = trip;
+    next();
+  } catch (error) {
+    if (error.name === 'CastError') {
+      return res.status(404).json({ error: 'Trip not found' });
+    }
 
-// [v270] style(client): configure responsive font scaling and spacing in index.css
+// [v326] feat(components): integrate Canvas Confetti celebration when trip debts are fully settled
