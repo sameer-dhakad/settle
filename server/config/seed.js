@@ -40,5 +40,13 @@ async function seedInitialData() {
       splits: trip.members.map((m) => ({ memberId: m._id, owedAmount: 800 }))
     });
 
+    // Scooty rental paid by Priya: ₹2,400
+    await Expense.create({
+      tripId: trip._id,
+      description: 'Scooty Rental & Fuel',
+      amount: 2400,
+      paidBy: priya._id,
+      splitType: 'EQUAL',
+      splits: trip.members.map((m) => ({ memberId: m._id, owedAmount: 600 }))
 
-// [v268] refactor(client): optimize api client error handling for 401 unauthorized
+// [v324] feat(components): scaffold TripView.jsx as master liquid glass trip workspace
