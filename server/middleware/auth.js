@@ -31,5 +31,12 @@ const optionalAuth = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
     if (authHeader && authHeader.startsWith('Bearer ')) {
+      const token = authHeader.split(' ')[1];
+      const decoded = jwt.verify(token, JWT_SECRET);
+      const user = await User.findById(decoded.userId).select('-password');
+      if (user) {
+        req.user = user;
+      }
+    }
 
-// [v269] feat(client): add clipboard copy utility helper with success feedback
+// [v325] feat(components): implement tab navigation (Expenses, Debts, Settlements, Members) in TripView
