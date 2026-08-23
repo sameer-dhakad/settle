@@ -148,5 +148,35 @@ const HomePage = () => {
                 <span className="text-sm font-semibold font-mono text-zinc-900 dark:text-zinc-100">₹2,200.00</span>
                 <Link
                   to="/trip/live"
+                  className="py-1 px-2.5 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 rounded-md text-[11px] font-medium transition-colors flex items-center gap-1 shadow-2xs"
+                >
+                  <Smartphone className="w-3 h-3" />
+                  <span>Pay</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </section>
 
-// [v256] feat(client): create Layout.jsx wrapper with responsive container and background
+      {/* ───────────────────────────────────────────────────────────
+          2. MINIMALIST THREE SPEC PILLARS (Clean badges, zero marketing fluff)
+         ─────────────────────────────────────────────────────────── */}
+      <section className="max-w-2xl mx-auto pt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <motion.div
+            variants={itemVariants}
+            className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 rounded-lg p-4 space-y-1.5 shadow-2xs"
+          >
+            <div className="flex items-center gap-2 text-zinc-900 dark:text-zinc-100 text-xs font-medium">
+              <GitCommit className="w-3.5 h-3.5 text-zinc-500" />
+              <span>Min-cash-flow</span>
+            </div>
+            <p className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
+              Collapses multi-person debts to at most N-1 direct payments.
+            </p>
+          </motion.div>
+
+          <motion.div
+
+// [v312] feat(components): add GPay, PhonePe, Paytm, and Cred app target chips in PaymentModal
