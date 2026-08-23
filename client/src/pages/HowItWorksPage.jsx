@@ -115,5 +115,28 @@ const HowItWorksPage = () => {
         variants={cardMotion}
         initial="hidden"
         animate="visible"
+        className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-5 sm:p-6 space-y-3 shadow-2xs"
+      >
+        <div className="flex items-center gap-2 text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase">
+          <Terminal className="w-3.5 h-3.5" />
+          <span>Greedy Min-Cash-Flow Code Logic</span>
+        </div>
+        <div className="bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md p-3.5 font-mono text-xs text-zinc-800 dark:text-zinc-300 overflow-x-auto">
+          <pre>{`// 1. Calculate net balances
+for each member m:
+  net[m] = sum(amount paid by m) - sum(amount owed by m)
 
-// [v257] feat(client): add notification toast system using custom styled alerts
+// 2. Greedy matching
+while debtors.length > 0 and creditors.length > 0:
+  debtor = max_debtor()   // owes most
+  creditor = max_creditor() // owed most
+  settle_amount = min(-debtor.net, creditor.net)
+
+  create_settlement(debtor -> creditor, settle_amount)
+  debtor.net += settle_amount
+  creditor.net -= settle_amount`}</pre>
+        </div>
+        <p className="text-[11px] text-zinc-500">
+          Result: Guarantees at most <span className="font-mono text-zinc-800 dark:text-zinc-300">N-1</span> transfers, completely avoiding circular payment loops.
+
+// [v313] feat(components): add fallback copy UPI ID and amount button in PaymentModal
