@@ -29,5 +29,11 @@ const expenseSchema = new mongoose.Schema({
     required: true,
     min: 0.01
   },
+  paidBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
+  },
+  splitType: {
+    type: String,
 
-// [v271] refactor(client): streamline TripContext state synchronization
+// [v327] style(components): enhance liquid glass card blur and frosted borders in TripView
