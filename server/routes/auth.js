@@ -172,5 +172,40 @@ router.get('/dashboard', requireAuth, async (req, res) => {
           ...log,
           tripTitle: trip.title,
           tripAccessToken: trip.accessToken
+        });
+      });
 
-// [v277] style(client): refine liquid glass border reflection and shadow gradients
+      tripsSummary.push({
+        _id: trip._id,
+        title: trip.title,
+        accessToken: trip.accessToken,
+        totalSpent: tripTotal,
+        membersCount: trip.members?.length || 0,
+        userNetBalance: userNet,
+        activeDebtsCount: activeDebts.length,
+        createdAt: trip.createdAt,
+        updatedAt: trip.updatedAt
+      });
+    }
+
+    allRecentActivities.sort((a, b) => new Date(b.confirmedAt) - new Date(a.confirmedAt));
+
+    res.json({
+      user: req.user,
+      stats: {
+        totalLifetimeSpend: Math.round(totalLifetimeSpend * 100) / 100,
+        totalPendingCollect: Math.round(totalPendingCollect * 100) / 100,
+        totalPendingPay: Math.round(totalPendingPay * 100) / 100,
+        activeTripsCount: trips.length,
+        netPosition: Math.round((totalPendingCollect - totalPendingPay) * 100) / 100
+      },
+      trips: tripsSummary,
+      recentActivities: allRecentActivities.slice(0, 10)
+    });
+  } catch (err) {
+    console.error('Dashboard error:', err);
+    res.status(500).json({ error: 'Failed to generate dashboard overview.' });
+  }
+});
+
+// [v333] refactor(components): memoize heavy component renders with React.memo
