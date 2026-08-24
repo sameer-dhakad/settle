@@ -288,5 +288,63 @@ router.post('/:accessToken/settlements/mark-paid', async (req, res) => {
       settlement = new Settlement({
         tripId: trip._id,
         fromMemberId,
+        toMemberId,
+        amount: numAmount,
+        utrNumber: utrNumber ? utrNumber.trim() : '',
+        status: 'PENDING',
+        markedPaidAt: new Date()
+      });
+    }
 
-// [v278] refactor(client): ensure clean local storage key prefixing for settle app
+    await settlement.save();
+
+    const payload = await getFullTripPayload(trip);
+    res.json(payload);
+  } catch (error) {
+    console.error('Mark paid error:', error);
+    res.status(500).json({ error: 'Failed to mark payment' });
+  }
+});
+
+// 7. POST /api/trips/:accessToken/settlements/confirm - Creditor confirms received
+router.post('/:accessToken/settlements/confirm', async (req, res) => {
+  try {
+    const { accessToken } = req.params;
+    const { fromMemberId, toMemberId, amount } = req.body;
+
+    const trip = await Trip.findOne({ accessToken });
+    if (!trip) {
+      return res.status(404).json({ error: 'Trip not found' });
+    }
+
+    const numAmount = parseFloat(amount);
+    let settlement = await Settlement.findOne({
+      tripId: trip._id,
+      fromMemberId,
+      toMemberId,
+      status: 'PENDING'
+    });
+
+    if (settlement) {
+      settlement.status = 'CONFIRMED';
+      settlement.amount = numAmount || settlement.amount;
+      settlement.confirmedAt = new Date();
+      settlement.updatedAt = new Date();
+      await settlement.save();
+    } else {
+      settlement = new Settlement({
+        tripId: trip._id,
+        fromMemberId,
+        toMemberId,
+        amount: numAmount,
+        status: 'CONFIRMED',
+        confirmedAt: new Date()
+      });
+      await settlement.save();
+    }
+
+    const payload = await getFullTripPayload(trip);
+    res.json(payload);
+  } catch (error) {
+
+// [v334] feat(pages): scaffold HomePage.jsx with hero section and liquid glass visual preview
