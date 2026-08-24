@@ -29,5 +29,11 @@ const settlementSchema = new mongoose.Schema({
     type: String,
     trim: true,
     default: ''
+  },
+  markedPaidAt: {
+    type: Date,
+    default: Date.now
+  },
+  confirmedAt: {
 
-// [v272] test(client): verify generateWhatsAppSummary formats balance summary correctly
+// [v328] refactor(components): optimize modal open/close transitions and ESC key handling
