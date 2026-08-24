@@ -110,5 +110,27 @@ function simplifyDebts(members = [], expenses = [], settlements = []) {
         amount: roundedTransfer,
         status: pendingSettlement ? 'PENDING' : 'UNPAID',
         settlementId: pendingSettlement ? pendingSettlement._id : null,
+        utrNumber: pendingSettlement ? pendingSettlement.utrNumber : '',
+        markedPaidAt: pendingSettlement ? pendingSettlement.markedPaidAt : null
+      });
+    }
 
-// [v280] style(client): add active nav link pill highlight styling
+    creditor.amount -= transferAmount;
+    debtor.amount -= transferAmount;
+
+    if (creditor.amount < 0.01) creditors.shift();
+    if (debtor.amount < 0.01) debtors.shift();
+  }
+
+  // Audit log of confirmed transactions
+  const membersMap = {};
+  members.forEach((m) => {
+    membersMap[m._id.toString()] = m.name;
+  });
+
+  const auditLog = settlements
+    .filter((s) => s.status === 'CONFIRMED')
+    .map((s) => ({
+      _id: s._id,
+
+// [v336] feat(pages): add Create Trip and Join Trip primary CTA buttons on HomePage.jsx
