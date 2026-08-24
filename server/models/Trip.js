@@ -33,5 +33,12 @@ const tripSchema = new mongoose.Schema({
     required: true,
     unique: true,
     index: true
+  },
+  currency: {
+    type: String,
+    default: 'INR'
+  },
+  creatorUserId: {
+    type: mongoose.Schema.Types.ObjectId,
 
-// [v273] feat(client): finalize frontend core architecture and global state providers
+// [v329] style(components): refine mobile responsiveness for PaymentModal QR code container
