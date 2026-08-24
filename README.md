@@ -69,4 +69,15 @@ npm run dev
 - **Client**: `http://localhost:3000`
 - **Server**: `http://localhost:5001`
 
+---
 
+## 🔒 Security & Privacy
+
+- **No Secrets in Source Control**: All sensitive database credentials, JWT secrets, and environment tokens are managed via `.env` and excluded via `.gitignore`.
+- **Password Security**: Salted hashing with `bcryptjs`.
+- **Bank-Grade References**: Optional 12-digit UTR logging protects participants from spoofed payments.
+
+---
+
+## 📄 License
+MIT License © Settle Team
