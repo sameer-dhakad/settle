@@ -33,5 +33,12 @@ const userSchema = new mongoose.Schema({
 userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
   try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
 
-// [v274] style(client): add delicate backdrop blur filters on glass panels
+// [v330] refactor(components): extract reusable ModalWrapper component
