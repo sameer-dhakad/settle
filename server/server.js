@@ -18,5 +18,9 @@ app.use('/api/trips', tripRoutes);
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
 
-// [v279] feat(client): add guest session recovery from URL parameters
+// Connect to DB and start server
+const PORT = process.env.PORT || 5001;
+
+// [v335] feat(pages): add high-impact value propositions and interactive split preview on HomePage
