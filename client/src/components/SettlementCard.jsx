@@ -286,5 +286,52 @@ const SettlementCard = ({
                 level="M"
                 includeMargin={false}
               />
+            </div>
 
-// [v300] feat(components): add 12-digit UTR reference display and verification badge on SettlementCard
+            <div className="bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md p-2.5 text-left text-xs space-y-1">
+              <div className="flex justify-between">
+                <span className="text-zinc-500">Payee:</span>
+                <span className="font-medium text-zinc-800 dark:text-zinc-200">{toName}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-zinc-500">UPI ID:</span>
+                <span className="font-mono text-zinc-800 dark:text-zinc-300 text-[11px]">{toUpiId}</span>
+              </div>
+            </div>
+
+            <div className="flex gap-2 pt-1">
+              <button
+                onClick={copyUpiId}
+                className="flex-1 py-1.5 px-3 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium rounded-md text-xs flex items-center justify-center gap-1.5 transition-colors"
+              >
+                {copiedUpi ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
+                <span>{copiedUpi ? 'Copied' : 'Copy'}</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setShowQrModal(false);
+                  setShowMarkPaidModal(true);
+                }}
+                className="flex-1 py-1.5 px-3 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium rounded-md text-xs transition-colors flex items-center justify-center gap-1.5 shadow-2xs"
+              >
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                <span>Mark Paid</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <MarkPaidModal
+        isOpen={showMarkPaidModal}
+        onClose={() => setShowMarkPaidModal(false)}
+        debt={settlement}
+        tripTitle={tripTitle}
+        onSubmit={handleMarkPaidSubmit}
+      />
+    </>
+  );
+};
+
+export default SettlementCard;
