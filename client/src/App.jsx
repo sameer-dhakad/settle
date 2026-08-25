@@ -34,5 +34,10 @@ function App() {
               <Route path="dashboard" element={<DashboardPage />} />
             </Route>
           </Routes>
+        </AuthProvider>
+      </BrowserRouter>
+    </ThemeProvider>
+  );
+}
 
-// [v287] feat(components): add user profile badge and quick logout trigger in Layout.jsx
+export default App;
