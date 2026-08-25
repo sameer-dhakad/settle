@@ -169,5 +169,32 @@ const Layout = () => {
       </main>
 
       {/* Minimalist Staff-Grade Footer */}
+      <footer className="border-t border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-950 py-8 text-xs text-zinc-500 dark:text-zinc-500 transition-colors">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="font-semibold text-zinc-800 dark:text-zinc-300">Settle</span>
+            <span className="text-zinc-300 dark:text-zinc-700">•</span>
+            <span>Minimalist debt engine & instant UPI payments</span>
+          </div>
 
-// [v295] feat(components): add expandable split breakdown accordion on ExpenseCard
+          <div className="flex items-center gap-4 text-zinc-500 dark:text-zinc-400">
+            <div className="flex items-center gap-1.5 text-[11px] font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              <span>All systems normal</span>
+            </div>
+            <span className="text-zinc-300 dark:text-zinc-700">•</span>
+            <Link to="/trip/live" className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors text-[11px]">
+              Live Demo
+            </Link>
+            <span className="text-zinc-300 dark:text-zinc-700">•</span>
+            <Link to="/how-it-works" className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors text-[11px]">
+              Min-Flow Docs
+            </Link>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default Layout;
