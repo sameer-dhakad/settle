@@ -209,5 +209,39 @@ const AddExpenseModal = ({
                   >
                     <span className="truncate">{m.name}</span>
                     <div
+                      className={`w-3.5 h-3.5 rounded flex items-center justify-center ${
+                        isSelected ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-950' : 'border border-zinc-300 dark:border-zinc-700'
+                      }`}
+                    >
+                      {isSelected && <Check className="w-2.5 h-2.5" />}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
 
-// [v289] feat(components): scaffold MemberList.jsx for displaying trip participants
+          {/* Action Buttons */}
+          <div className="pt-2 flex gap-2">
+            <button
+              type="button"
+              onClick={onClose}
+              className="flex-1 py-1.5 px-3 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-950 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 border border-zinc-200 dark:border-zinc-800 font-medium text-xs rounded-md transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="flex-1 py-1.5 px-3 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium text-xs rounded-md transition-colors disabled:opacity-50 shadow-xs"
+            >
+              {loading ? 'Saving...' : 'Save Expense'}
+            </button>
+          </div>
+        </form>
+      </motion.div>
+    </div>
+  );
+};
+
+export default AddExpenseModal;
