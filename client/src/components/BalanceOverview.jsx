@@ -94,5 +94,19 @@ const BalanceOverview = ({ members = [], expenses = [], balances = [], currentMe
                         : 'text-zinc-500 dark:text-zinc-400'
                     }`}
                   >
+                    {isPositive ? `+₹${mb.balance.toFixed(2)}` : isNegative ? `-₹${Math.abs(mb.balance).toFixed(2)}` : '₹0.00'}
+                  </div>
+                  <span className="text-[10px] text-zinc-400 dark:text-zinc-500 block">
+                    {isPositive ? 'gets back' : isNegative ? 'owes' : 'settled'}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
 
-// [v290] feat(components): add member avatar chips with initials and UPI ID in MemberList
+export default BalanceOverview;
