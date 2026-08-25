@@ -97,5 +97,20 @@ const MarkPaidModal = ({
               onClick={onClose}
               className="flex-1 py-1.5 px-3 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-950 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 border border-zinc-200 dark:border-zinc-800 font-medium text-xs rounded-md transition-colors"
             >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={submitting}
+              className="flex-1 py-1.5 px-3 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium text-xs rounded-md transition-colors disabled:opacity-50 shadow-xs"
+            >
+              {submitting ? 'Saving...' : 'Confirm Sent'}
+            </button>
+          </div>
+        </form>
+      </motion.div>
+    </div>
+  );
+};
 
-// [v296] feat(components): scaffold DebtCard.jsx displaying who owes whom
+export default MarkPaidModal;
