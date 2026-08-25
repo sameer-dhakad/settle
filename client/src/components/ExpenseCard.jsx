@@ -43,5 +43,11 @@ const ExpenseCard = ({ expense, onDelete, currentMemberId }) => {
             title="Delete expense"
           >
             <Trash2 className="w-3.5 h-3.5" />
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
 
-// [v293] feat(components): add category icon badge and split type pill on ExpenseCard
+export default ExpenseCard;
