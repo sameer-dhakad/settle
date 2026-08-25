@@ -287,5 +287,52 @@ const PaymentModal = ({
             </div>
             <div className="flex justify-between">
               <span className="text-zinc-500">UPI ID:</span>
+              <div className="flex items-center gap-1.5">
+                <span className="font-mono text-zinc-800 dark:text-zinc-300 text-[11px]">{toUpiId || 'Not Set'}</span>
+                {toUpiId && (
+                  <button
+                    onClick={copyUpiId}
+                    className="p-0.5 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
+                    title="Copy UPI ID"
+                  >
+                    {copiedUpi ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
+                  </button>
+                )}
+              </div>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-zinc-500">Note:</span>
+              <span className="text-zinc-600 dark:text-zinc-400 text-[11px] font-mono">{note}</span>
+            </div>
+          </div>
 
-// [v298] feat(components): add member avatars and payment direction arrow on DebtCard
+          <form onSubmit={handleCompletePayment} className="space-y-2.5 pt-1">
+            <div>
+              <label className="block text-left text-[11px] font-medium text-zinc-600 dark:text-zinc-400 mb-1">
+                12-digit UTR Reference <span className="text-zinc-400 dark:text-zinc-500 font-normal">(optional)</span>
+              </label>
+              <input
+                type="text"
+                value={utrNumber}
+                onChange={(e) => setUtrNumber(e.target.value)}
+                placeholder="e.g. 412345678901"
+                className="w-full px-2.5 py-1.5 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md text-zinc-900 dark:text-zinc-100 text-xs font-mono focus:border-zinc-500 focus:outline-none transition-colors"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full py-2 px-3 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium text-xs rounded-md transition-colors flex items-center justify-center gap-1.5 disabled:opacity-50 shadow-xs"
+            >
+              <CheckCircle2 className="w-3.5 h-3.5" />
+              <span>{isSubmitting ? 'Updating...' : 'I Have Completed the Payment'}</span>
+            </button>
+          </form>
+        </motion.div>
+      )}
+    </div>
+  );
+};
+
+export default PaymentModal;
