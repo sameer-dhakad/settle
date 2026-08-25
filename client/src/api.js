@@ -32,5 +32,9 @@ export const getTrip = (accessToken) => api.get(`/trips/${accessToken}`);
 export const joinTrip = (accessToken, data) => api.post(`/trips/${accessToken}/join`, data);
 export const addExpense = (accessToken, data) => api.post(`/trips/${accessToken}/expenses`, data);
 export const deleteExpense = (accessToken, expenseId) => api.delete(`/trips/${accessToken}/expenses/${expenseId}`);
+export const markSettlementPaid = (accessToken, data) => api.post(`/trips/${accessToken}/settlements/mark-paid`, data);
+export const confirmSettlement = (accessToken, data) => api.post(`/trips/${accessToken}/settlements/confirm`, data);
+export const rejectSettlement = (accessToken, data) => api.post(`/trips/${accessToken}/settlements/reject`, data);
+export const updateMemberUpi = (accessToken, memberId, data) => api.put(`/trips/${accessToken}/members/${memberId}`, data);
 
-// [v288] feat(components): add guest session indicator pill in Layout header
+export default api;
