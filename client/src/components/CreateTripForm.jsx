@@ -89,5 +89,19 @@ const CreateTripForm = () => {
             onChange={handleChange}
             placeholder="name@okaxis"
             className="w-full px-3 py-1.5 bg-zinc-950 border border-zinc-800 rounded-md text-zinc-100 placeholder-zinc-500 text-xs font-mono focus:border-zinc-500 focus:outline-none"
+          />
+        </div>
 
-// [v291] feat(components): add add member button trigger with input dialog in MemberList
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full py-2 px-3 bg-zinc-100 hover:bg-white text-zinc-950 font-medium text-xs rounded-md transition-colors disabled:opacity-50 mt-2"
+        >
+          {loading ? 'Creating...' : 'Create Trip'}
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default CreateTripForm;
