@@ -134,5 +134,26 @@ const DebtCard = ({
         </div>
       </div>
 
+      {showQrModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 dark:bg-black/70 backdrop-blur-xs p-4">
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-5 max-w-xs w-full shadow-xl text-center space-y-3">
+            <div className="flex justify-between items-center pb-2 border-b border-zinc-100 dark:border-zinc-800">
+              <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase">UPI QR Code</span>
+              <button onClick={() => setShowQrModal(false)} className="text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200">
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
+            <div className="bg-white p-3 rounded-md inline-block border border-zinc-200 dark:border-zinc-700">
+              <QRCodeSVG value={upiLink} size={160} level="M" />
+            </div>
+            <div className="text-xs font-mono text-zinc-800 dark:text-zinc-300">
+              {toName}: {formatCurrency(amount)}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
 
-// [v292] feat(components): scaffold ExpenseCard.jsx for transaction feed items
+export default DebtCard;
