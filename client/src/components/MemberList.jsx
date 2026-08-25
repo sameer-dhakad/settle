@@ -184,5 +184,34 @@ const MemberList = ({
               <div>
                 <label className="block text-[11px] text-zinc-600 dark:text-zinc-400 mb-1">UPI ID (optional)</label>
                 <input
+                  type="text"
+                  value={newMemberUpi}
+                  onChange={(e) => setNewMemberUpi(e.target.value)}
+                  placeholder="rahul@oksbi"
+                  className="w-full px-2.5 py-1.5 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md text-zinc-900 dark:text-zinc-100 text-xs font-mono focus:border-zinc-500 focus:outline-none"
+                />
+              </div>
+              <div className="flex gap-2 pt-1">
+                <button
+                  type="button"
+                  onClick={() => setShowAddModal(false)}
+                  className="flex-1 py-1.5 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-md text-xs"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium rounded-md text-xs shadow-xs"
+                >
+                  Add
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
-// [v297] feat(components): add instant Pay via UPI button on DebtCard.jsx
+export default MemberList;
