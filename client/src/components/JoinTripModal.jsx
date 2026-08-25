@@ -87,5 +87,18 @@ const JoinTripModal = ({ isOpen, tripTitle, members = [], onJoin }) => {
             />
           </div>
 
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-2 px-3 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium text-xs rounded-md transition-colors flex items-center justify-center gap-1.5 disabled:opacity-50 mt-1 shadow-xs"
+          >
+            <span>{loading ? 'Joining...' : 'Join Trip'}</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </form>
+      </motion.div>
+    </div>
+  );
+};
 
-// [v294] feat(components): add payer name, date, and formatted amount on ExpenseCard
+export default JoinTripModal;
