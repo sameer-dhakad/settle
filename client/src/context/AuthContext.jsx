@@ -74,5 +74,16 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
-
-// [v303] feat(components): add total group spend, your spend, and net balance cards in BalanceOverview
+        token,
+        loading,
+        isAuthenticated: Boolean(user),
+        login,
+        register,
+        logout,
+        refreshUser: fetchCurrentUser
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
