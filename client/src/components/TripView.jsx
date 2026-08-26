@@ -590,5 +590,102 @@ const TripView = () => {
             <div className="flex items-center justify-between text-xs">
               <span className="font-medium text-zinc-600 dark:text-zinc-400">
                 {activeMember ? activeMember.name : 'Guest'}
+              </span>
+              <span
+                className={`text-[10px] font-mono px-1.5 py-0.2 rounded uppercase ${
+                  activeMemberBalance > 0.01
+                    ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/40'
+                    : activeMemberBalance < -0.01
+                    ? 'bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40'
+                    : 'bg-zinc-100 dark:bg-zinc-850 text-zinc-600 dark:text-zinc-400'
+                }`}
+              >
+                {activeMemberBalance > 0.01 ? 'Owed to you' : activeMemberBalance < -0.01 ? 'You owe' : 'Settled'}
+              </span>
+            </div>
 
-// [v302] feat(components): scaffold BalanceOverview.jsx for trip financial summary
+            <div className="text-2xl font-semibold font-mono tracking-tight text-zinc-900 dark:text-zinc-100">
+              {activeMemberBalance > 0.01
+                ? `+ ₹${activeMemberBalance.toFixed(2)}`
+                : activeMemberBalance < -0.01
+                ? `- ₹${Math.abs(activeMemberBalance).toFixed(2)}`
+                : '₹0.00'}
+            </div>
+          </div>
+
+          {/* Group Balances Leaderboard */}
+          <div className="p-4 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 shadow-2xs space-y-3">
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-medium text-zinc-900 dark:text-zinc-100">Balances</span>
+              <span className="text-[11px] font-mono text-zinc-400">{members.length} members</span>
+            </div>
+
+            <div className="space-y-2">
+              {balances.map((b) => {
+                const isCurrent = b.memberId === currentMemberId;
+                const net = b.netBalance || 0;
+                return (
+                  <button
+                    key={b.memberId}
+                    onClick={() => {
+                      const target = members.find((m) => m._id === b.memberId);
+                      if (target) handleSwitchMember(target);
+                    }}
+                    className={`w-full flex items-center justify-between text-xs py-1 px-1.5 rounded transition-colors ${
+                      isCurrent
+                        ? 'bg-zinc-100 dark:bg-zinc-850 font-medium'
+                        : 'hover:bg-zinc-50 dark:hover:bg-zinc-850/50'
+                    }`}
+                  >
+                    <div className="flex items-center gap-1.5 truncate">
+                      <span className="truncate text-zinc-800 dark:text-zinc-200">{b.name}</span>
+                      {isCurrent && <span className="text-[10px] text-zinc-400 font-mono">(you)</span>}
+                    </div>
+
+                    <span
+                      className={`font-mono text-xs ${
+                        net > 0.01
+                          ? 'text-emerald-600 dark:text-emerald-400'
+                          : net < -0.01
+                          ? 'text-rose-600 dark:text-rose-400'
+                          : 'text-zinc-400'
+                      }`}
+                    >
+                      {net > 0.01 ? `+₹${net.toFixed(0)}` : net < -0.01 ? `-₹${Math.abs(net).toFixed(0)}` : '₹0'}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* MODALS */}
+      <PaymentModal
+        isOpen={Boolean(activePaymentDebt)}
+        onClose={() => setActivePaymentDebt(null)}
+        debt={activePaymentDebt}
+        tripTitle={trip.title}
+        onMarkPaid={handleMarkPaid}
+      />
+
+      <AddExpenseModal
+        isOpen={isAddExpenseOpen}
+        onClose={() => setIsAddExpenseOpen(false)}
+        members={members}
+        currentMemberId={currentMemberId}
+        onSubmit={handleAddExpense}
+      />
+
+      <JoinTripModal
+        isOpen={isJoinModalOpen}
+        tripTitle={trip.title}
+        members={members}
+        onJoin={handleJoin}
+      />
+    </div>
+  );
+};
+
+export default TripView;
