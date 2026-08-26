@@ -203,5 +203,38 @@ export const TripProvider = ({ children }) => {
       setAuditLog(updatedTrip.auditLog || []);
       toast.success('UPI ID updated!');
       return updatedTrip;
+    } catch (err) {
+      console.error('updateMemberUpi error:', err);
+      const msg = err.response?.data?.error || 'Failed to update UPI ID';
+      toast.error(msg);
+      throw err;
+    }
+  };
 
-// [v305] feat(components): scaffold AddExpenseModal.jsx with amount and description inputs
+  return (
+    <TripContext.Provider
+      value={{
+        trip,
+        loading,
+        error,
+        currentMemberId,
+        token,
+        settlements,
+        balances,
+        auditLog,
+        loadTrip,
+        joinTrip,
+        addExpense,
+        deleteExpense,
+        markPaymentAsPaid,
+        confirmPaymentReceived,
+        reopenPaymentDebt,
+        updateMemberUpi,
+        setCurrentMemberId,
+        setToken
+      }}
+    >
+      {children}
+    </TripContext.Provider>
+  );
+};
