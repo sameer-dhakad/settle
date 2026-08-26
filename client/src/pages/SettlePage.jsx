@@ -141,5 +141,27 @@ const SettlePage = () => {
                     <ShieldCheck className="w-4 h-4" />
                   </div>
                   <div>
+                    <div className="font-semibold text-slate-800">
+                      <span>{log.from?.name}</span>
+                      <span className="text-slate-400 font-normal"> paid </span>
+                      <span>{log.to?.name}</span>
+                    </div>
+                    <span className="text-[11px] text-slate-400">
+                      Confirmed on {new Date(log.confirmedAt || log.createdAt).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                    </span>
+                  </div>
+                </div>
 
-// [v315] feat(components): add UTR input with 12-digit numerical validation in MarkPaidModal
+                <div className="font-bold text-slate-900 text-sm">
+                  {formatCurrency(log.amount)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default SettlePage;
