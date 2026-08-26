@@ -207,5 +207,38 @@ const AuthPage = () => {
             <div>
               <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300 mb-1">
                 Default UPI ID <span className="text-zinc-400 dark:text-zinc-500 font-normal">(optional)</span>
+              </label>
+              <input
+                type="text"
+                value={defaultUpiId}
+                onChange={(e) => setDefaultUpiId(e.target.value)}
+                placeholder="name@okaxis"
+                className="w-full px-2.5 py-1.5 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-md text-zinc-900 dark:text-zinc-100 text-xs font-mono focus:border-zinc-500 focus:outline-none"
+              />
+            </div>
+          )}
 
-// [v308] feat(components): add participant inclusion checkboxes with auto-split in AddExpenseModal
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-2 px-3 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium text-xs rounded-md transition-colors flex items-center justify-center gap-1.5 disabled:opacity-50 mt-1 shadow-xs"
+          >
+            <span>{loading ? 'Processing...' : mode === 'login' ? 'Sign In' : 'Create Account'}</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </form>
+
+        <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 text-center">
+          <Link
+            to="/trip/live"
+            className="text-[11px] text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 font-mono"
+          >
+            Skip login and open Demo Trip →
+          </Link>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+export default AuthPage;
