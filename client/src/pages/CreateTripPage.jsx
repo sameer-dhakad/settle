@@ -166,5 +166,31 @@ const CreateTripPage = () => {
               disabled={loading}
               className="w-full py-2 px-4 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium text-xs rounded-md transition-colors flex items-center justify-center gap-2 shadow-xs disabled:opacity-50"
             >
+              <span>{loading ? 'Creating...' : 'Create trip'}</span>
+              <kbd className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[10px] font-mono bg-zinc-800 text-zinc-300 dark:bg-zinc-200 dark:text-zinc-700">⌘↵</kbd>
+            </button>
+          </div>
+        </form>
+      </div>
 
-// [v309] feat(components): scaffold PaymentModal.jsx with two-tier UPI settlement pathways
+      {recentTrips.length > 0 && (
+        <div className="space-y-1.5 pt-2">
+          {recentTrips.map((rt) => (
+            <Link
+              key={rt.accessToken}
+              to={`/trip/${rt.accessToken}`}
+              className="flex items-center justify-between px-3.5 py-2.5 rounded-md bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors text-xs text-zinc-700 dark:text-zinc-300 group"
+            >
+              <span className="font-medium truncate group-hover:text-zinc-900 dark:group-hover:text-zinc-100">
+                {rt.title}
+              </span>
+              <ArrowRight className="w-3.5 h-3.5 text-zinc-400 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          ))}
+        </div>
+      )}
+    </motion.div>
+  );
+};
+
+export default CreateTripPage;
