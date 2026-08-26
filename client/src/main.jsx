@@ -6,5 +6,5 @@ import './index.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
-
-// [v307] feat(components): add split type toggle (equal, exact, percentage) in AddExpenseModal
+  </React.StrictMode>,
+);
