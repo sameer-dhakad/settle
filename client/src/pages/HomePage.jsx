@@ -178,5 +178,34 @@ const HomePage = () => {
           </motion.div>
 
           <motion.div
+            variants={itemVariants}
+            className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 rounded-lg p-4 space-y-1.5 shadow-2xs"
+          >
+            <div className="flex items-center gap-2 text-zinc-900 dark:text-zinc-100 text-xs font-medium">
+              <QrCode className="w-3.5 h-3.5 text-zinc-500" />
+              <span>Direct UPI</span>
+            </div>
+            <p className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
+              1-tap GPay, PhonePe, Paytm deep links & dynamic QR codes.
+            </p>
+          </motion.div>
 
-// [v312] feat(components): add GPay, PhonePe, Paytm, and Cred app target chips in PaymentModal
+          <motion.div
+            variants={itemVariants}
+            className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 rounded-lg p-4 space-y-1.5 shadow-2xs"
+          >
+            <div className="flex items-center gap-2 text-zinc-900 dark:text-zinc-100 text-xs font-medium">
+              <Link2 className="w-3.5 h-3.5 text-zinc-500" />
+              <span>Zero signup</span>
+            </div>
+            <p className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
+              Shareable link. Friends participate directly without logins.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+    </motion.div>
+  );
+};
+
+export default HomePage;
