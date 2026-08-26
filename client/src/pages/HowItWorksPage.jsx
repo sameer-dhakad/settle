@@ -138,5 +138,27 @@ while debtors.length > 0 and creditors.length > 0:
         </div>
         <p className="text-[11px] text-zinc-500">
           Result: Guarantees at most <span className="font-mono text-zinc-800 dark:text-zinc-300">N-1</span> transfers, completely avoiding circular payment loops.
+        </p>
+      </motion.div>
 
-// [v313] feat(components): add fallback copy UPI ID and amount button in PaymentModal
+      {/* CTA */}
+      <div className="pt-2 flex items-center justify-between">
+        <Link
+          to="/create"
+          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium rounded-md text-xs transition-colors shadow-xs"
+        >
+          <span>Create Trip Now</span>
+          <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
+        <Link
+          to="/trip/live"
+          className="text-xs font-mono text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
+        >
+          View Live Demo →
+        </Link>
+      </div>
+    </motion.div>
+  );
+};
+
+export default HowItWorksPage;
