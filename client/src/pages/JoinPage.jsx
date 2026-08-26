@@ -176,5 +176,33 @@ const JoinPage = () => {
             type="submit"
             disabled={submitting}
             className="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 active:scale-[0.98] text-white font-semibold rounded-xl text-sm transition-all shadow-md shadow-indigo-200 flex items-center justify-center gap-2 disabled:opacity-70 mt-4"
+          >
+            <span>{submitting ? 'Joining Trip...' : `Join ${trip.name}`}</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </form>
 
-// [v314] feat(components): scaffold MarkPaidModal.jsx for recording 12-digit UTR bank reference
+        {/* Quick Join as Existing Member if multiple members exist */}
+        {existingMembersList.length > 0 && (
+          <div className="pt-4 border-t border-slate-100">
+            <span className="text-xs text-slate-400 block mb-2 font-medium">Or switch to an existing member:</span>
+            <div className="flex flex-wrap gap-1.5">
+              {existingMembersList.map((m) => (
+                <button
+                  key={m._id || m.id}
+                  type="button"
+                  onClick={() => handleSwitchToExisting(m)}
+                  className="px-2.5 py-1 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 text-slate-700 rounded-lg text-xs font-medium transition-colors"
+                >
+                  {m.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default JoinPage;
