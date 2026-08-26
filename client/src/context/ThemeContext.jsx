@@ -50,5 +50,12 @@ export const ThemeProvider = ({ children }) => {
     <ThemeContext.Provider
       value={{
         theme,
-
-// [v304] feat(components): add color-coded net balance pill (You are owed vs You owe) in BalanceOverview
+        isDark: theme === 'dark',
+        toggleTheme,
+        setTheme
+      }}
+    >
+      {children}
+    </ThemeContext.Provider>
+  );
+};
