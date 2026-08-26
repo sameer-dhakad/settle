@@ -123,5 +123,24 @@ const FeaturesPage = () => {
           <p className="text-xs text-zinc-500 dark:text-zinc-400">
             Create your first trip or test with sample data in under 10 seconds.
           </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <Link
+            to="/create"
+            className="px-3.5 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 font-medium rounded-md text-xs transition-colors shadow-xs"
+          >
+            Create Trip
+          </Link>
+          <Link
+            to="/trip/live"
+            className="px-3.5 py-1.5 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-md text-xs font-medium transition-colors"
+          >
+            Open Demo
+          </Link>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
-// [v311] feat(components): implement desktop browser dynamic high-contrast QR code modal in PaymentModal
+export default FeaturesPage;
