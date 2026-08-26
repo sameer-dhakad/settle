@@ -70,5 +70,15 @@ const ShareLink = ({ tripId, token, tripName = 'Trip' }) => {
                 <X className="w-3.5 h-3.5" />
               </button>
             </div>
+            <div className="bg-white p-3 rounded-md inline-block border border-zinc-200 dark:border-zinc-700">
+              <QRCodeSVG value={joinUrl} size={160} level="M" />
+            </div>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400">Scan to join "{tripName}"</p>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
 
-// [v301] feat(components): add sign-off button for payee verification on SettlementCard
+export default ShareLink;
