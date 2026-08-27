@@ -25,5 +25,8 @@ async function tripAuth(req, res, next) {
     if (error.name === 'CastError') {
       return res.status(404).json({ error: 'Trip not found' });
     }
+    res.status(500).json({ error: 'Server error' });
+  }
+}
 
-// [v326] feat(components): integrate Canvas Confetti celebration when trip debts are fully settled
+module.exports = tripAuth;
