@@ -41,4 +41,9 @@ userSchema.pre('save', async function(next) {
   }
 });
 
-// [v330] refactor(components): extract reusable ModalWrapper component
+// Compare password method
+userSchema.methods.comparePassword = async function(candidatePassword) {
+  return bcrypt.compare(candidatePassword, this.password);
+};
+
+module.exports = mongoose.model('User', userSchema);
