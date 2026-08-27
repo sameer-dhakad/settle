@@ -14,5 +14,6 @@ export default defineConfig({
         target: 'http://localhost:5001',
         changeOrigin: true
       }
-
-// [v319] feat(components): scaffold ShareLink.jsx with 1-click WhatsApp broadcast trigger
+    }
+  }
+});
