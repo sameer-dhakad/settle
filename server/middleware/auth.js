@@ -38,5 +38,10 @@ const optionalAuth = async (req, res, next) => {
         req.user = user;
       }
     }
+  } catch (err) {
+    // Ignore invalid token for optional auth
+  }
+  next();
+};
 
-// [v325] feat(components): implement tab navigation (Expenses, Debts, Settlements, Members) in TripView
+module.exports = { requireAuth, optionalAuth, JWT_SECRET };
