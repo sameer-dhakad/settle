@@ -29,5 +29,9 @@ export const generateUpiLink = (upiId, name, amount, tripName = 'Trip') => {
   return `upi://pay?pa=${encodeURIComponent(cleanUpi)}&pn=${encodeURIComponent(cleanName)}&am=${cleanAmount}&cu=INR&tn=${encodeURIComponent(note)}`;
 };
 
-
-// [v317] feat(components): scaffold JoinTripModal.jsx for guest onboarding via invite link
+export const getInitials = (name = '') => {
+  if (!name) return '??';
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[1][0]).toUpperCase();
+};
