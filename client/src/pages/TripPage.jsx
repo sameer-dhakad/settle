@@ -395,5 +395,70 @@ const TripPage = () => {
               </button>
             </div>
           ) : (
+            <div className="space-y-3">
+              {settlements.map((debt, idx) => (
+                <DebtCard
+                  key={idx}
+                  debt={debt}
+                  tripName={trip.name}
+                  currentMemberId={currentMemberId}
+                  onMarkPaid={handleMarkPaid}
+                  onConfirmReceived={handleConfirmReceived}
+                  onReopen={handleReopen}
+                  onUpdateUpi={(member) => handleUpdateUpi(member.memberId, member.upiId)}
+                />
+              ))}
+            </div>
+          )}
 
-// [v316] feat(components): add proof payment receipt attachment option in MarkPaidModal
+          {/* Permanent Settlement Audit Log */}
+          {auditLog && auditLog.length > 0 && (
+            <div className="pt-4 border-t border-slate-200/80 space-y-3">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
+                <History className="w-4 h-4" />
+                <span>Settled Payment Audit Log ({auditLog.length})</span>
+              </div>
+
+              <div className="bg-white rounded-3xl border border-slate-200/80 divide-y divide-slate-100 overflow-hidden shadow-sm">
+                {auditLog.map((log) => (
+                  <div key={log._id || log.id} className="p-4 flex items-center justify-between text-xs">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
+                        <ShieldCheck className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-slate-800">
+                          <span>{log.from?.name}</span>
+                          <span className="text-slate-400 font-normal"> paid </span>
+                          <span>{log.to?.name}</span>
+                        </div>
+                        <span className="text-[11px] text-slate-400">
+                          Confirmed on {new Date(log.confirmedAt || log.createdAt).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="font-bold text-slate-900 text-sm">
+                      {formatCurrency(log.amount)}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Add Expense Modal */}
+      <AddExpenseModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        members={members}
+        onSubmit={handleAddExpense}
+        currentMemberId={currentMemberId}
+      />
+    </div>
+  );
+};
+
+export default TripPage;
