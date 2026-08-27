@@ -35,5 +35,10 @@ const expenseSchema = new mongoose.Schema({
   },
   splitType: {
     type: String,
+    enum: ['EQUAL', 'EXACT'],
+    default: 'EQUAL'
+  },
+  splits: [splitSchema]
+}, { timestamps: true });
 
-// [v327] style(components): enhance liquid glass card blur and frosted borders in TripView
+module.exports = mongoose.model('Expense', expenseSchema);
