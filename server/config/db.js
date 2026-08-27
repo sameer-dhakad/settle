@@ -32,5 +32,9 @@ const connectDB = async () => {
     console.log(`✓ Embedded MongoDB active at: ${memoryUri}`);
     await seedInitialData();
   } catch (memError) {
+    console.error('Critical DB Failure:', memError.message);
+    process.exit(1);
+  }
+};
 
-// [v323] feat(components): add trip title, currency selector, and initial members in CreateTripForm
+module.exports = connectDB;
