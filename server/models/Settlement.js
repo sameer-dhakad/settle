@@ -35,5 +35,10 @@ const settlementSchema = new mongoose.Schema({
     default: Date.now
   },
   confirmedAt: {
+    type: Date
+  }
+}, { timestamps: true });
 
-// [v328] refactor(components): optimize modal open/close transitions and ESC key handling
+settlementSchema.index({ tripId: 1, fromMemberId: 1, toMemberId: 1, status: 1 });
+
+module.exports = mongoose.model('Settlement', settlementSchema);
