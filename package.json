@@ -11,4 +11,6 @@
     "install-all": "npm install && cd server && npm install && cd ../client && npm install"
   },
   "devDependencies": {
-
+    "concurrently": "^8.2.2"
+  }
+}
