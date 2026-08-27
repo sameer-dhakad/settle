@@ -40,5 +40,10 @@ const tripSchema = new mongoose.Schema({
   },
   creatorUserId: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    default: null
+  },
+  members: [memberSchema]
+}, { timestamps: true });
 
-// [v329] style(components): refine mobile responsiveness for PaymentModal QR code container
+module.exports = mongoose.model('Trip', tripSchema);
