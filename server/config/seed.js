@@ -48,5 +48,12 @@ async function seedInitialData() {
       paidBy: priya._id,
       splitType: 'EQUAL',
       splits: trip.members.map((m) => ({ memberId: m._id, owedAmount: 600 }))
+    });
 
-// [v324] feat(components): scaffold TripView.jsx as master liquid glass trip workspace
+    console.log('✓ Demo trip "Goa Trip 2026" ready at /trip/live');
+  } catch (err) {
+    console.error('Seeding warning:', err.message);
+  }
+}
+
+module.exports = { seedInitialData };
