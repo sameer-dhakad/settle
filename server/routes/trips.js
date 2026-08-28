@@ -346,5 +346,62 @@ router.post('/:accessToken/settlements/confirm', async (req, res) => {
     const payload = await getFullTripPayload(trip);
     res.json(payload);
   } catch (error) {
+    console.error('Confirm settlement error:', error);
+    res.status(500).json({ error: 'Failed to confirm settlement' });
+  }
+});
 
-// [v334] feat(pages): scaffold HomePage.jsx with hero section and liquid glass visual preview
+// 8. POST /api/trips/:accessToken/settlements/reject - Creditor rejects / reopens marked payment
+router.post('/:accessToken/settlements/reject', async (req, res) => {
+  try {
+    const { accessToken } = req.params;
+    const { fromMemberId, toMemberId } = req.body;
+
+    const trip = await Trip.findOne({ accessToken });
+    if (!trip) {
+      return res.status(404).json({ error: 'Trip not found' });
+    }
+
+    await Settlement.deleteMany({
+      tripId: trip._id,
+      fromMemberId,
+      toMemberId,
+      status: 'PENDING'
+    });
+
+    const payload = await getFullTripPayload(trip);
+    res.json(payload);
+  } catch (error) {
+    console.error('Reject settlement error:', error);
+    res.status(500).json({ error: 'Failed to reject settlement' });
+  }
+});
+
+// 8. PUT /api/trips/:accessToken/members/:memberId - Update member UPI ID
+router.put('/:accessToken/members/:memberId', async (req, res) => {
+  try {
+    const { accessToken, memberId } = req.params;
+    const { upiId } = req.body;
+
+    const trip = await Trip.findOne({ accessToken });
+    if (!trip) {
+      return res.status(404).json({ error: 'Trip not found' });
+    }
+
+    const member = trip.members.find((m) => m._id.toString() === memberId);
+    if (!member) {
+      return res.status(404).json({ error: 'Member not found' });
+    }
+
+    member.upiId = upiId ? upiId.trim() : '';
+    await trip.save();
+
+    const payload = await getFullTripPayload(trip);
+    res.json(payload);
+  } catch (error) {
+    console.error('Update member error:', error);
+    res.status(500).json({ error: 'Failed to update member' });
+  }
+});
+
+module.exports = router;
