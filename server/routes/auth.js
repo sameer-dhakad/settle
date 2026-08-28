@@ -208,4 +208,37 @@ router.get('/dashboard', requireAuth, async (req, res) => {
   }
 });
 
-// [v333] refactor(components): memoize heavy component renders with React.memo
+// 5. POST /api/auth/claim-trip/:accessToken - Connect a trip to logged-in user
+router.post('/claim-trip/:accessToken', requireAuth, async (req, res) => {
+  try {
+    const { accessToken } = req.params;
+    const { memberId } = req.body;
+    const userId = req.user._id;
+
+    const trip = await Trip.findOne({ accessToken });
+    if (!trip) {
+      return res.status(404).json({ error: 'Trip not found.' });
+    }
+
+    if (memberId) {
+      const member = trip.members.find((m) => m._id.toString() === memberId);
+      if (member) {
+        member.userId = userId;
+      }
+    }
+
+    if (!req.user.trips.includes(trip._id)) {
+      req.user.trips.push(trip._id);
+      await req.user.save();
+    }
+
+    await trip.save();
+
+    res.json({ success: true, message: 'Trip successfully saved to your dashboard.' });
+  } catch (err) {
+    console.error('Claim trip error:', err);
+    res.status(500).json({ error: 'Failed to link trip to account.' });
+  }
+});
+
+module.exports = router;
