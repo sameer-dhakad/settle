@@ -41,5 +41,3 @@ function App() {
 }
 
 export default App;
-
-// sync step 399

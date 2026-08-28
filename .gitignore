@@ -1,2 +1,48 @@
 # Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
+# Diagnostic / System logs
+.system_generated/
+*.log
+
+# Dependencies
+node_modules/
+*/node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Environment variables & secrets (CRITICAL - DO NOT COMMIT)
+.env
+.env.*
+!.env.example
+*.env
+*/.env
+*/.env.*
+!*/.env.example
+
+# macOS system files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+
+# Editor & IDE directories
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

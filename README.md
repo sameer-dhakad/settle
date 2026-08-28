@@ -81,4 +81,3 @@ npm run dev
 
 ## 📄 License
 MIT License © Settle Team
-
