@@ -132,5 +132,26 @@ function simplifyDebts(members = [], expenses = [], settlements = []) {
     .filter((s) => s.status === 'CONFIRMED')
     .map((s) => ({
       _id: s._id,
+      fromMember: {
+        _id: s.fromMemberId,
+        name: membersMap[s.fromMemberId?.toString()] || 'Member'
+      },
+      toMember: {
+        _id: s.toMemberId,
+        name: membersMap[s.toMemberId?.toString()] || 'Member'
+      },
+      amount: s.amount,
+      status: 'CONFIRMED',
+      utrNumber: s.utrNumber || '',
+      confirmedAt: s.confirmedAt || s.updatedAt || s.createdAt
+    }))
+    .sort((a, b) => new Date(b.confirmedAt) - new Date(a.confirmedAt));
 
-// [v336] feat(pages): add Create Trip and Join Trip primary CTA buttons on HomePage.jsx
+  return {
+    settlements: simplified,
+    balances: netBalances,
+    auditLog
+  };
+}
+
+module.exports = { simplifyDebts, calculateNetBalances };
