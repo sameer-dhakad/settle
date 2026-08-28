@@ -22,5 +22,8 @@ app.get('/api/health', (req, res) => {
 
 // Connect to DB and start server
 const PORT = process.env.PORT || 5001;
-
-// [v335] feat(pages): add high-impact value propositions and interactive split preview on HomePage
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Settle API running on port ${PORT}`);
+  });
+});
